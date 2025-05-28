@@ -19,10 +19,10 @@ export default function JudyAccordion({ items }: AccordionSectionProps) {
         <AccordionItem
         key={item.title + index}
         aria-label={`Accordion ${index + 1}`}
-        title={<p className="text-black px-2">{item.title}</p>}
-        className="bg-gray-100 shadow-none border border-orange-100 rounded-none"
+        title={<p className="text-default-900 px-2">{item.title}</p>}
+        className="bg-default-100 shadow-none border border-orange-100 rounded-none"
         >
-          <p className="text-gray-600 px-2 pb-2">{item.content}</p>
+          <p className="text-default-600 px-2 pb-2">{item.content}</p>
         </AccordionItem>
       ))}
     </Accordion>

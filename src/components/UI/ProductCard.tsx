@@ -13,9 +13,9 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, showAddToBag }: ProductCardProps) {
   return (
-    <div className="w-72 border border-orange-100 rounded-none group relative transition-all duration-300">
+    <div className="w-full border border-orange-100 text-default-900 rounded-none group relative transition-all duration-300">
       {/* Badge */}
-      <span className="absolute top-2 left-2 bg-orange-100 text-sm px-2 py-1 rounded-none z-10">
+      <span className="absolute top-2 left-2 bg-orange-100 text-default-600 text-sm px-2 py-1 rounded-none z-10">
         {product.badge}
       </span>
 
@@ -47,7 +47,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
         <div className="flex items-center px-4 py-2 gap-2 text-xs">
           <span className="w-3 h-3 bg-yellow-400 rounded-full"></span>
           <span className="w-3 h-3 bg-gray-400 rounded-full"></span>
-          <span className="text-black">{product.material}</span>
+          <span className="">{product.material}</span>
         </div>
       </div>
     </div>

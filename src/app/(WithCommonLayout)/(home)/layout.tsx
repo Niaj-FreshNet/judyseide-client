@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 
 export default function layout({
   children, 
+  categorySection,
   trendingProducts,
   catalogSection,
   storyAndServices,
@@ -9,6 +10,7 @@ export default function layout({
   reviewSection,
   faqSection,
 }: {children: ReactNode, 
+  categorySection: ReactNode,
   trendingProducts: ReactNode,
   catalogSection: ReactNode,
   storyAndServices: ReactNode,
@@ -19,6 +21,7 @@ export default function layout({
   return (
     <>
       {children}
+      {categorySection}
       {trendingProducts}
       {catalogSection}
       {storyAndServices}

@@ -4,12 +4,12 @@ import { Share2, Camera, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t-2 border-orange-200 text-gray-700 px-5 py-12">
-<div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+    <footer className="max-w-screen-full mx-auto bg-default-100 border-t border-orange-200 text-default-700 px-5 py-12">
+<div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
         {/* Brand Section */}
 <div className="space-y-8 flex flex-col items-center md:items-start">
   <h1 className="text-5xl font-serif text-orange-400 font-bold">Judyseide</h1>
-  <p className="text-sm text-black leading-relaxed">
+  <p className="text-sm leading-relaxed">
     Lorem ipsum dolor sit amet consectetur. Mollis at in suscipit est morbi. Eget cras vitae imperdiet a felis et massa lorem.
   </p>
 
@@ -26,7 +26,7 @@ export default function Footer() {
     </a>
   </div>
 
-  <div className="pt-4 space-y-1 text-sm text-gray-800">
+  <div className="pt-4 space-y-1 text-sm text-default-800">
     <p>Legal & Policies</p>
     <p>© 2025 CraftTrain. All Rights Reserved.</p>
   </div>
@@ -40,7 +40,7 @@ export default function Footer() {
             <ul className="mt-2 space-y-2"> 
               {["Earrings", "Bracelets", "Necklaces", "Rings"].map((item) => (
                 <li key={item}>
-                  <Link href="#" className="text-md text-gray-600 hover:text-black transition-colors">
+                  <Link href="#" className="text-md text-default-600 hover:text-black transition-colors">
                     {item}
                   </Link>
                 </li>
@@ -52,7 +52,7 @@ export default function Footer() {
         {/* Contact Section */}
         <div className="space-y-8 flex flex-col items-center md:items-start">
           <h2 className="text-2xl font-serif text-orange-400 font-semibold">Contact Us</h2>
-          <div className="space-y-2 text-md text-gray-600">
+          <div className="space-y-2 text-md text-default-600">
             <p>
               <Link href="#" className="hover:text-black transition-colors">
                 Help Center
@@ -78,8 +78,8 @@ export default function Footer() {
       {/* Divider Lines for md+ screens */}
       <div className="max-w-6xl mx-auto hidden md:block mt-10">
         <div className="grid grid-cols-3 gap-8">
-          <div className="border-r border-gray-200 h-full"></div>
-          <div className="border-r border-gray-200 h-full"></div>
+          <div className="border-r border-default-200 h-full"></div>
+          <div className="border-r border-default-200 h-full"></div>
         </div>
       </div>
     </footer>

@@ -29,13 +29,13 @@ const sections = [
 
 export default function StoryAndServices() {
   return (
-    <Container>
+    <Container className="">
       <SectionTitle
         title="Our story and  Services"
         subtitle=""
         align="left"
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sections.map((section, idx) => (
           <div
             key={idx}
@@ -51,8 +51,8 @@ export default function StoryAndServices() {
             </div>
 
             <div className="flex flex-col gap-3 p-5">
-              <h3 className="text-xl font-bold">{section.title}</h3>
-              <p className="text-gray-600 text-sm">{section.text}</p>
+              <h3 className="text-xl text-default-900 font-bold">{section.title}</h3>
+              <p className="text-default-600 text-sm">{section.text}</p>
               <Link
                 href={section.link}
                 className="text-primary font-medium hover:underline mt-auto"

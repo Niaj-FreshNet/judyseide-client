@@ -29,10 +29,10 @@ export default function ReviewCard({
       </div>
 
       {/* Title */}
-      <h3 className="font-semibold text-nowrap text-lg text-gray-800">{title}</h3>
+      <h3 className="font-semibold text-lg text-default-800">{title}</h3>
 
       {/* Description */}
-      <p className="text-gray-600 text-sm">{description}</p>
+      <p className="text-default-600 text-sm">{description}</p>
 
       {/* Reviewer */}
       <div className="flex items-center space-x-3 pt-2">
@@ -44,8 +44,8 @@ export default function ReviewCard({
           className="rounded-full object-cover"
         />
         <div>
-          <p className="font-semibold text-gray-800 text-sm">{name}</p>
-          <p className="text-gray-500 text-sm">{date}</p>
+          <p className="font-semibold text-default-800 text-sm">{name}</p>
+          <p className="text-default-500 text-sm">{date}</p>
         </div>
       </div>
     </div>

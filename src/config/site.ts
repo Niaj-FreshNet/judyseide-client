@@ -29,6 +29,24 @@ export const siteConfig = {
       href: "/rings",
     },
   ],
+  topItems: [
+    {
+      label: "+1234567890",
+      href: "tel:+1234567890",
+    },
+    {
+      label: "Blog",
+      href: "/blog",
+    },
+    {
+      label: "About us",
+      href: "/about-us",
+    },
+    {
+      label: "Help",
+      href: "/help",
+    },
+  ],
   navMenuItems: [
     {
       label: "Profile",

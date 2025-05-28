@@ -43,13 +43,13 @@ const reviews = [
 
 export default function ReviewSection() {
     return (
-    <Container>
+    <Container className="">
             <SectionTitle
               title="Customer Reviews"
               subtitle=""
               align="left"
             />
-      <div className="mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {reviews.map((review, index) => (
           <ReviewCard key={index} {...review} />
         ))}

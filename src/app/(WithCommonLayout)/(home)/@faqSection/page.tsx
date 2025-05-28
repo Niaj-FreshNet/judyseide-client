@@ -1,6 +1,7 @@
 import JudyAccordion from "@/src/components/common/JudyAccordion";
 import Container from "@/src/components/UI/Container";
 import SectionTitle from "@/src/components/UI/SectionTitle";
+import Link from "next/link";
 
 export default function FAQSection() {
   const faqItems = [
@@ -28,17 +29,17 @@ export default function FAQSection() {
 
   
   return (
-    <Container>
+    <Container className="">
                     <SectionTitle
                       title="Frequently Asked Questions"
                       subtitle=""
                       align="left"
                     />
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-8">
         <JudyAccordion items={faqItems} />
-      <div className="">
+      <div>
         <p>Have more questions? 
-<span className="underline">Visit our Help Center</span> to find answers to all your questions.</p>
+<Link href={"/#"} className="underline">Visit our Help Center</Link> to find answers to all your questions.</p>
       </div>
       </div>
     </Container>
