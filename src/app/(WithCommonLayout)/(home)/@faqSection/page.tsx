@@ -34,6 +34,7 @@ export default function FAQSection() {
                       title="Frequently Asked Questions"
                       subtitle=""
                       align="left"
+        titleClassName="text-default-900"
                     />
       <div className="flex flex-col space-y-8">
         <JudyAccordion items={faqItems} />

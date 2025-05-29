@@ -15,7 +15,7 @@ export default function CategorySection() {
   ];
 
   return (
-    <section className="max-w-screen-2xl mx-auto text-center bg-white">
+    <section className="max-w-full mx-auto text-center bg-white">
       <div className="grid grid-cols-2 lg:grid-cols-4 mx-auto border-b border-r border-l border-black">
         {categories.map((category, index) => (
           <div

@@ -15,7 +15,7 @@ export default function GallerySection() {
         />
 
         {/* Desktop & Tablet layout (md and up) */}
-        <div className="hidden md:grid grid-cols-5 grid-rows-2 gap-4 h-[600px] mt-8">
+        <div className="hidden max-w-screen-2xl mx-auto h-[600px] px-8 lg:px-24 md:grid grid-cols-5 grid-rows-2 gap-4 mt-8">
           <GalleryImage
             src="/gallery/img1.jpg"
             alt="Portrait"

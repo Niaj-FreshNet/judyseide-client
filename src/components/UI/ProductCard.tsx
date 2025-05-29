@@ -15,7 +15,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
   return (
     <div className="w-full border border-orange-100 text-default-900 rounded-none group relative transition-all duration-300">
       {/* Badge */}
-      <span className="absolute top-2 left-2 bg-orange-100 text-default-600 text-sm px-2 py-1 rounded-none z-10">
+      <span className="absolute top-2 left-2 bg-orange-100 text-default-800 text-sm px-2 py-1 rounded-none z-10">
         {product.badge}
       </span>
 
@@ -28,7 +28,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
         />
         {showAddToBag && (
           <button
-            className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-orange-400 text-white px-4 py-2 text-sm rounded-none shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-[#FB923C] text-white px-4 py-2 text-sm rounded-none shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           >
             Add to Bag
           </button>

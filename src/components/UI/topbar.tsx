@@ -16,7 +16,10 @@ import { HeartIcon, ShoppingBagIcon, User } from "lucide-react";
 
 export const Topbar = () => {
   return (
-    <HeroUINavbar maxWidth="full" position="sticky" className="shadow-sm">
+    <HeroUINavbar 
+    maxWidth="full" 
+    position="sticky" 
+    className="max-w-screen-2xl mx-auto lg:px-8 shadow-sm">
       {/* Left-side Menu Items */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <ul className="flex gap-4 lg:gap-6 justify-start ml-2">

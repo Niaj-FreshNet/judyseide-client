@@ -1,7 +1,7 @@
 'use client';
 
 import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '../../icons';
 
 const slides = [
@@ -13,22 +13,39 @@ const slides = [
   {
     image: '/carousel/hero1.jpg',
     title: 'Elegance in Every Detail',
-    button: 'Explore Now',
+    button: 'Shop Jewelry',
   },
 ];
 
 export default function HeroSlider() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
+  // Scroll handlers
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollTo = useCallback(
+    (index: number) => emblaApi?.scrollTo(index),
+    [emblaApi]
+  );
+
+  // Sync selected index
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect(); // set initial index
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, onSelect]);
 
   return (
     <div className="max-w-full mx-auto relative overflow-hidden">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide, index) => (
-            // needs to be edited for adjustment
             <div className="min-w-full relative h-screen" key={index}>
               <img
                 src={slide.image}
@@ -53,7 +70,7 @@ export default function HeroSlider() {
         onClick={scrollPrev}
         className="absolute top-1/2 left-4 md:left-12 -translate-y-1/2 p-2 rounded-full text-white/70 hover:text-white/100 transition"
       >
-      <ArrowLeftIcon />
+        <ArrowLeftIcon />
       </button>
       <button
         onClick={scrollNext}
@@ -61,6 +78,19 @@ export default function HeroSlider() {
       >
         <ArrowRightIcon />
       </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => scrollTo(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              selectedIndex === index ? 'bg-orange-500' : 'bg-white/50'
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 }

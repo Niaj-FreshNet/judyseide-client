@@ -38,7 +38,7 @@ export const Navbar = () => {
     <HeroUINavbar
       maxWidth="full"
       position="sticky"
-      className="sticky top-0 z-50 px-8 pt-2 pb-4 shadow-sm"
+      className="max-w-screen-2xl mx-auto sticky top-0 z-50 px-2 lg:px-8 pt-2 pb-4 shadow-sm"
     >
       {/* Brand */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
