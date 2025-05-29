@@ -25,7 +25,7 @@ export const Topbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "uppercase text-sm lg:text-md data-[active=true]:text-primary data-[active=true]:font-medium"
+                  "uppercase text-sm md:text-md lg:text-lg data-[active=true]:text-primary data-[active=true]:font-medium"
                 )}
                 href={item.href}
               >

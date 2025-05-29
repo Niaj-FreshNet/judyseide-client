@@ -19,13 +19,13 @@ export default function CatalogSection() {
   ];
 
   return (
-    <div className="w-screen mx-auto pt-16 flex-grow">
+    <div className="max-w-full mx-auto pt-16 flex-grow">
       <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 gap-0">
         {/* Top two side-by-side */}
         {catalogs.slice(0, 2).map((catalog, index) => (
           <div
             key={index}
-            className="relative h-[512px] lg:h-screen group overflow-hidden rounded-none shadow-md"
+            className="relative h-[512px] lg:h-[720px] group overflow-hidden rounded-none shadow-md"
             >
             <img
               src={catalog.image}
@@ -49,7 +49,7 @@ export default function CatalogSection() {
 
         {/* Bottom full-width */}
         <div className="sm:col-span-2">
-          <div className="relative h-[448px] lg:h-[576px] group overflow-hidden rounded-none shadow-md">
+          <div className="relative h-[448px] lg:h-[540px] group overflow-hidden rounded-none shadow-md">
             <img
               src={catalogs[2].image}
               alt={catalogs[2].title}

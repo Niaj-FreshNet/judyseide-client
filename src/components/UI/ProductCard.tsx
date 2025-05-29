@@ -24,7 +24,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-64 lg:h-96 object-cover transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-64 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
         />
         {showAddToBag && (
           <button

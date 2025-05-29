@@ -24,12 +24,12 @@ export default function HeroSlider() {
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="max-w-full mx-auto relative overflow-hidden">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide, index) => (
             // needs to be edited for adjustment
-            <div className="min-w-full relative h-svh" key={index}>
+            <div className="min-w-full relative h-screen" key={index}>
               <img
                 src={slide.image}
                 alt={slide.title}

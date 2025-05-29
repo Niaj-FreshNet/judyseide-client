@@ -35,7 +35,7 @@ const sampleProducts = [
 
 export default function TrendingProducts() {
   return (
-    <Container className="">
+    <Container>
       <div className="flex flex-col gap-6">
         <SectionTitle 
           title="Top Trending Products"

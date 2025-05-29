@@ -4,8 +4,8 @@ import { Share2, Camera, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="max-w-screen-full mx-auto bg-default-100 border-t border-orange-200 text-default-700 px-5 py-12">
-<div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+    <footer className="max-w-full mx-auto bg-default-100 border-t border-orange-200 text-default-700">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-24 pt-12 pb-8 place-items-center">
         {/* Brand Section */}
 <div className="space-y-8 flex flex-col items-center md:items-start">
   <h1 className="text-5xl font-serif text-orange-400 font-bold">Judyseide</h1>

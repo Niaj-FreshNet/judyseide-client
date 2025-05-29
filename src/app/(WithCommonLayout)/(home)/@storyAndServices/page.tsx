@@ -23,7 +23,7 @@ const sections = [
     text: "Our customers love us! Check out their feedback and see why we are their favorite store.",
     link: "/blog",
     linkText: "Read Blog",
-    image: "/services/img2.jpg",
+    image: "/services/img3.jpg",
   },
 ];
 
