@@ -20,8 +20,8 @@ export default function SectionTitle({
   };
 
   return (
-    <div className={`mb-6 ${alignment[align]}`}>
-      <h2 className={`font-serif text-2xl sm:text-3xl font-bold text-default-900 ${titleClassName}`}>
+    <div className={`mb-8 ${alignment[align]}`}>
+      <h2 className={`font-serif text-3xl lg:text-4xl font-bold text-default-900 ${titleClassName}`}>
         {title}
       </h2>
       {subtitle && (

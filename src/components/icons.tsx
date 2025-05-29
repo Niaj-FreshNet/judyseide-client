@@ -190,10 +190,10 @@ export const ArrowLeftIcon = (props: IconSvgProps) => (
     aria-hidden="true"
     fill="none"
     focusable="false"
-    height="2em"
+    height="3em"
     role="presentation"
     viewBox="0 0 24 24"
-    width="2em"
+    width="3em"
     {...props}
   >
     <path
@@ -211,10 +211,10 @@ export const ArrowRightIcon = (props: IconSvgProps) => (
     aria-hidden="true"
     fill="none"
     focusable="false"
-    height="2em"
+    height="3em"
     role="presentation"
     viewBox="0 0 24 24"
-    width="2em"
+    width="3em"
     {...props}
   >
     <path

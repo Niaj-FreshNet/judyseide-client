@@ -6,12 +6,12 @@ import { ArrowLeftIcon, ArrowRightIcon } from '../../icons';
 
 const slides = [
   {
-    image: '/hero1.jpg',
+    image: '/carousel/hero1.jpg',
     title: 'Forever looks great on anyone!',
     button: 'Shop Jewelry',
   },
   {
-    image: '/hero2.jpg',
+    image: '/carousel/hero1.jpg',
     title: 'Elegance in Every Detail',
     button: 'Explore Now',
   },
@@ -28,11 +28,12 @@ export default function HeroSlider() {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide, index) => (
-            <div className="min-w-full relative h-[500px]" key={index}>
+            // needs to be edited for adjustment
+            <div className="min-w-full relative h-svh" key={index}>
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="object-contain w-full h-full"
+                className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4">
                 <h2 className="text-3xl md:text-5xl font-serif font-bold mb-8">
@@ -50,13 +51,13 @@ export default function HeroSlider() {
       {/* Arrows */}
       <button
         onClick={scrollPrev}
-        className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full text-white/70 hover:text-white/100 transition"
+        className="absolute top-1/2 left-4 md:left-12 -translate-y-1/2 p-2 rounded-full text-white/70 hover:text-white/100 transition"
       >
       <ArrowLeftIcon />
       </button>
       <button
         onClick={scrollNext}
-        className="absolute top-1/2 right-4 -translate-y-1/2 p-2 rounded-full text-white/70 hover:text-white/100 transition"
+        className="absolute top-1/2 right-4 md:right-12 -translate-y-1/2 p-2 rounded-full text-white/70 hover:text-white/100 transition"
       >
         <ArrowRightIcon />
       </button>

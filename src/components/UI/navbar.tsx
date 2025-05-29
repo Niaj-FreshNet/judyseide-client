@@ -22,8 +22,8 @@ export const Navbar = () => {
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: "bg-default-100 rounded-none border border-orange-200",
-        input: "text-sm",
+        inputWrapper: "h-12 bg-default-50 rounded-none border border-orange-200",
+        input: "text-md",
       }}
       labelPlacement="outside"
       placeholder="Search Jewellery"
@@ -38,13 +38,13 @@ export const Navbar = () => {
     <HeroUINavbar
       maxWidth="full"
       position="sticky"
-      className="sticky top-0 z-50 pb-2 bg-white shadow-sm"
+      className="sticky top-0 z-50 px-8 pt-2 pb-4 shadow-sm"
     >
       {/* Brand */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <p className="text-4xl font-serif font-bold text-inherit text-orange-400">
+            <p className="text-5xl font-serif font-bold text-inherit text-orange-400">
               JudySeide
             </p>
           </NextLink>
@@ -59,7 +59,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "uppercase data-[active=true]:text-primary data-[active=true]:font-medium",
+                  "uppercase text-xl data-[active=true]:text-primary data-[active=true]:font-medium",
                 )}
                 color="foreground"
                 href={item.href}

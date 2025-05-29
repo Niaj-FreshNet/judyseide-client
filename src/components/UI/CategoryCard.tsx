@@ -10,7 +10,7 @@ export function CategoryCard ({ categoryName, imageUrl }: CategoryCardProps) {
   return (
     <div className="w-full text-center font-semibold">
       <Link href={`/shop/${categoryName.toLowerCase()}`}>
-        <div className="w-full h-64 bg-gray-100 flex items-center justify-center mb-2 overflow-hidden">
+        <div className="w-full h-96 bg-gray-100 flex items-center justify-center mb-2 overflow-hidden">
           {imageUrl ? (
             <img 
               src={imageUrl} 
@@ -21,7 +21,7 @@ export function CategoryCard ({ categoryName, imageUrl }: CategoryCardProps) {
             <div className="text-7xl text-gray-300">{categoryName.charAt(0)}</div>
           )}
         </div>
-        <h3 className="text-lg text-black my-2 uppercase tracking-wider">
+        <h3 className="text-xl text-black my-2 uppercase tracking-wider">
           {categoryName}
         </h3>
       </Link>

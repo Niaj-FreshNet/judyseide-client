@@ -31,20 +31,6 @@ const sampleProducts = [
     badge: "Best selling",
     material: "18k Gold Vermeil",
   },
-  {
-    name: "Starburst Earrings",
-    price: 756,
-    image: "/hero2.jpg",
-    badge: "Best selling",
-    material: "18k Gold Vermeil",
-  },
-  {
-    name: "Starburst Earrings",
-    price: 756,
-    image: "/hero2.jpg",
-    badge: "Best selling",
-    material: "18k Gold Vermeil",
-  },
 ];
 
 export default function TrendingProducts() {
@@ -52,12 +38,12 @@ export default function TrendingProducts() {
     <Container className="">
       <div className="flex flex-col gap-6">
         <SectionTitle 
-          title="Top Trending Product"
+          title="Top Trending Products"
           subtitle=""
           align="left"
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
           {sampleProducts.map((product, index) => (
             <ProductCard
               key={index}

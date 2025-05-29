@@ -19,13 +19,13 @@ export default function CatalogSection() {
   ];
 
   return (
-    <div className="container mx-auto pt-16 flex-grow">
+    <div className="w-screen mx-auto pt-16 flex-grow">
       <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 gap-0">
         {/* Top two side-by-side */}
         {catalogs.slice(0, 2).map((catalog, index) => (
           <div
             key={index}
-            className="relative h-80 sm:h-[28rem] group overflow-hidden rounded-none shadow-md"
+            className="relative h-[512px] lg:h-screen group overflow-hidden rounded-none shadow-md"
             >
             <img
               src={catalog.image}
@@ -33,13 +33,13 @@ export default function CatalogSection() {
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-end text-white text-center p-4">
-              <h3 className="text-xl font-serif sm:text-2xl font-bold mb-3 px-3 py-1 rounded-sm">
+              <h3 className="text-3xl font-sans sm:text-2xl font-bold mb-3 px-3 py-1 rounded-sm">
                 {catalog.title}
               </h3>
               <a
                 href={catalog.link}
                 // className="bg-white text-orange-500 font-semibold px-5 py-2 rounded-sm shadow hover:bg-orange-100 transition"
-                className="text-white underline font-semibold px-5 py-2 rounded-sm hover:text-gray-300 transition"
+                className="text-white text-xl underline font-semibold px-5 py-2 rounded-sm hover:text-gray-300 transition"
                 >
                 Shop Now
               </a>
@@ -49,20 +49,20 @@ export default function CatalogSection() {
 
         {/* Bottom full-width */}
         <div className="sm:col-span-2">
-          <div className="relative h-80 group overflow-hidden rounded-none shadow-md">
+          <div className="relative h-[448px] lg:h-[576px] group overflow-hidden rounded-none shadow-md">
             <img
               src={catalogs[2].image}
               alt={catalogs[2].title}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white text-center p-4">
-              <h3 className="text-2xl font-serif font-bold mb-3 px-3 py-1 rounded-sm">
+              <h3 className="text-3xl font-sans font-bold mb-3 px-3 py-1 rounded-sm">
                 {catalogs[2].title}
               </h3>
               <a
                 href={catalogs[2].link}
                 // className="bg-white text-orange-500 font-semibold px-6 py-2 rounded-sm shadow hover:bg-orange-100 transition"
-                className="text-white underline font-semibold px-5 py-2 rounded-sm hover:text-gray-300 transition"
+                className="text-white underline text-xl font-semibold px-5 py-2 rounded-sm hover:text-gray-300 transition"
                 >
                 Shop Now
               </a>

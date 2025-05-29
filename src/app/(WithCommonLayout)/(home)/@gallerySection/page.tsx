@@ -4,8 +4,8 @@ import { ZoomIn } from "lucide-react";
 
 export default function GallerySection() {
   return (
-    <section className="mt-8 py-12 md:py-16 lg:py-20 bg-orange-400">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="mt-16 py-12 md:py-16 lg:py-20 bg-orange-400">
+      <div className="mx-auto px-4 sm:px-6 lg:px-12">
         <SectionTitle
           title="A Piece of Something Awesome"
           subtitle="Lorem ipsum dolor sit amet consectetur. Placerat vitae et fringilla sit pellentesque mattis. Eu lacus lobortis mollis nec dolor eleifend donec. Donec in a vitae proin a. Volutpat feugiat nibh in lobortis. Lorem commodo platea tristique turpis est id. Cursus in eu"

@@ -38,10 +38,11 @@ export default function FAQSection() {
       <div className="flex flex-col space-y-8">
         <JudyAccordion items={faqItems} />
       <div>
-        <p>Have more questions? 
+        <p className="text-xl">Have more questions? 
 <Link href={"/#"} className="underline">Visit our Help Center</Link> to find answers to all your questions.</p>
       </div>
       </div>
+      <br />
     </Container>
   );
 }

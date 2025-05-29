@@ -9,7 +9,7 @@ export default function Footer() {
         {/* Brand Section */}
 <div className="space-y-8 flex flex-col items-center md:items-start">
   <h1 className="text-5xl font-serif text-orange-400 font-bold">Judyseide</h1>
-  <p className="text-sm leading-relaxed">
+  <p className="text-lg text-balance leading-relaxed">
     Lorem ipsum dolor sit amet consectetur. Mollis at in suscipit est morbi. Eget cras vitae imperdiet a felis et massa lorem.
   </p>
 
@@ -34,13 +34,13 @@ export default function Footer() {
 
         {/* Quick Links Section */}
         <div className="space-y-8 flex flex-col items-center md:items-start">
-          <h2 className="text-2xl font-serif text-orange-400 font-semibold">Quick Links</h2>
+          <h2 className="text-3xl font-serif text-orange-400 font-semibold">Quick Links</h2>
           <div>
             <h3 className  ="font-medium">Category</h3>
             <ul className="mt-2 space-y-2"> 
               {["Earrings", "Bracelets", "Necklaces", "Rings"].map((item) => (
                 <li key={item}>
-                  <Link href="#" className="text-md text-default-600 hover:text-black transition-colors">
+                  <Link href="#" className="text-lg text-default-600 hover:text-black transition-colors">
                     {item}
                   </Link>
                 </li>
@@ -51,8 +51,8 @@ export default function Footer() {
 
         {/* Contact Section */}
         <div className="space-y-8 flex flex-col items-center md:items-start">
-          <h2 className="text-2xl font-serif text-orange-400 font-semibold">Contact Us</h2>
-          <div className="space-y-2 text-md text-default-600">
+          <h2 className="text-3xl font-serif text-orange-400 font-semibold">Contact Us</h2>
+          <div className="space-y-2 text-lg text-default-600">
             <p>
               <Link href="#" className="hover:text-black transition-colors">
                 Help Center

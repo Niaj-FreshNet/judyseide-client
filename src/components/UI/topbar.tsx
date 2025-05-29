@@ -16,7 +16,7 @@ import { HeartIcon, ShoppingBagIcon, User } from "lucide-react";
 
 export const Topbar = () => {
   return (
-    <HeroUINavbar maxWidth="full" position="sticky" className="border-b shadow-sm">
+    <HeroUINavbar maxWidth="full" position="sticky" className="shadow-sm">
       {/* Left-side Menu Items */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <ul className="flex gap-4 lg:gap-6 justify-start ml-2">
@@ -25,7 +25,7 @@ export const Topbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "uppercase text-sm data-[active=true]:text-primary data-[active=true]:font-medium"
+                  "uppercase text-sm lg:text-md data-[active=true]:text-primary data-[active=true]:font-medium"
                 )}
                 href={item.href}
               >
