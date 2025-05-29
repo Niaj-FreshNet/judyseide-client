@@ -13,7 +13,7 @@ const sampleProducts = [
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/hero2.jpg",
+    image: "/hero1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
   },
@@ -27,7 +27,7 @@ const sampleProducts = [
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/hero2.jpg",
+    image: "/hero1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
   },
