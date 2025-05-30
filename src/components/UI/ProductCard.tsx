@@ -13,7 +13,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, showAddToBag }: ProductCardProps) {
   return (
-    <div className="w-full border border-orange-100 text-default-900 rounded-none group relative transition-all duration-300">
+    <div className="w-full border border-orange-200 text-default-900 rounded-none group relative transition-all duration-300">
       {/* Badge */}
       <span className="absolute top-2 left-2 bg-orange-100 text-default-800 text-sm px-2 py-1 rounded-none z-10">
         {product.badge}

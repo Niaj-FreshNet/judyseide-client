@@ -19,10 +19,10 @@ export const Topbar = () => {
     <HeroUINavbar 
     maxWidth="full" 
     position="sticky" 
-    className="max-w-screen-2xl mx-auto lg:px-8 shadow-sm">
+    className="max-w-screen-2xl mx-auto px-2 lg:px-24 shadow-sm">
       {/* Left-side Menu Items */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <ul className="flex gap-4 lg:gap-6 justify-start ml-2">
+        <ul className="flex gap-4 lg:gap-6 justify-start">
           {siteConfig.topItems?.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink

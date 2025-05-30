@@ -38,7 +38,7 @@ export const Navbar = () => {
     <HeroUINavbar
       maxWidth="full"
       position="sticky"
-      className="max-w-screen-2xl mx-auto sticky top-0 z-50 px-2 lg:px-8 pt-2 pb-4 shadow-sm"
+      className="max-w-screen-2xl mx-auto sticky top-0 z-50 px-2 lg:px-24 pt-2 pb-4 shadow-sm"
     >
       {/* Brand */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -53,7 +53,7 @@ export const Navbar = () => {
 
       {/* Desktop Nav Items */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="center">
-        <ul className="hidden lg:flex gap-8 justify-start ml-2">
+        <ul className="hidden lg:flex gap-6 justify-start">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
