@@ -1,5 +1,7 @@
 'use client';
 
+import { SlidersHorizontal } from "lucide-react";
+
 interface FilterBarProps {
     filterCount: number;
     selectedCategory: string;
@@ -18,6 +20,7 @@ export default function FilterBar({
     onSortChange,
 }: FilterBarProps) {
     const sortOptions = ['New In', 'Price: Low to High', 'Price: High to Low'];
+    // console.log("selectedCategory: ", selectedCategory)
 
     return (
         <div className="flex flex-wrap justify-between items-center mb-8">
@@ -25,17 +28,19 @@ export default function FilterBar({
                 {categories.map((label) => (
                     <button
                         key={label}
-                        onClick={() => onCategoryChange(label === 'All Filter' ? '' : label.toLowerCase())}
+                        onClick={() => onCategoryChange(label)}
                         className={`px-4 py-2 border rounded-none text-lg transition
-              ${selectedCategory === label
+                            ${(selectedCategory === label.trim().toLowerCase() || (label === 'All Filter' && selectedCategory === ''))
                                 ? 'border-orange-300 bg-orange-400 text-white'
                                 : 'border-orange-200 text-default-900 hover:bg-gray-100'
                             }`}
                     >
-                        {label}
-                        {label === 'All Filter' && (
-                            <span className="ml-1 text-gray-200 font-medium">{filterCount}</span>
-                        )}
+                        <div className="flex items-center gap-2">
+                            {label}
+                            {label === 'All Filter' && (
+                                <span className="ml-1 text-gray-200 font-medium"><SlidersHorizontal size={20} /></span>
+                            )}
+                        </div>
                     </button>
                 ))}
             </div>

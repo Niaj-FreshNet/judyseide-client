@@ -1,6 +1,5 @@
 'use client';
 
-import { Accordion, AccordionItem } from "@heroui/accordion";
 import { Checkbox } from "@heroui/checkbox";
 import { Radio, RadioGroup } from "@heroui/radio";
 import React from "react";
@@ -34,9 +33,11 @@ interface AllFiltersProps {
     setFilters: React.Dispatch<React.SetStateAction<Filters>>;
 }
 
-
 export default function AllFilters({ filters, setFilters }: AllFiltersProps) {
-    const toggleFilter = (filterType: keyof Pick<Filters, 'availability' | 'price'>, value: string) => {
+    const toggleFilter = (
+        filterType: keyof Pick<Filters, 'availability' | 'price'>,
+        value: string
+    ) => {
         setFilters(prev => ({
             ...prev,
             [filterType]: {
@@ -45,16 +46,6 @@ export default function AllFilters({ filters, setFilters }: AllFiltersProps) {
             },
         }));
     };
-
-    // const handleRadioChange = (
-    //     filterType: 'sortBy',
-    //     value: SortByOption
-    // ) => {
-    //     setFilters(prev => ({
-    //         ...prev,
-    //         sortBy: value,
-    //     }));
-    // };
 
     const handleRadioChange = (
         filterType: 'sortBy' | 'category' | 'material',
@@ -66,25 +57,15 @@ export default function AllFilters({ filters, setFilters }: AllFiltersProps) {
         }));
     };
 
-    // const handleCategoryChange = (
-    //     value: CategoryOption
-    // ) => {
-    //     setFilters(prev => ({ ...prev, category: value }));
-    // };
-
-    // const handleMaterialChange = (
-    //     value: MaterialOption
-    // ) => {
-    //     setFilters(prev => ({ ...prev, material: value }));
-    // };
-
-
     return (
-        <div className="p-4 bg-white rounded-xl shadow-md space-y-6">
-            <h2 className="text-lg font-bold">All Filters</h2>
+        <div className="bg-[#fef6f1] p-6 rounded-md border text-sm space-y-5 w-full">
+            <h2 className="text-lg font-semibold text-gray-800">All Filters</h2>
+            <hr className="border-t border-orange-200" />
 
-            <Accordion variant="splitted">
-                <AccordionItem key="1" aria-label="Availability" title="Availability">
+            {/* Availability */}
+            <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-700">Availability</h3>
+                <div className="flex flex-col gap-2">
                     <Checkbox
                         isSelected={filters.availability.inStock}
                         onValueChange={() => toggleFilter('availability', 'inStock')}
@@ -97,38 +78,80 @@ export default function AllFilters({ filters, setFilters }: AllFiltersProps) {
                     >
                         Out of Stock
                     </Checkbox>
-                </AccordionItem>
+                </div>
+            </div>
 
-                <AccordionItem key="2" aria-label="Price" title="Price">
+            <hr className="border-t border-orange-200" />
+
+            {/* Price */}
+            <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-700">Price</h3>
+                <div className="flex flex-col gap-2">
                     <Checkbox isSelected={filters.price.under150} onValueChange={() => toggleFilter('price', 'under150')}>Under 150</Checkbox>
                     <Checkbox isSelected={filters.price['150to300']} onValueChange={() => toggleFilter('price', '150to300')}>150 - 300</Checkbox>
                     <Checkbox isSelected={filters.price['300to500']} onValueChange={() => toggleFilter('price', '300to500')}>300 - 500</Checkbox>
                     <Checkbox isSelected={filters.price.above500} onValueChange={() => toggleFilter('price', 'above500')}>Above 500</Checkbox>
-                </AccordionItem>
+                </div>
+            </div>
 
-                <AccordionItem key="3" title="Sort By: Price">
-                    <RadioGroup value={filters.sortBy} onValueChange={(val) => handleRadioChange('sortBy', val)}>
-                        <Radio value="price-low-to-high">Low to High</Radio>
-                        <Radio value="price-high-to-low">High to Low</Radio>
+            <hr className="border-t border-orange-200" />
+
+            {/* Sort by */}
+            <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-700">Sort by: Price</h3>
+                <div className="flex flex-col gap-2">
+                    <RadioGroup
+                        value={filters.sortBy}
+                        onValueChange={(val) => handleRadioChange('sortBy', val)}
+                    >
+                        <Radio value="price-low-to-high">Price: Low to High</Radio>
+                        <Radio value="price-high-to-low">Price: High to Low</Radio>
                     </RadioGroup>
-                </AccordionItem>
+                </div>
+            </div>
 
-                <AccordionItem key="4" title="Category">
-                    <RadioGroup value={filters.category} onValueChange={(val) => handleRadioChange('category', val)}>
+            <hr className="border-t border-orange-200" />
+
+            {/* Category */}
+            <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-700">Category</h3>
+                <div className="flex flex-col gap-2">
+                    <RadioGroup
+                        value={filters.category}
+                        onValueChange={(val) => handleRadioChange('category', val)}
+                    >
                         {['Earrings', 'Bracelets', 'Necklaces', 'Rings'].map(cat => (
                             <Radio key={cat} value={cat.toLowerCase()}>{cat}</Radio>
                         ))}
                     </RadioGroup>
-                </AccordionItem>
+                </div>
+            </div>
 
-                <AccordionItem key="5" title="Material">
-                    <RadioGroup value={filters.material} onValueChange={(val) => handleRadioChange('material', val)}>
-                        {['14k Yellow Gold', '18k Gold Vermeil', 'Sterling Silver', 'Link'].map(mat => (
+            <hr className="border-t border-orange-200" />
+
+            {/* Material */}
+            <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-700">Material</h3>
+                <div className="flex flex-col gap-2">
+                    <RadioGroup
+                        value={filters.material}
+                        onValueChange={(val) => handleRadioChange('material', val)}
+                    >
+                        {['14k Yellow Gold', '18k Gold Vermeil', 'Sterling Silver'].map(mat => (
                             <Radio key={mat} value={mat.toLowerCase()}>{mat}</Radio>
                         ))}
                     </RadioGroup>
-                </AccordionItem>
-            </Accordion>
+                </div>
+            </div>
+
+            <hr className="border-t border-orange-200" />
+
+            {/* View Button */}
+            <div className="pt-2">
+                <button className="w-full bg-orange-400 text-white text-lg font-semibold py-2 rounded border hover:bg-orange-500 transition">
+                    View Jewelry
+                </button>
+            </div>
         </div>
     );
 }

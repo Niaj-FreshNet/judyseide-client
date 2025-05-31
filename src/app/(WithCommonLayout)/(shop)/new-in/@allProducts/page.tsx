@@ -39,7 +39,7 @@ const allProducts: Product[] = Array(16).fill(null).map((_, i) => ({
 }));
 
 export default function AllProductPage() {
-    const [showAllFilters, setShowAllFilters] = useState(false);
+    const [showAllFilters, setShowAllFilters] = useState(true);
     const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
     const [filters, setFilters] = useState<Filters>({
         availability: { inStock: false, outOfStock: false },
@@ -49,32 +49,32 @@ export default function AllProductPage() {
         material: '',
     });
 
-    const isAllFiltersSelected = useMemo(() => {
-        const { availability, price, category, material, sortBy } = filters;
-        const hasAvailability = availability.inStock || availability.outOfStock;
-        const hasPrice = Object.values(price).some(Boolean);
-        const hasCategory = !!category;
-        const hasMaterial = !!material;
-        const hasSort = !!sortBy;
-        return hasAvailability && hasPrice && hasCategory && hasMaterial && hasSort;
-    }, [filters]);
+    // const isAllFiltersSelected = useMemo(() => {
+    //     const { availability, price, category, material, sortBy } = filters;
+    //     const hasAvailability = availability.inStock || availability.outOfStock;
+    //     const hasPrice = Object.values(price).some(Boolean);
+    //     const hasCategory = !!category;
+    //     const hasMaterial = !!material;
+    //     const hasSort = !!sortBy;
+    //     return hasAvailability && hasPrice && hasCategory && hasMaterial && hasSort;
+    // }, [filters]);
 
-    const isAnyFilterSelected = useMemo(() => {
-        const { availability, price, category, material } = filters;
-        return (
-            availability.inStock ||
-            availability.outOfStock ||
-            Object.values(price).some(Boolean) ||
-            !!category ||
-            !!material
-        );
-    }, [filters]);
+    // const isAnyFilterSelected = useMemo(() => {
+    //     const { availability, price, category, material } = filters;
+    //     return (
+    //         availability.inStock ||
+    //         availability.outOfStock ||
+    //         Object.values(price).some(Boolean) ||
+    //         !!category ||
+    //         !!material
+    //     );
+    // }, [filters]);
 
     const isAllFilterView = showAllFilters;
 
     const filteredProducts = allProducts
         .filter((product) => {
-            const matchesCategory = !filters.category || product.category.toLowerCase() === filters.category;
+            const matchesCategory = !filters.category || product.category.replace(/\s+/g, '').toLowerCase() === filters.category.replace(/\s+/g, '').toLowerCase();
             const matchesMaterial = !filters.material || product.material.toLowerCase() === filters.material;
             return matchesCategory && matchesMaterial;
         })
@@ -90,6 +90,33 @@ export default function AllProductPage() {
         <Container className="pt-8">
             <CustomBreadcrumbs items={['Home', 'All Category']} />
 
+            <FilterBar
+                filterCount={filteredProducts.length}
+                selectedCategory={filters.category}
+                onCategoryChange={(cat) => {
+                    if (cat === 'All Filter') {
+                        setShowAllFilters(prev => !prev);
+                        setFilters(f => ({
+                            ...f,
+                            category: '',
+                        }));
+                    } else {
+                        const formattedCategory = cat.toLowerCase() as CategoryOption;
+                        setFilters(f => ({
+                            ...f,
+                            category: formattedCategory,
+                        }));
+                    }
+                }}
+                selectedSort={filters.sortBy}
+                onSortChange={(sort) => {
+                    setFilters(f => ({
+                        ...f,
+                        sortBy: sort as SortByOption,
+                    }));
+                }}
+            />
+
             <div className="flex gap-6">
                 {isAllFilterView && (
                     <div className="hidden lg:block w-1/4">
@@ -98,34 +125,6 @@ export default function AllProductPage() {
                 )}
 
                 <div className={`${isAllFilterView ? 'lg:w-3/4' : 'w-full'}`}>
-                    <FilterBar
-                        filterCount={filteredProducts.length}
-                        selectedCategory={filters.category || 'All Filter'}
-                        onCategoryChange={(cat) => {
-                            console.log("Category clicked:", cat); // See if "All Filter" prints
-                            if (cat === 'All Filter') {
-                                setShowAllFilters(prev => !prev); // ✅ Toggle filter panel
-                                setFilters(f => ({
-                                    ...f,
-                                    category: '', // ✅ Ensure no category is selected
-                                }));
-                            } else {
-                                const formattedCategory = cat.toLowerCase() as CategoryOption;
-                                // ⛔️ Do NOT change showAllFilters
-                                setFilters(f => ({
-                                    ...f,
-                                    category: formattedCategory,
-                                }));
-                            }
-                        }}
-                        selectedSort={filters.sortBy}
-                        onSortChange={(sort) => {
-                            setFilters(f => ({
-                                ...f,
-                                sortBy: sort as SortByOption,
-                            }));
-                        }}
-                    />
                     <ProductGrid products={visibleProducts} cols={isAllFilterView ? 3 : 4} />
                     <LoadMoreFooter
                         viewed={visibleCount}
