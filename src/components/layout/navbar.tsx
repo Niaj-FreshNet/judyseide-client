@@ -59,7 +59,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "uppercase text-xl data-[active=true]:text-primary data-[active=true]:font-medium",
+                  "uppercase text-lg data-[active=true]:text-primary data-[active=true]:font-medium",
                 )}
                 color="foreground"
                 href={item.href}

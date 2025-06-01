@@ -86,57 +86,54 @@ export default function ReviewSection() {
   }, [emblaApi]);
 
   return (
-    <Container>
-      <div className="flex flex-col gap-6">
-        <SectionTitle 
-        title="Customer Reviews" 
-        subtitle="" 
-        align="left" 
-        titleClassName="text-default-900"/>
+    <div className="flex flex-col gap-6">
+      <SectionTitle
+        title="Customer Reviews"
+        subtitle=""
+        align="left"
+        titleClassName="text-default-900" />
 
-        <div className="relative">
-          {/* Arrows */}
-          <button
-            onClick={scrollPrev}
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
-          >
-            <ChevronLeft size={28} color="white" />
-          </button>
+      <div className="relative">
+        {/* Arrows */}
+        <button
+          onClick={scrollPrev}
+          className="absolute left-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+        >
+          <ChevronLeft size={28} color="white" />
+        </button>
 
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-4">
-              {reviews.map((review, index) => (
-                <div
-                  className="min-w-[250px] flex-[0_0_90%] sm:flex-[0_0_60%] md:flex-[0_0_33%] lg:flex-[0_0_25%]"
-                  key={index}
-                >
-                  <ReviewCard {...review} />
-                </div>
-              ))}
-            </div>
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-4">
+            {reviews.map((review, index) => (
+              <div
+                className="min-w-[250px] flex-[0_0_90%] sm:flex-[0_0_60%] md:flex-[0_0_33%] lg:flex-[0_0_25%]"
+                key={index}
+              >
+                <ReviewCard {...review} />
+              </div>
+            ))}
           </div>
-
-          <button
-            onClick={scrollNext}
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
-          >
-            <ChevronRight size={28} color="white" />
-          </button>
         </div>
 
-        {/* Pagination Dots */}
-        <div className="flex justify-center gap-2 mt-4">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={`w-2.5 h-2.5 rounded-full ${
-                index === selectedIndex ? 'bg-orange-100' : 'bg-orange-400'
-              }`}
-            />
-          ))}
-        </div>
+        <button
+          onClick={scrollNext}
+          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+        >
+          <ChevronRight size={28} color="white" />
+        </button>
       </div>
-    </Container>
+
+      {/* Pagination Dots */}
+      <div className="flex justify-center gap-2 mt-4">
+        {scrollSnaps.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => scrollTo(index)}
+            className={`w-2.5 h-2.5 rounded-full ${index === selectedIndex ? 'bg-orange-100' : 'bg-orange-400'
+              }`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/src/config/site";
 import { fontSans, fontSerif } from "@/src/config/fonts";
+import { JodyDrawerProvider } from "../components/drawers/JodyDrawer";
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en"  className={`${fontSans.variable} ${fontSerif.variable}`}>
+    <html suppressHydrationWarning lang="en" className={`${fontSans.variable} ${fontSerif.variable}`}>
       <head />
       <body
         className={clsx(
@@ -40,7 +41,9 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          {children}
+          <JodyDrawerProvider>
+            {children}
+          </JodyDrawerProvider>
         </Providers>
       </body>
     </html>

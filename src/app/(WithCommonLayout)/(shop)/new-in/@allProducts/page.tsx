@@ -87,9 +87,7 @@ export default function AllProductPage() {
     const visibleProducts = filteredProducts.slice(0, visibleCount);
 
     return (
-        <Container className="pt-8">
-            <CustomBreadcrumbs items={['Home', 'All Category']} />
-
+        <>
             <FilterBar
                 filterCount={filteredProducts.length}
                 selectedCategory={filters.category}
@@ -135,6 +133,6 @@ export default function AllProductPage() {
                     />
                 </div>
             </div>
-        </Container>
+        </>
     );
 }
