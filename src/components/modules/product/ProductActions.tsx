@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
 import { HeartIcon } from 'lucide-react'
-import { useCartDrawer } from '../../drawers/CartDrawer/CartDrawer'
+import { useDrawerManager } from '../../drawers/DrawerManager';
 
 export default function ProductActions() {
-  const { openCart } = useCartDrawer();
+  const { openDrawer } = useDrawerManager();
 
   return (
     <div className="w-full flex gap-4 mt-8">
       <button
         className="w-2/3 bg-orange-500 hover:bg-orange-600 text-lg text-white px-6 py-4"
-        onClick={openCart}
+        onClick={() => openDrawer("cart")}
       >
         Add To Bag
       </button>

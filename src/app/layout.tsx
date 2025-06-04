@@ -2,11 +2,10 @@ import "@/src/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
-import { Providers } from "./providers";
+import { Providers } from "../lib/Providers";
 
 import { siteConfig } from "@/src/config/site";
 import { fontSans, fontSerif } from "@/src/config/fonts";
-import { JodyDrawerProvider } from "../components/drawers/JodyDrawer";
 
 export const metadata: Metadata = {
   title: {
@@ -41,9 +40,7 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <JodyDrawerProvider>
             {children}
-          </JodyDrawerProvider>
         </Providers>
       </body>
     </html>

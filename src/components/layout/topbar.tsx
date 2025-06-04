@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -13,13 +15,16 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/src/config/site";
 import { HeartIcon, ShoppingBagIcon, User } from "lucide-react";
+import { useDrawerManager } from "../drawers/DrawerManager";
 
 export const Topbar = () => {
+  const { openDrawer } = useDrawerManager();
+
   return (
-    <HeroUINavbar 
-    maxWidth="full" 
-    position="sticky" 
-    className="max-w-screen-2xl mx-auto px-2 lg:px-24 shadow-sm">
+    <HeroUINavbar
+      maxWidth="full"
+      position="sticky"
+      className="max-w-screen-2xl mx-auto px-2 lg:px-24 shadow-sm">
       {/* Left-side Menu Items */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <ul className="flex gap-4 lg:gap-6 justify-start">
@@ -42,17 +47,22 @@ export const Topbar = () => {
       {/* Desktop Icons (hidden on mobile) */}
       <NavbarContent className="hidden lg:flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="cursor-pointer hover:text-gray-600">
-          <NextLink href="/wishlist">
+          <NextLink
+            href="#"
+            onClick={() => openDrawer("wishlist")}>
             <HeartIcon />
           </NextLink>
         </NavbarItem>
         <NavbarItem className="cursor-pointer hover:text-gray-600">
-          <NextLink href="/cart">
+          <NextLink
+            href="#"
+            onClick={() => openDrawer("cart")}>
             <ShoppingBagIcon />
           </NextLink>
         </NavbarItem>
         <NavbarItem className="cursor-pointer hover:text-gray-600">
-          <NextLink href="/login">
+          <NextLink
+            href="/login">
             <User />
           </NextLink>
         </NavbarItem>
@@ -61,17 +71,22 @@ export const Topbar = () => {
       {/* Mobile Icons */}
       <NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
         <NavbarItem className="cursor-pointer hover:text-gray-600">
-          <NextLink href="/wishlist">
+          <NextLink
+            href="#"
+            onClick={() => openDrawer("wishlist")}>
             <HeartIcon />
           </NextLink>
         </NavbarItem>
         <NavbarItem className="cursor-pointer hover:text-gray-600">
-          <NextLink href="/cart">
+          <NextLink
+            href="#"
+            onClick={() => openDrawer("cart")}>
             <ShoppingBagIcon />
           </NextLink>
         </NavbarItem>
         <NavbarItem className="cursor-pointer hover:text-gray-600">
-          <NextLink href="/login">
+          <NextLink
+            href="/login">
             <User />
           </NextLink>
         </NavbarItem>

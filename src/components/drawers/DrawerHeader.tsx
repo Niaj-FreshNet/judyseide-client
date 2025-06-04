@@ -1,12 +1,38 @@
-import { useJodyDrawer } from "./JodyDrawer";
+interface DrawerHeaderProps {
+  onAddToBag: () => void;
+  onWishlist: () => void;
+  currentDrawer: "cart" | "wishlist";
+}
 
-export function DrawerHeader() {
-  const { closeDrawer } = useJodyDrawer();
-
+export function DrawerHeader({
+  onAddToBag,
+  onWishlist,
+  currentDrawer,
+}: DrawerHeaderProps) {
   return (
-    <header className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-      <h2 className="text-xl font-semibold">Add To Bag</h2>
-      <button className="text-gray-400 hover:text-gray-600" onClick={closeDrawer}>✕</button>
+    <header className="mx-auto flex justify-between items-center px-6">
+      <div className="w-full mx-auto flex gap-0 justify-center items-center border border-orange-200 p-2 rounded-none">
+        <button
+          onClick={onAddToBag}
+          className={`px-6 py-2 font-semibold transition rounded-none border-none ${
+            currentDrawer === "cart"
+              ? "bg-orange-500 text-white"
+              : "bg-white text-orange-500 hover:bg-orange-100"
+          }`}
+        >
+          Add to Bag
+        </button>
+        <button
+          onClick={onWishlist}
+          className={`px-6 py-2 font-medium transition rounded-none border-none ${
+            currentDrawer === "wishlist"
+              ? "bg-orange-500 text-white"
+              : "bg-white text-orange-500 hover:bg-orange-100"
+          }`}
+        >
+          Wishlist
+        </button>
+      </div>
     </header>
   );
 }
