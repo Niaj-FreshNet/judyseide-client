@@ -8,6 +8,7 @@ import {
   DrawerFooter,
 } from "@heroui/drawer";
 import { createContext, useContext, useState, ReactNode } from "react";
+
 import { DrawerHeader } from "./DrawerHeader";
 import { CartDrawer } from "./CartDrawer/CartDrawer";
 import { WishlistDrawer } from "./WishlistDrawer/WishlistDrawer";
@@ -23,7 +24,9 @@ const DrawerContext = createContext<DrawerContextType | undefined>(undefined);
 
 export function useDrawerManager() {
   const context = useContext(DrawerContext);
+
   if (!context) throw new Error("Must use within <DrawerProvider>");
+
   return context;
 }
 
@@ -51,20 +54,22 @@ export const DrawerProvider = ({ children }: { children: ReactNode }) => {
       {children}
 
       <Drawer
-        isOpen={isOpen}
-        onClose={closeDrawer}
-        placement="right"
-        size="2xl"
         hideCloseButton
         isDismissable
         className="rounded-none"
+        isOpen={isOpen}
+        placement="right"
+        size="2xl"
+        onClose={closeDrawer}
       >
         <DrawerContent>
           <NextUIDrawerHeader>
             <DrawerHeader
+              currentDrawer={
+                currentDrawer === "cart" || currentDrawer === "wishlist" ? currentDrawer : "cart"
+              }
               onAddToBag={() => openDrawer("cart")}
               onWishlist={() => openDrawer("wishlist")}
-              currentDrawer={currentDrawer === "cart" || currentDrawer === "wishlist" ? currentDrawer : "cart"}
             />
 
             {/* <DrawerCloseButton /> */}
@@ -76,7 +81,7 @@ export const DrawerProvider = ({ children }: { children: ReactNode }) => {
             {currentDrawer === "custom" && customDrawerContent}
           </DrawerBody>
 
-          <DrawerFooter></DrawerFooter>
+          <DrawerFooter />
         </DrawerContent>
       </Drawer>
     </DrawerContext.Provider>

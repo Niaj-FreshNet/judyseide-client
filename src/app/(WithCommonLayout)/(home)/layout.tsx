@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 
 export default function layout({
-  children, 
+  children,
   categorySection,
   trendingProducts,
   catalogSection,
@@ -9,14 +9,15 @@ export default function layout({
   gallerySection,
   reviewSection,
   faqSection,
-}: {children: ReactNode, 
-  categorySection: ReactNode,
-  trendingProducts: ReactNode,
-  catalogSection: ReactNode,
-  storyAndServices: ReactNode,
-  gallerySection: ReactNode,
-  reviewSection: ReactNode,
-  faqSection: ReactNode,
+}: {
+  children: ReactNode;
+  categorySection: ReactNode;
+  trendingProducts: ReactNode;
+  catalogSection: ReactNode;
+  storyAndServices: ReactNode;
+  gallerySection: ReactNode;
+  reviewSection: ReactNode;
+  faqSection: ReactNode;
 }) {
   return (
     <>
@@ -29,5 +30,5 @@ export default function layout({
       {reviewSection}
       {faqSection}
     </>
-  )
+  );
 }

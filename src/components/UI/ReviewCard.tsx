@@ -24,7 +24,7 @@ export default function ReviewCard({
       {/* Stars */}
       <div className="flex space-x-1 text-yellow-500">
         {Array.from({ length: stars }).map((_, i) => (
-          <Star key={i} size={18} fill="currentColor" strokeWidth={0} />
+          <Star key={i} fill="currentColor" size={18} strokeWidth={0} />
         ))}
       </div>
 
@@ -37,11 +37,11 @@ export default function ReviewCard({
       {/* Reviewer */}
       <div className="flex items-center space-x-3 pt-2">
         <Image
-          src={image}
           alt={name}
-          width={40}
-          height={40}
           className="rounded-full object-cover"
+          height={40}
+          src={image}
+          width={40}
         />
         <div>
           <p className="font-semibold text-default-800 text-sm">{name}</p>

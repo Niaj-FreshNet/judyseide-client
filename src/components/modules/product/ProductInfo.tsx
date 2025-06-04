@@ -5,11 +5,11 @@ export default function ProductInfo({
   material,
   description,
 }: {
-  badge: string
-  title: string
-  price: string
-  material: string
-  description: string
+  badge: string;
+  title: string;
+  price: string;
+  material: string;
+  description: string;
 }) {
   return (
     <div className="space-y-6">
@@ -29,7 +29,7 @@ export default function ProductInfo({
       {/* Material & Color Dot */}
       <div className="flex flex-col items-start gap-6">
         <div className="font-medium text-lg">{material}</div>
-        <div className="w-10 h-10 bg-yellow-300 rounded-full border border-orange-200" ></div>
+        <div className="w-10 h-10 bg-yellow-300 rounded-full border border-orange-200" />
       </div>
 
       <hr className="border-t border-orange-200" />
@@ -41,7 +41,6 @@ export default function ProductInfo({
       </div>
 
       <hr className="border-t border-orange-200" />
-
     </div>
-  )
+  );
 }

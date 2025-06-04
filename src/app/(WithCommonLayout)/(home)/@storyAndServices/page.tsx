@@ -1,6 +1,7 @@
-import Container from "@/src/components/UI/Container";
 import Link from "next/link";
 import Image from "next/image";
+
+import Container from "@/src/components/UI/Container";
 import SectionTitle from "@/src/components/UI/SectionTitle";
 
 const sections = [
@@ -31,9 +32,9 @@ export default function StoryAndServices() {
   return (
     <Container className="">
       <SectionTitle
-        title="Our story and  Services"
-        subtitle=""
         align="left"
+        subtitle=""
+        title="Our story and  Services"
         titleClassName="text-default-900"
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -44,10 +45,10 @@ export default function StoryAndServices() {
           >
             <div className="relative h-72 w-full">
               <Image
-                src={section.image}
-                alt={section.title}
                 fill
+                alt={section.title}
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
+                src={section.image}
               />
             </div>
 
@@ -55,8 +56,8 @@ export default function StoryAndServices() {
               <h3 className="text-xl text-default-900 font-bold">{section.title}</h3>
               <p className="text-default-600 text-sm">{section.text}</p>
               <Link
-                href={section.link}
                 className="text-primary font-medium hover:underline mt-auto"
+                href={section.link}
               >
                 {section.linkText}
               </Link>

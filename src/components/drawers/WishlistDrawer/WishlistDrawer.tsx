@@ -1,5 +1,6 @@
-import WishlistItem from "./WishlistItem";
 import { RelatedProductsInDrawer } from "../CartDrawer/RelatedProductsInDrawer";
+
+import WishlistItem from "./WishlistItem";
 
 export function WishlistDrawer() {
   return (
@@ -14,4 +15,4 @@ export function WishlistDrawer() {
       </div>
     </>
   );
-};
+}

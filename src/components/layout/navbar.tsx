@@ -36,17 +36,15 @@ export const Navbar = () => {
 
   return (
     <HeroUINavbar
+      className="max-w-screen-2xl mx-auto sticky top-0 z-50 px-2 lg:px-24 pt-2 pb-4 shadow-sm"
       maxWidth="full"
       position="sticky"
-      className="max-w-screen-2xl mx-auto sticky top-0 z-50 px-2 lg:px-24 pt-2 pb-4 shadow-sm"
     >
       {/* Brand */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <p className="text-5xl font-serif font-bold text-inherit text-orange-400">
-              JudySeide
-            </p>
+            <p className="text-5xl font-serif font-bold text-inherit text-orange-400">JudySeide</p>
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
@@ -59,7 +57,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "uppercase text-lg data-[active=true]:text-primary data-[active=true]:font-medium",
+                  "uppercase text-lg data-[active=true]:text-primary data-[active=true]:font-medium"
                 )}
                 color="foreground"
                 href={item.href}

@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { HeartIcon } from 'lucide-react'
-import { useDrawerManager } from '../../drawers/DrawerManager';
+import { HeartIcon } from "lucide-react";
+
+import { useDrawerManager } from "../../drawers/DrawerManager";
 
 export default function ProductActions() {
   const { openDrawer } = useDrawerManager();
@@ -19,5 +20,5 @@ export default function ProductActions() {
         <HeartIcon className="w-6 h-6 text-orange-300" />
       </button>
     </div>
-  )
+  );
 }

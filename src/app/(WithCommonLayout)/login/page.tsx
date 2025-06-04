@@ -14,11 +14,11 @@ import JudyForm from "@/src/components/form/JudyForm";
 import JudyInput from "@/src/components/form/JudyInput";
 
 const LoginPage = () => {
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const router = useRouter();
   const { setIsLoading: userLoading } = useUser();
 
-  const redirect = searchParams.get("redirect");
+  // const redirect = searchParams.get("redirect");
 
   const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
 
@@ -29,11 +29,11 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (!isPending && isSuccess) {
-      if (redirect) {
-        router.push(redirect);
-      } else {
-        router.push("/");
-      }
+      // if (redirect) {
+      //   router.push(redirect);
+      // } else {
+      //   router.push("/");
+      // }
     }
   }, [isPending, isSuccess]);
 
@@ -43,10 +43,7 @@ const LoginPage = () => {
         <h3 className="my-2 text-2xl font-bold">Login with FoundX</h3>
         <p className="mb-4">Welcome Back! Let&lsquo;s Get Started</p>
         <div className="w-[35%]">
-          <JudyForm
-            resolver={zodResolver(loginValidationSchema)}
-            onSubmit={onSubmit}
-          >
+          <JudyForm resolver={zodResolver(loginValidationSchema)} onSubmit={onSubmit}>
             <div className="py-3">
               <JudyInput label="Email" name="email" type="email" />
             </div>

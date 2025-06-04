@@ -1,14 +1,15 @@
-import Container from '@/src/components/UI/Container'
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
+
+import Container from "@/src/components/UI/Container";
 
 export default function layout({
   breadcrumbs,
   children,
-  allProducts
+  allProducts,
 }: {
-  breadcrumbs: ReactNode,
-  children: ReactNode,
-  allProducts: ReactNode,
+  breadcrumbs: ReactNode;
+  children: ReactNode;
+  allProducts: ReactNode;
 }) {
   return (
     <Container className="pt-8">
@@ -16,5 +17,5 @@ export default function layout({
       {children}
       {allProducts}
     </Container>
-  )
+  );
 }

@@ -7,5 +7,5 @@ export default function ProductPage() {
       <RelatedProducts />
       <ProductReviews />
     </div>
-  )
+  );
 }

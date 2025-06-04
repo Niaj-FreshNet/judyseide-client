@@ -13,12 +13,7 @@ interface IProps extends formConfig {
   onSubmit: SubmitHandler<any>;
 }
 
-export default function JudyForm({
-  children,
-  onSubmit,
-  defaultValues,
-  resolver,
-}: IProps) {
+export default function JudyForm({ children, onSubmit, defaultValues, resolver }: IProps) {
   const formConfig: formConfig = {};
 
   if (!!defaultValues) {

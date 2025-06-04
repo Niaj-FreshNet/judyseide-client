@@ -9,7 +9,7 @@ interface IProps extends IInput {}
 
 export default function JudyInput({
   variant = "bordered",
-  labelPlacement= "outside",
+  labelPlacement = "outside",
   size = "lg",
   required = false,
   type = "text",
@@ -29,11 +29,11 @@ export default function JudyInput({
       errorMessage={errors[name] ? (errors[name].message as string) : ""}
       isInvalid={!!errors[name]}
       label={label}
+      labelPlacement={labelPlacement}
       required={required}
       size={size}
       type={type}
       variant={variant}
-      labelPlacement={labelPlacement}
     />
   );
 }

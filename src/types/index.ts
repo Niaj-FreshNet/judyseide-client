@@ -4,7 +4,6 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-
 export interface IInput {
   variant?: "flat" | "bordered" | "faded" | "underlined";
   labelPlacement?: "outside" | "outside-left" | "inside";
@@ -15,7 +14,6 @@ export interface IInput {
   name: string;
   disabled?: boolean;
 }
-
 
 export interface IUser {
   _id: string;

@@ -5,7 +5,6 @@ export function useJodyDrawer() {
 
   return {
     openDrawer: (component: JSX.Element) => {
-      console.warn("⚠️ useJodyDrawer is deprecated. Please use useDrawerManager.");
       openDrawer("custom", component);
     },
     closeDrawer,

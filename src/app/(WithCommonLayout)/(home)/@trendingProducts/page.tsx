@@ -1,11 +1,12 @@
 "use client";
 
-import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback, useEffect, useState } from 'react';
-import Container from '@/src/components/UI/Container';
-import ProductCard from '@/src/components/UI/ProductCard';
-import SectionTitle from '@/src/components/UI/SectionTitle';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback, useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import Container from "@/src/components/UI/Container";
+import ProductCard from "@/src/components/UI/ProductCard";
+import SectionTitle from "@/src/components/UI/SectionTitle";
 
 const sampleProducts = [
   {
@@ -62,39 +63,47 @@ export default function TrendingProducts() {
     };
 
     setScrollSnaps(emblaApi.scrollSnapList());
-    emblaApi.on('select', onSelect);
+    emblaApi.on("select", onSelect);
     onSelect();
   }, [emblaApi]);
 
   return (
     <Container>
       <div className="flex flex-col gap-6">
-        <SectionTitle title="Top Trending Products" subtitle="" align="left" titleClassName="text-default-900" />
+        <SectionTitle
+          align="left"
+          subtitle=""
+          title="Top Trending Products"
+          titleClassName="text-default-900"
+        />
 
         <div className="relative">
           {/* Arrows */}
           <button
-            onClick={scrollPrev}
             className="absolute left-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+            onClick={scrollPrev}
           >
-            <ChevronLeft size={28} color='white' />
+            <ChevronLeft color="white" size={28} />
           </button>
 
-          <div className="overflow-hidden" ref={emblaRef}>
+          <div ref={emblaRef} className="overflow-hidden">
             <div className="flex gap-4">
               {sampleProducts.map((product, index) => (
-                <div className="min-w-[250px] flex-[0_0_80%] sm:flex-[0_0_45%] md:flex-[0_0_33%] lg:flex-[0_0_25%]" key={index}>
-                  <ProductCard product={product} showAddToBag />
+                <div
+                  key={index}
+                  className="min-w-[250px] flex-[0_0_80%] sm:flex-[0_0_45%] md:flex-[0_0_33%] lg:flex-[0_0_25%]"
+                >
+                  <ProductCard showAddToBag product={product} />
                 </div>
               ))}
             </div>
           </div>
 
           <button
-            onClick={scrollNext}
             className="absolute right-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+            onClick={scrollNext}
           >
-            <ChevronRight size={28} color='white' />
+            <ChevronRight color="white" size={28} />
           </button>
         </div>
 
@@ -103,10 +112,10 @@ export default function TrendingProducts() {
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
-              onClick={() => scrollTo(index)}
               className={`w-2.5 h-2.5 rounded-full ${
-                index === selectedIndex ? 'bg-orange-100' : 'bg-orange-400'
+                index === selectedIndex ? "bg-orange-100" : "bg-orange-400"
               }`}
+              onClick={() => scrollTo(index)}
             />
           ))}
         </div>

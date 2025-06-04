@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import ProductCard from '@/src/components/UI/ProductCard';
+import ProductCard from "@/src/components/UI/ProductCard";
 
 type Product = {
   name: string;
@@ -16,11 +16,13 @@ interface ProductGridProps {
 }
 
 export default function ProductGrid({ products, cols = 4 }: ProductGridProps) {
-  const colClass = cols === 3 ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4';
+  const colClass =
+    cols === 3 ? "grid-cols-2 md:grid-cols-3" : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4";
+
   return (
     <div className={`grid ${colClass} gap-3 md:gap-6 lg:gap-8`}>
       {products.map((product, index) => (
-        <ProductCard key={index} product={product} showAddToBag />
+        <ProductCard key={index} showAddToBag product={product} />
       ))}
     </div>
   );

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { BreadcrumbItem, Breadcrumbs } from "@heroui/breadcrumbs";
 
@@ -13,12 +13,12 @@ export default function CustomBreadcrumbs({ items }: BreadcrumbProps) {
         <BreadcrumbItem key={index}>
           <span
             className={`cursor-pointer text-lg hover:text-orange-500 transition ${
-              index === items.length - 1 ? 'font-semibold text-orange-400' : ''
+              index === items.length - 1 ? "font-semibold text-orange-400" : ""
             }`}
           >
             {item}
           </span>
-          {index < items.length - 1 && <span className="text-gray-400"></span>}
+          {index < items.length - 1 && <span className="text-gray-400" />}
         </BreadcrumbItem>
       ))}
     </Breadcrumbs>

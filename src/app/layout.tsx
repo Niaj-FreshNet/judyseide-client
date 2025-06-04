@@ -1,6 +1,7 @@
 import "@/src/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
+import { ReactNode } from "react";
 
 import { Providers } from "../lib/Providers";
 
@@ -25,23 +26,21 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html suppressHydrationWarning lang="en" className={`${fontSans.variable} ${fontSerif.variable}`}>
+    <html
+      suppressHydrationWarning
+      className={`${fontSans.variable} ${fontSerif.variable}`}
+      lang="en"
+    >
       <head />
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-            {children}
-        </Providers>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>{children}</Providers>
       </body>
     </html>
   );
