@@ -102,7 +102,7 @@ export default function AllFilters({ filters, setFilters }: AllFiltersProps) {
                 <div className="flex flex-col gap-2">
                     <RadioGroup
                         value={filters.sortBy}
-                        onValueChange={(val) => handleRadioChange('sortBy', val)}
+                        onValueChange={(val) => handleRadioChange('sortBy', val as SortByOption)}
                     >
                         <Radio value="price-low-to-high">Price: Low to High</Radio>
                         <Radio value="price-high-to-low">Price: High to Low</Radio>
@@ -118,7 +118,7 @@ export default function AllFilters({ filters, setFilters }: AllFiltersProps) {
                 <div className="flex flex-col gap-2">
                     <RadioGroup
                         value={filters.category}
-                        onValueChange={(val) => handleRadioChange('category', val)}
+                        onValueChange={(val) => handleRadioChange('category', val as CategoryOption)}
                     >
                         {['Earrings', 'Bracelets', 'Necklaces', 'Rings'].map(cat => (
                             <Radio key={cat} value={cat.toLowerCase()}>{cat}</Radio>
@@ -135,7 +135,7 @@ export default function AllFilters({ filters, setFilters }: AllFiltersProps) {
                 <div className="flex flex-col gap-2">
                     <RadioGroup
                         value={filters.material}
-                        onValueChange={(val) => handleRadioChange('material', val)}
+                        onValueChange={(val) => handleRadioChange('material', val as MaterialOption)}
                     >
                         {['14k Yellow Gold', '18k Gold Vermeil', 'Sterling Silver'].map(mat => (
                             <Radio key={mat} value={mat.toLowerCase()}>{mat}</Radio>
