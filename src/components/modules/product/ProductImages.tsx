@@ -49,7 +49,6 @@ export default function ProductImages({ images }: { images: string[] }) {
         }}
       >
         <div
-          className="relative ..."
           role="button"
           tabIndex={0}
           onClick={() => {
@@ -86,11 +85,10 @@ export default function ProductImages({ images }: { images: string[] }) {
           <Image
             key={idx}
             alt={`Thumbnail ${idx}`}
-            className={`rounded-none border cursor-pointer object-cover ${
-              selectedImage === img
+            className={`rounded-none border cursor-pointer object-cover ${selectedImage === img
                 ? "border-2 border-orange-500 ring-2 ring-orange-300"
                 : "border border-orange-200 hover:ring-2 ring-orange-400"
-            }`}
+              }`}
             height={112}
             src={img}
             width={112}
