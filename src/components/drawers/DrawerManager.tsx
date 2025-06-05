@@ -12,6 +12,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 import { DrawerHeader } from "./DrawerHeader";
 import { CartDrawer } from "./CartDrawer/CartDrawer";
 import { WishlistDrawer } from "./WishlistDrawer/WishlistDrawer";
+import { X } from "lucide-react";
 
 type DrawerType = "cart" | "wishlist" | "custom" | null;
 
@@ -49,12 +50,13 @@ export const DrawerProvider = ({ children }: { children: ReactNode }) => {
     setCustomDrawerContent(null);
   };
 
+
   return (
     <DrawerContext.Provider value={{ openDrawer, closeDrawer }}>
       {children}
 
       <Drawer
-        hideCloseButton
+        hideCloseButton={true}
         isDismissable
         className="rounded-none"
         isOpen={isOpen}
@@ -64,6 +66,13 @@ export const DrawerProvider = ({ children }: { children: ReactNode }) => {
       >
         <DrawerContent>
           <NextUIDrawerHeader>
+            <button
+              onClick={closeDrawer}
+              className="absolute top-8 right-8 text-orange-500 hover:text-default-800 z-50"
+              aria-label="Close"
+            >
+              <X className="w-6 h-6" />
+            </button>
             <DrawerHeader
               currentDrawer={
                 currentDrawer === "cart" || currentDrawer === "wishlist" ? currentDrawer : "cart"

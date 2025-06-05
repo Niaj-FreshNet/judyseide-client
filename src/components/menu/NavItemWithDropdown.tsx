@@ -20,7 +20,7 @@ export const NavItemWithDropdown = ({ label, href }: { label: string; href: stri
                 {label}
             </NextLink>
             {isHovered && (
-                <div className="animate-fade-in">
+                <div className="hidden md:block animate-fade-in">
                     <MegaMenu />
                 </div>
             )}

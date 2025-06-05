@@ -5,16 +5,11 @@ import {
   NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
-  NavbarMenuItem,
 } from "@heroui/navbar";
-import { Link } from "@heroui/link";
 import { Input } from "@heroui/input";
-import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
-import clsx from "clsx";
 
 import { siteConfig } from "@/src/config/site";
-import { ThemeSwitch } from "@/src/components/UI/theme-switch";
 import { SearchIcon } from "@/src/components/icons";
 import { NavItemWithDropdown } from "../menu/NavItemWithDropdown";
 
@@ -37,7 +32,7 @@ export const Navbar = () => {
 
   return (
     <HeroUINavbar
-      className="relative max-w-screen-2xl mx-auto  top-0 z-[60] px-2 lg:px-24 pt-2 pb-4 shadow-sm overflow-visible"
+      className="relative max-w-screen-2xl mx-auto top-0 z-[40] px-2 lg:px-24 pt-2 pb-4 shadow-sm overflow-visible"
       maxWidth="full"
       position="sticky"
     >
@@ -64,7 +59,7 @@ export const Navbar = () => {
       {/* Desktop Search + Theme */}
       <NavbarContent className="hidden lg:flex basis-1/5" justify="end">
         <NavbarItem className="flex gap-2">
-          <ThemeSwitch  />
+          {/* <ThemeSwitch  /> */}
         </NavbarItem>
         <NavbarItem>
           <div className="w-64">{searchInput}</div>
@@ -73,7 +68,7 @@ export const Navbar = () => {
 
       {/* Mobile & Tablet Toggle */}
       <NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
-        <ThemeSwitch />
+        {/* <ThemeSwitch /> */}
         <NavbarMenuToggle />
       </NavbarContent>
 
