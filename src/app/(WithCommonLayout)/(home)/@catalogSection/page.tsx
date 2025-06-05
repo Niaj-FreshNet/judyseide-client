@@ -9,12 +9,12 @@ export default function CatalogSection() {
     },
     {
       title: "Emeralds For This Month",
-      image: "/catalog/catalog2.jpeg",
+      image: "/catalog/catalog2.jpg",
       link: "/shop/bold",
     },
     {
       title: "Create your own jewelry!",
-      image: "/catalog/catalog3.jpeg",
+      image: "/catalog/catalog3.jpg",
       link: "/shop/gold",
     },
   ];
