@@ -64,7 +64,7 @@ export const Navbar = () => {
       {/* Desktop Search + Theme */}
       <NavbarContent className="hidden lg:flex basis-1/5" justify="end">
         <NavbarItem className="flex gap-2">
-          <ThemeSwitch />
+          <ThemeSwitch  />
         </NavbarItem>
         <NavbarItem>
           <div className="w-64">{searchInput}</div>
