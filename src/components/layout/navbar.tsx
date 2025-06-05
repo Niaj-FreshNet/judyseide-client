@@ -16,6 +16,7 @@ import clsx from "clsx";
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/UI/theme-switch";
 import { SearchIcon } from "@/src/components/icons";
+import { NavItemWithDropdown } from "../menu/NavItemWithDropdown";
 
 export const Navbar = () => {
   const searchInput = (
@@ -36,7 +37,7 @@ export const Navbar = () => {
 
   return (
     <HeroUINavbar
-      className="max-w-screen-2xl mx-auto sticky top-0 z-50 px-2 lg:px-24 pt-2 pb-4 shadow-sm"
+      className="relative max-w-screen-2xl mx-auto  top-0 z-[60] px-2 lg:px-24 pt-2 pb-4 shadow-sm overflow-visible"
       maxWidth="full"
       position="sticky"
     >
@@ -51,20 +52,11 @@ export const Navbar = () => {
 
       {/* Desktop Nav Items */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="center">
-        <ul className="hidden lg:flex gap-6 justify-start">
+        <ul className="hidden lg:flex gap-6 justify-start items-center">
           {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "uppercase text-lg data-[active=true]:text-primary data-[active=true]:font-medium"
-                )}
-                color="foreground"
-                href={item.href}
-              >
-                {item.label}
-              </NextLink>
-            </NavbarItem>
+            <li key={item.href} className="relative">
+              <NavItemWithDropdown label={item.label} href={item.href} />
+            </li>
           ))}
         </ul>
       </NavbarContent>
@@ -89,23 +81,13 @@ export const Navbar = () => {
       <NavbarMenu className="pt-[72px]">
         <div className="px-4 pt-4">{searchInput}</div>
         <div className="mx-4 mt-4 flex flex-col gap-4">
-          {siteConfig.navItems.map((item, index) => (
-            <NavbarMenuItem key={`${item.href}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href={item.href}
-                size="lg"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
+          <ul className="flex flex-col gap-2 px-4 pt-4">
+            {siteConfig.navItems.map((item) => (
+              <li key={item.href}>
+                <NavItemWithDropdown label={item.label} href={item.href} />
+              </li>
+            ))}
+          </ul>
         </div>
       </NavbarMenu>
     </HeroUINavbar>

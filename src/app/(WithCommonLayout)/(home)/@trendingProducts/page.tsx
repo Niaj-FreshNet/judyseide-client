@@ -15,6 +15,7 @@ const sampleProducts = [
     image: "/hero1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings",
   },
   {
     name: "Starburst Earrings",
@@ -22,6 +23,7 @@ const sampleProducts = [
     image: "/products/product1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings",
   },
   {
     name: "Starburst Earrings",
@@ -29,6 +31,7 @@ const sampleProducts = [
     image: "/products/product1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings",
   },
   {
     name: "Starburst Earrings",
@@ -36,6 +39,7 @@ const sampleProducts = [
     image: "/products/product1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings",
   },
   {
     name: "Starburst Earrings",
@@ -43,6 +47,7 @@ const sampleProducts = [
     image: "/products/product1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings",
   },
 ];
 
@@ -112,9 +117,8 @@ export default function TrendingProducts() {
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
-              className={`w-2.5 h-2.5 rounded-full ${
-                index === selectedIndex ? "bg-orange-100" : "bg-orange-400"
-              }`}
+              className={`w-2.5 h-2.5 rounded-full ${index === selectedIndex ? "bg-orange-100" : "bg-orange-400"
+                }`}
               onClick={() => scrollTo(index)}
             />
           ))}

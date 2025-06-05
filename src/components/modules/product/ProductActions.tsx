@@ -16,7 +16,10 @@ export default function ProductActions() {
         Add To Bag
       </button>
 
-      <button className="w-1/3 border border-orange-200 text-white px-6 py-4 flex justify-center items-center">
+      <button
+        className="w-1/3 border border-orange-200 text-white px-6 py-4 flex justify-center items-center"
+        onClick={() => openDrawer("wishlist")}
+      >
         <HeartIcon className="w-6 h-6 text-orange-300" />
       </button>
     </div>

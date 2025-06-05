@@ -9,12 +9,13 @@ interface IProps extends IInput {}
 
 export default function JudyInput({
   variant = "bordered",
-  labelPlacement = "outside",
+  labelPlacement = "inside",
   size = "lg",
   required = false,
   type = "text",
   label,
   name,
+  className = "rounded-none"
 }: IProps) {
   const {
     register,
@@ -34,6 +35,7 @@ export default function JudyInput({
       size={size}
       type={type}
       variant={variant}
+      className={className}
     />
   );
 }

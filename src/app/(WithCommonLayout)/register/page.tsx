@@ -23,89 +23,98 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="flex w-full max-w-6xl bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="flex w-full bg-white border border-gray-100 rounded-md shadow-lg overflow-hidden">
         {/* Left Side - Image Placeholder */}
-        <div className="hidden md:block md:w-1/2 bg-indigo-600">
+        <div className="hidden md:block md:w-1/2 border-r-2">
           <div className="h-full flex items-center justify-center p-10">
             <div className="text-white text-center">
               <Image
                 alt="Registration Illustration"
-                className="mx-auto"
+                className="object-cover w-full h-full mx-auto"
+                src="/products/bracelet.jpg"
+                width={1024}
                 height={1024}
-                src="/hero1.jpg"
-                width={708}
               />
-              <h2 className="text-2xl font-bold mt-6">Welcome to Our Platform</h2>
-              <p className="mt-2">Join thousands of happy users today</p>
             </div>
           </div>
         </div>
 
         {/* Right Side - Registration Form */}
-        <div className="w-full md:w-1/2 p-8 border">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900">Register</h2>
-            <p className="mt-2 text-sm text-gray-500">Sign up to your account</p>
-          </div>
-
-          {/* Form */}
-          <JudyForm
-            defaultValues={{
-              name: "Mir Hussain",
-              email: "mir@gmail.com",
-              mobileNumber: "01711223344",
-              password: "123456",
-            }}
-            resolver={zodResolver(registerValidationSchema)}
-            onSubmit={onSubmit}
-          >
-            <div className="space-y-8">
-              <JudyInput label="Full Name" name="name" size="sm" />
-              <JudyInput label="Email Address" name="email" size="sm" />
-              <JudyInput label="Mobile Number" name="mobileNumber" size="sm" />
-              <JudyInput label="Password" name="password" size="sm" type="password" />
+        <div className="w-full md:w-1/2 p-12 flex justify-center items-center">
+          <div className="w-full">
+            <div className="text-center">
+              <h2 className="text-4xl font-bold text-orange-500 mb-4">Register</h2>
             </div>
 
-            {/* Submit Button */}
-            <div className="mt-6">
-              <Button
-                className="w-full rounded-none bg-orange-500 py-2 text-sm font-semibold text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                disabled={isPending}
-                size="lg"
-                type="submit"
+            <div className="px-8 pt-8 pb-16 rounded-md shadow-2xl border border-gray-50 space-y-6">
+              {/* Form */}
+              <JudyForm
+                // defaultValues={{
+                //   name: "Mir Hussain",
+                //   email: "mir@gmail.com",
+                //   mobileNumber: "01711223344",
+                //   password: "123456",
+                // }}
+                resolver={zodResolver(registerValidationSchema)}
+                onSubmit={onSubmit}
               >
-                {isPending ? "Registering..." : "Register"}
-              </Button>
+                <p className="mt-2 text-2xl text-center text-default-800 font-semibold mb-6 ml-2">Sign up to your account</p>
+                <div className="space-y-4">
+                  <JudyInput label="Name" name="name" size="lg" />
+                  <JudyInput label="Email Address" name="email" size="lg" />
+                  <JudyInput label="Mobile Number" name="mobileNumber" size="lg" />
+                  <JudyInput label="Password" name="password" size="lg" type="password" />
+                </div>
+
+                {/* Submit Button */}
+                <div className="mt-6">
+                  <Button
+                    className="w-full rounded-none bg-orange-500 py-2 text-lg font-semibold text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                    disabled={isPending}
+                    size="lg"
+                    type="submit"
+                  >
+                    {isPending ? "Registering..." : "Register"}
+                  </Button>
+                </div>
+              </JudyForm>
+
+              {/* Divider */}
+              <div className="flex items-center gap-4">
+                <div className="h-px flex-1 bg-gray-200" />
+                <span className="text-xs text-gray-600">Other log in options</span>
+                <div className="h-px flex-1 bg-gray-200" />
+              </div>
+
+              {/* Social Auth Buttons */}
+              <div className="flex flex-col space-y-2">
+                <h1>Log In with Open Account</h1>
+                <Button
+                  className="w-full rounded-md bg-white py-4 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 border-2 border-gray-200 flex items-center justify-center space-x-2"
+                  size="sm"
+                  type="button"
+                >
+                  <Image
+                    src="/google.svg"
+                    alt="Google"
+                    width={20}
+                    height={20}
+                  />
+                  <span>Log In with Google</span>
+                </Button>
+              </div>
             </div>
-          </JudyForm>
 
-          {/* Divider */}
-          <div className="flex items-center gap-4">
-            <div className="h-px flex-1 bg-gray-200" />
-            <span className="text-xs text-gray-600">Other log in options</span>
-            <div className="h-px flex-1 bg-gray-200" />
+            {/* Login Link */}
+            <p className="text-center text-sm text-default-600 mt-8">
+              Already have an account?{" "}
+              <Link className="underline font-medium text-orange-500 hover:underline" href="/login">
+                Login
+              </Link>
+            </p>
+
           </div>
-
-          {/* Social Auth Buttons */}
-          <div className="flex flex-col space-y-2">
-            <h1>Log In with Open Account</h1>
-            <Button
-              className="flex items-center justify-center rounded-none border border-gray-300 bg-white py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-              size="sm"
-              type="button"
-            >
-              Log In with Google
-            </Button>
-          </div>
-
-          {/* Login Link */}
-          <p className="text-center text-sm text-gray-500">
-            Already have an account?{" "}
-            <Link className="font-medium text-indigo-600 hover:underline" href="/login">
-              Login here
-            </Link>
-          </p>
         </div>
       </div>
     </div>

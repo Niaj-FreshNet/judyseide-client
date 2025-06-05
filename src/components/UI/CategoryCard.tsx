@@ -13,7 +13,12 @@ export function CategoryCard({ categoryName, imageUrl }: CategoryCardProps) {
       <Link href={`/shop/${categoryName.toLowerCase()}`}>
         <div className="w-full h-96 bg-gray-100 flex items-center justify-center mb-2 overflow-hidden">
           {imageUrl ? (
-            <Image alt={categoryName} className="w-full h-full object-cover" src={imageUrl} />
+            <Image
+              width={1200}
+              height={600}
+              alt={categoryName}
+              src={imageUrl}
+              className="w-full h-full object-cover" />
           ) : (
             <div className="text-7xl text-gray-300">{categoryName.charAt(0)}</div>
           )}

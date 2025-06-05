@@ -8,6 +8,7 @@ type Product = {
   image: string;
   badge: string;
   material: string;
+  slug: string;
 };
 
 interface ProductGridProps {

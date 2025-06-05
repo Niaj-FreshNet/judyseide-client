@@ -20,6 +20,7 @@ type Product = {
   badge: string;
   material: string;
   category: string;
+  slug: string;
 };
 
 const productNames = [
@@ -52,6 +53,7 @@ const allProducts: Product[] = Array(16)
     badge: badges[i % badges.length],
     material: "18k Gold Vermeil",
     category: ["Earrings", "Bracelets", "Necklaces", "Rings"][i % 4],
+    slug: productNames[i].toLowerCase().replace(/\s+/g, "-"),
   }));
 
 export default function AllProductPage() {
@@ -77,7 +79,7 @@ export default function AllProductPage() {
       const matchesCategory =
         !filters.category ||
         product.category.replace(/\s+/g, "").toLowerCase() ===
-          filters.category.replace(/\s+/g, "").toLowerCase();
+        filters.category.replace(/\s+/g, "").toLowerCase();
       const matchesMaterial =
         !filters.material || product.material.toLowerCase() === filters.material;
 

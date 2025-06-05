@@ -14,6 +14,7 @@ const sampleProducts = [
     image: "/hero1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
@@ -21,6 +22,7 @@ const sampleProducts = [
     image: "/products/product1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
@@ -28,6 +30,7 @@ const sampleProducts = [
     image: "/products/product1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
@@ -35,6 +38,7 @@ const sampleProducts = [
     image: "/products/product1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
@@ -42,6 +46,7 @@ const sampleProducts = [
     image: "/products/product1.jpg",
     badge: "Best selling",
     material: "18k Gold Vermeil",
+    slug: "starburst-earrings"
   },
 ];
 

@@ -29,12 +29,11 @@ export default function FilterBar({
           <button
             key={label}
             className={`px-4 py-2 border rounded-none text-lg transition
-                            ${
-                              selectedCategory === label.trim().toLowerCase() ||
-                              (label === "All Filter" && selectedCategory === "")
-                                ? "border-orange-300 bg-orange-400 text-white"
-                                : "border-orange-200 text-default-900 hover:bg-gray-100"
-                            }`}
+               ${selectedCategory === label.trim().toLowerCase() ||
+                (label === "All Filter" && selectedCategory === "")
+                ? "border-orange-300 bg-orange-400 text-white"
+                : "border-orange-200 text-default-900 hover:bg-gray-100"
+              }`}
             onClick={() => onCategoryChange(label)}
           >
             <div className="flex items-center gap-2">

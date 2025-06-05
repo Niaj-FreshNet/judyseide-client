@@ -17,7 +17,6 @@ export default function ProductImages({ images }: { images: string[] }) {
 
   const handleMouseMove = (e: MouseEvent) => {
     const zoomEl = zoomRef.current;
-
     if (!zoomEl) return;
 
     const { left, top, width, height } = zoomEl.getBoundingClientRect();
@@ -29,7 +28,6 @@ export default function ProductImages({ images }: { images: string[] }) {
 
   const handleMouseLeave = () => {
     const zoomEl = zoomRef.current;
-
     if (zoomEl) {
       zoomEl.style.backgroundPosition = "center";
     }
@@ -49,6 +47,7 @@ export default function ProductImages({ images }: { images: string[] }) {
         }}
       >
         <div
+          className="relative w-full sm:w-[648px] h-[300px] sm:h-[512px] border border-orange-200 shadow-sm cursor-zoom-in overflow-hidden"
           role="button"
           tabIndex={0}
           onClick={() => {
@@ -67,7 +66,6 @@ export default function ProductImages({ images }: { images: string[] }) {
             className="w-full h-full bg-no-repeat bg-center bg-cover"
             style={{ backgroundImage: `url(${selectedImage})` }}
           >
-            {/* Hidden <Image> just for Next.js optimization */}
             <Image
               alt="Main product image"
               className="opacity-0 w-full h-full"
@@ -80,12 +78,12 @@ export default function ProductImages({ images }: { images: string[] }) {
       </LightGallery>
 
       {/* Thumbnails */}
-      <div className="flex mt-4 gap-6">
+      <div className="flex gap-4 sm:gap-6 flex-wrap sm:flex-nowrap overflow-x-auto pb-2">
         {images.map((img, idx) => (
           <Image
             key={idx}
             alt={`Thumbnail ${idx}`}
-            className={`rounded-none border cursor-pointer object-cover ${selectedImage === img
+            className={`rounded-none border cursor-pointer object-cover min-w-[72px] sm:min-w-0 ${selectedImage === img
                 ? "border-2 border-orange-500 ring-2 ring-orange-300"
                 : "border border-orange-200 hover:ring-2 ring-orange-400"
               }`}

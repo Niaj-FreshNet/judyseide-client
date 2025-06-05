@@ -13,6 +13,7 @@ export interface IInput {
   label: string;
   name: string;
   disabled?: boolean;
+  className?: string;
 }
 
 export interface IUser {

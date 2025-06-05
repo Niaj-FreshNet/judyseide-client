@@ -32,6 +32,8 @@ export default function CatalogSection() {
               src={catalog.image}
               alt={catalog.title}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              width={1200}
+              height={600}
             />
 
             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-end text-white text-center p-4">
@@ -56,6 +58,8 @@ export default function CatalogSection() {
               src={catalogs[2].image}
               alt={catalogs[2].title}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              width={1200}
+              height={600}
             />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white text-center p-4">
               <h3 className="text-3xl font-sans font-bold mb-3 px-3 py-1 rounded-sm">
