@@ -9,7 +9,7 @@ export const siteConfig = {
       href: "/new-in",
     },
     {
-      label: "Earnings",
+      label: "Earrings",
       href: "/earrings",
     },
     {
@@ -36,7 +36,7 @@ export const siteConfig = {
     },
     {
       label: "About us",
-      href: "/about-us",
+      href: "/about",
     },
     {
       label: "Help",

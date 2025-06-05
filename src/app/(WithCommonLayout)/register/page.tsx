@@ -16,50 +16,39 @@ export default function RegisterPage() {
   const { mutate: handleUserRegistration, isPending } = useUserRegistration();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const userData = {
-      ...data,
-    };
-    handleUserRegistration(userData);
+    handleUserRegistration(data);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex w-full bg-white border border-gray-100 rounded-md shadow-lg overflow-hidden">
-        {/* Left Side - Image Placeholder */}
-        <div className="hidden md:block md:w-1/2 border-r-2">
-          <div className="h-full flex items-center justify-center p-10">
-            <div className="text-white text-center">
-              <Image
-                alt="Registration Illustration"
-                className="object-cover w-full h-full mx-auto"
-                src="/products/bracelet.jpg"
-                width={1024}
-                height={1024}
-              />
-            </div>
-          </div>
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="flex flex-col md:flex-row w-full max-w-5xl bg-white border border-gray-100 rounded-md shadow-lg overflow-hidden">
+        
+        {/* Image Side */}
+        <div className="w-full md:w-1/2 h-64 md:h-auto">
+          <Image
+            alt="Registration Illustration"
+            className="object-cover w-full h-full"
+            src="/products/bracelet.jpg"
+            width={1024}
+            height={1024}
+          />
         </div>
 
-        {/* Right Side - Registration Form */}
-        <div className="w-full md:w-1/2 p-12 flex justify-center items-center">
-          <div className="w-full">
-            <div className="text-center">
-              <h2 className="text-4xl font-bold text-orange-500 mb-4">Register</h2>
-            </div>
+        {/* Form Side */}
+        <div className="w-full md:w-1/2 p-6 sm:p-10 lg:p-12 flex justify-center items-center">
+          <div className="w-full max-w-md">
+            <h2 className="text-3xl sm:text-4xl font-bold text-orange-500 text-center mb-4">
+              Register
+            </h2>
 
-            <div className="px-8 pt-8 pb-16 rounded-md shadow-2xl border border-gray-50 space-y-6">
-              {/* Form */}
+            <div className="bg-white rounded-md shadow-md px-6 py-8 space-y-6 border border-gray-50">
               <JudyForm
-                // defaultValues={{
-                //   name: "Mir Hussain",
-                //   email: "mir@gmail.com",
-                //   mobileNumber: "01711223344",
-                //   password: "123456",
-                // }}
                 resolver={zodResolver(registerValidationSchema)}
                 onSubmit={onSubmit}
               >
-                <p className="mt-2 text-2xl text-center text-default-800 font-semibold mb-6 ml-2">Sign up to your account</p>
+                <p className="text-xl sm:text-2xl text-center font-semibold text-gray-800 mb-6">
+                  Sign up to your account
+                </p>
                 <div className="space-y-4">
                   <JudyInput label="Name" name="name" size="lg" />
                   <JudyInput label="Email Address" name="email" size="lg" />
@@ -67,10 +56,9 @@ export default function RegisterPage() {
                   <JudyInput label="Password" name="password" size="lg" type="password" />
                 </div>
 
-                {/* Submit Button */}
                 <div className="mt-6">
                   <Button
-                    className="w-full rounded-none bg-orange-500 py-2 text-lg font-semibold text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                    className="w-full bg-orange-500 py-2 text-lg font-semibold text-white hover:bg-orange-400 rounded-md"
                     disabled={isPending}
                     size="lg"
                     type="submit"
@@ -82,16 +70,15 @@ export default function RegisterPage() {
 
               {/* Divider */}
               <div className="flex items-center gap-4">
-                <div className="h-px flex-1 bg-gray-200" />
+                <div className="flex-1 h-px bg-gray-200" />
                 <span className="text-xs text-gray-600">Other log in options</span>
-                <div className="h-px flex-1 bg-gray-200" />
+                <div className="flex-1 h-px bg-gray-200" />
               </div>
 
-              {/* Social Auth Buttons */}
-              <div className="flex flex-col space-y-2">
-                <h1>Log In with Open Account</h1>
+              {/* Social Auth */}
+              <div className="space-y-2">
                 <Button
-                  className="w-full rounded-md bg-white py-4 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 border-2 border-gray-200 flex items-center justify-center space-x-2"
+                  className="w-full bg-white text-sm font-medium text-gray-700 border-2 border-gray-200 hover:bg-gray-50 flex items-center justify-center space-x-2 rounded-md py-3"
                   size="sm"
                   type="button"
                 >
@@ -107,13 +94,12 @@ export default function RegisterPage() {
             </div>
 
             {/* Login Link */}
-            <p className="text-center text-sm text-default-600 mt-8">
+            <p className="text-sm text-center text-gray-600 mt-6">
               Already have an account?{" "}
-              <Link className="underline font-medium text-orange-500 hover:underline" href="/login">
+              <Link href="/login" className="text-orange-500 font-medium hover:underline">
                 Login
               </Link>
             </p>
-
           </div>
         </div>
       </div>
