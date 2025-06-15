@@ -6,18 +6,18 @@ export const MegaMenu = () => {
             <div className="w-full max-w-screen-2xl mx-auto my-auto flex flex-row gap-4 justify-center items-start inset-x-0">
                 {/* Left Columns: Links */}
                 <div className="flex gap-8">
-                    <div className="w-32">
-                        <h3 className="font-semibold text-lg mb-6 text-default-800">All Category</h3>
-                        <ul className="space-y-6 text-default-800">
+                    <div className="w-32 text-black">
+                        <h3 className="font-semibold text-lg mb-6">All Category</h3>
+                        <ul className="space-y-6">
                             <li className="hover:underline cursor-pointer">Earrings</li>
                             <li className="hover:underline cursor-pointer">Brackets</li>
                             <li className="hover:underline cursor-pointer">Necklaces</li>
                             <li className="hover:underline cursor-pointer">Rings</li>
                         </ul>
                     </div>
-                    <div className="w-44">
-                        <h3 className="font-semibold text-lg mb-6 text-default-800">Trending Now</h3>
-                        <ul className="space-y-6 text-default-800">
+                    <div className="w-44 text-black">
+                        <h3 className="font-semibold text-lg mb-6">Trending Now</h3>
+                        <ul className="space-y-6">
                             <li className="hover:underline cursor-pointer">Pearl Jewelry</li>
                             <li className="hover:underline cursor-pointer">Organic Collections</li>
                             <li className="hover:underline cursor-pointer">Bold Statement Jewelry</li>

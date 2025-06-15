@@ -8,6 +8,7 @@ interface FilterBarProps {
   onCategoryChange: (category: string) => void;
   selectedSort: string;
   onSortChange: (sortOption: string) => void;
+  isLoading?: boolean;
 }
 
 const categories = ["All Filter", "Earrings", "Bracelets", "Necklaces", "Rings"];
@@ -18,6 +19,7 @@ export default function FilterBar({
   onCategoryChange,
   selectedSort,
   onSortChange,
+  isLoading = false,
 }: FilterBarProps) {
   const sortOptions = ["New In", "Price: Low to High", "Price: High to Low"];
   // console.log("selectedCategory: ", selectedCategory)

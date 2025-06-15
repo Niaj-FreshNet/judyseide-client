@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "../../icons";
+import Link from "next/link";
 
 const slides = [
   {
@@ -54,9 +55,10 @@ export default function HeroSlider() {
                 src={slide.image} />
               <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4">
                 <h2 className="text-3xl md:text-5xl font-serif font-bold mb-8">{slide.title}</h2>
-                <button className="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded font-sans font-medium transition">
-                  {slide.button}
-                </button>
+                <Link href="/new-in">
+                  <button className="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded font-sans font-medium transition">
+                    {slide.button}
+                  </button></Link>
               </div>
             </div>
           ))}

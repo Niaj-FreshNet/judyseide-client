@@ -5,9 +5,9 @@ import ProductCard from "@/src/components/UI/ProductCard";
 type Product = {
   name: string;
   price: number;
-  image: string;
+  imageUrl: string;
   badge: string;
-  material: string;
+  material: { name: string };
   slug: string;
 };
 

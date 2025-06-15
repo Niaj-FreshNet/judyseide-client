@@ -36,9 +36,39 @@ export interface Filters {
 interface AllFiltersProps {
   filters: Filters;
   setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  isLoading?: boolean;
 }
 
-export default function AllFilters({ filters, setFilters }: AllFiltersProps) {
+export default function AllFilters({ filters, setFilters, isLoading = false }: AllFiltersProps) {
+
+  if (isLoading) {
+    return (
+      <div className="bg-[#fef6f1] p-6 rounded-md border text-sm space-y-5 w-full animate-pulse">
+        {/* Title */}
+        <div className="h-6 w-1/3 bg-gray-300 rounded" />
+
+        {/* Divider */}
+        <div className="border-t border-orange-200" />
+
+        {/* Sections */}
+        {[...Array(5)].map((_, index) => (
+          <div key={index} className="space-y-4">
+            <div className="h-5 w-1/2 bg-gray-300 rounded" />
+            <div className="space-y-2">
+              <div className="h-4 w-3/4 bg-gray-200 rounded" />
+              <div className="h-4 w-2/3 bg-gray-200 rounded" />
+              <div className="h-4 w-1/2 bg-gray-200 rounded" />
+            </div>
+            <div className="border-t border-orange-200" />
+          </div>
+        ))}
+
+        {/* Button */}
+        <div className="h-10 w-full bg-orange-300 rounded" />
+      </div>
+    );
+  }
+
   const toggleFilter = (
     filterType: keyof Pick<Filters, "availability" | "price">,
     value: string

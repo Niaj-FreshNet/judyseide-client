@@ -4,9 +4,19 @@ interface LoadMoreFooterProps {
   viewed: number;
   total: number;
   onLoadMore: () => void;
+  isLoading?: boolean;
 }
 
-export default function LoadMoreFooter({ viewed, total, onLoadMore }: LoadMoreFooterProps) {
+export default function LoadMoreFooter({ viewed, total, onLoadMore, isLoading = false }: LoadMoreFooterProps) {
+
+    if (isLoading) {
+    return (
+      <div className="w-full mt-8 flex justify-center">
+        <div className="h-10 w-32 bg-gray-200 animate-pulse rounded-md" />
+      </div>
+    );
+  }
+  
   const handleBackToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

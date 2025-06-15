@@ -15,11 +15,11 @@ import JudyInput from "@/src/components/form/JudyInput";
 import Image from "next/image";
 
 const LoginPage = () => {
-  // const searchParams = useSearchParams();
-  // const router = useRouter();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const { setIsLoading: userLoading } = useUser();
 
-  // const redirect = searchParams.get("redirect");
+  const redirect = searchParams.get("redirect");
 
   const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
 
@@ -30,11 +30,11 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (!isPending && isSuccess) {
-      // if (redirect) {
-      //   router.push(redirect);
-      // } else {
-      //   router.push("/");
-      // }
+      if (redirect) {
+        router.push(redirect);
+      } else {
+        router.push("/");
+      }
     }
   }, [isPending, isSuccess]);
 

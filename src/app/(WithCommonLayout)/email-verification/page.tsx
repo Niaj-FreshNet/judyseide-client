@@ -3,35 +3,42 @@
 import JudyForm from "@/src/components/form/JudyForm";
 import JudyInput from "@/src/components/form/JudyInput";
 import { useUser } from "@/src/context/user.proider";
-import { useUserLogin } from "@/src/hooks/auth.hook";
+import { useUserVerification } from "@/src/hooks/auth.hook";
 import otpValidationSchema from "@/src/schemas/otp.schema";
 import { Button } from "@heroui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
-export default function ForgotPasswordPage() {
-    // const searchParams = useSearchParams();
-    // const router = useRouter();
+export default function EmailVerificationPage() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
     const { setIsLoading: userLoading } = useUser();
 
-    // const redirect = searchParams.get("redirect");
+    const email = searchParams.get("email");
+    const redirect = searchParams.get("redirect");
 
-    const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
+    const { mutate: handleUserVerification, isPending, isSuccess } = useUserVerification();
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        handleUserLogin(data);
+        // Add email to the data object
+        const formData = { ...data, email };
+        console.log("Form Data:", formData); // Check if email is passed correctly
+
+        handleUserVerification(formData); // Submit form data with email
         userLoading(true);
     };
 
     useEffect(() => {
         if (!isPending && isSuccess) {
-            // if (redirect) {
-            //   router.push(redirect);
-            // } else {
-            //   router.push("/");
-            // }
+            if (redirect) {
+                router.push(redirect);
+            } else {
+                router.push("/");
+            }
         }
     }, [isPending, isSuccess]);
 
@@ -61,13 +68,21 @@ export default function ForgotPasswordPage() {
                         </div>
 
                         <div className="px-8 pt-16 pb-16  rounded-md shadow-2xl border border-gray-50 space-y-6">
+
+                            {/* OTP Sent Message */}
+                            {email && (
+                                <div className="text-center mb-6 text-lg text-gray-700">
+                                    <p>An OTP has been sent to <strong>{email}</strong>.</p>
+                                </div>
+                            )}
+
                             {/* Form */}
                             <JudyForm
                                 resolver={zodResolver(otpValidationSchema)}
                                 onSubmit={onSubmit}
                             >
                                 <div className="space-y-4">
-                                    <JudyInput label="OTP" name="otp" size="lg" />
+                                    <JudyInput label="OTP" name="token" size="lg" />
                                 </div>
 
                                 {/* Submit Button */}

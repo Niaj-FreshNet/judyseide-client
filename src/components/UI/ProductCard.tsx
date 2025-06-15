@@ -4,9 +4,9 @@ import Link from "next/link";
 type Product = {
   name: string;
   price: number;
-  image: string;
+  imageUrl: string;
   badge: string;
-  material: string;
+  material: { name: string };
   slug: string;
 };
 
@@ -28,7 +28,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
         <div className="relative overflow-hidden bg-gray-100">
           <Image
             alt={product.name}
-            src={product.image}
+            src={product.imageUrl?.[0] || "/placeholder.jpg"}
             className="w-full h-64 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
             width={1200}
             height={600}
@@ -54,7 +54,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
           <div className="flex items-center px-4 py-2 gap-2 text-xs">
             <span className="w-3 h-3 bg-yellow-400 rounded-full" />
             <span className="w-3 h-3 bg-gray-400 rounded-full" />
-            <span className="text-sm">{product.material}</span>
+            <span className="text-sm">{product.material?.name}</span>
           </div>
         </div>
       </div>

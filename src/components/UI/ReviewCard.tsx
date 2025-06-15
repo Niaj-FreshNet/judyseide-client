@@ -4,26 +4,26 @@ import { Star } from "lucide-react";
 
 interface ReviewCardProps {
   title: string;
-  description: string;
+  comment: string;
   name: string;
   date: string;
-  stars?: number;
+  rating?: number;
   image: string;
 }
 
 export default function ReviewCard({
   title,
-  description,
+  comment,
   name,
   date,
-  stars = 5,
+  rating = 5,
   image,
 }: ReviewCardProps) {
   return (
     <div className="border border-orange-100 p-6 rounded-none shadow-sm space-y-4">
-      {/* Stars */}
+      {/* rating */}
       <div className="flex space-x-1 text-yellow-500">
-        {Array.from({ length: stars }).map((_, i) => (
+        {Array.from({ length: rating }).map((_, i) => (
           <Star key={i} fill="currentColor" size={18} strokeWidth={0} />
         ))}
       </div>
@@ -31,8 +31,8 @@ export default function ReviewCard({
       {/* Title */}
       <h3 className="font-semibold text-lg text-default-800">{title}</h3>
 
-      {/* Description */}
-      <p className="text-default-600 text-sm">{description}</p>
+      {/* comment */}
+      <p className="text-default-600 text-sm">{comment}</p>
 
       {/* Reviewer */}
       <div className="flex items-center space-x-3 pt-2">

@@ -19,7 +19,30 @@ export const registerUser = async (userData: FieldValues) => {
 
     return data;
   } catch (error: any) {
-    throw new Error(error);
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Registration failed. Please try again.");
+  }
+};
+
+export const verifyUser = async (userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/verify-email", userData);
+
+    if (data.success) {
+      const cookieStore = await cookies();
+
+      cookieStore.set("accessToken", data?.data?.accessToken);
+      cookieStore.set("refreshToken", data?.data?.refreshToken);
+    }
+
+    return data;
+  } catch (error: any) {
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Verification failed. Please try again.");
   }
 };
 
@@ -32,11 +55,18 @@ export const loginUser = async (userData: FieldValues) => {
 
       cookieStore.set("accessToken", data?.data?.accessToken);
       cookieStore.set("refreshToken", data?.data?.refreshToken);
+      cookieStore.set("userName", data?.data?.user?.name);  // Store name directly in cookie
+      cookieStore.set("userImg", data?.data?.user?.imageUrl);  // Store imageUrl directly in cookie
+
     }
 
-    return data;
+    console.log(data?.data?.user?.name)
+    return data?.data?.user;
   } catch (error: any) {
-    throw new Error(error);
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Login failed. Please try again.");
   }
 };
 
@@ -45,10 +75,16 @@ export const logout = async () => {
 
   cookieStore.delete("accessToken");
   cookieStore.delete("refreshToken");
+  cookieStore.delete("userName");
+  cookieStore.delete("imageUrl");
 };
 
 export const getCurrentUser = async () => {
   const cookieStore = await cookies();
+
+  const userName = cookieStore.get("userName")?.value;
+  const userImg = cookieStore.get("imageUrl")?.value;
+
   const accessToken = cookieStore.get("accessToken")?.value;
 
   let decodedToken = null;
@@ -58,12 +94,12 @@ export const getCurrentUser = async () => {
 
     return {
       _id: decodedToken._id,
-      name: decodedToken.name,
+      name: userName,
       email: decodedToken.email,
       mobileNumber: decodedToken.mobileNumber,
       role: decodedToken.role,
       status: decodedToken.status,
-      profilePhoto: decodedToken.profilePhoto,
+      profilePhoto: userImg,
     };
   }
 

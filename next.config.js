@@ -1,11 +1,16 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {};
-
-// module.exports = nextConfig;
+// next.config.js
 
 module.exports = {
   eslint: {
-    // dirs: ["pages", "utils"],
-     ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'nyc3.digitaloceanspaces.com',
+        pathname: '**',
+      },
+    ],
   },
 };

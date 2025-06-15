@@ -52,7 +52,7 @@ export default function RegisterPage() {
                 <div className="space-y-4">
                   <JudyInput label="Name" name="name" size="lg" />
                   <JudyInput label="Email Address" name="email" size="lg" />
-                  <JudyInput label="Mobile Number" name="mobileNumber" size="lg" />
+                  {/* <JudyInput label="Mobile Number" name="mobileNumber" size="lg" /> */}
                   <JudyInput label="Password" name="password" size="lg" type="password" />
                 </div>
 

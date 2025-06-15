@@ -12,6 +12,7 @@ import NextLink from "next/link";
 import { siteConfig } from "@/src/config/site";
 import { SearchIcon } from "@/src/components/icons";
 import { NavItemWithDropdown } from "../menu/NavItemWithDropdown";
+import { ThemeSwitch } from "../UI/theme-switch";
 
 export const Navbar = () => {
   const searchInput = (
@@ -59,7 +60,7 @@ export const Navbar = () => {
       {/* Desktop Search + Theme */}
       <NavbarContent className="hidden lg:flex basis-1/5" justify="end">
         <NavbarItem className="flex gap-2">
-          {/* <ThemeSwitch  /> */}
+          <ThemeSwitch  />
         </NavbarItem>
         <NavbarItem>
           <div className="w-64">{searchInput}</div>
@@ -68,7 +69,7 @@ export const Navbar = () => {
 
       {/* Mobile & Tablet Toggle */}
       <NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
-        {/* <ThemeSwitch /> */}
+        <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
 
