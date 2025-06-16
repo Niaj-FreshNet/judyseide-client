@@ -11,41 +11,41 @@ const sampleProducts = [
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/hero1.jpg",
+    imageUrl: "/hero1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/products/product1.jpg",
+    imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/products/product1.jpg",
+    imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/products/product1.jpg",
+    imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/products/product1.jpg",
+    imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
 ];

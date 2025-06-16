@@ -1,15 +1,7 @@
 "use client";
 
 import ProductCard from "@/src/components/UI/ProductCard";
-
-type Product = {
-  name: string;
-  price: number;
-  imageUrl: string;
-  badge: string;
-  material: { name: string };
-  slug: string;
-};
+import { Product } from "@/src/types";
 
 interface ProductGridProps {
   products: Product[];

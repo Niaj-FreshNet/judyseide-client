@@ -11,41 +11,41 @@ const sampleProducts = [
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/hero1.jpg",
+    imageUrl: "/hero1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
     slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/products/product1.jpg",
+    imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
     slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/products/product1.jpg",
+    imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
     slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/products/product1.jpg",
+    imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
     slug: "starburst-earrings"
   },
   {
     name: "Starburst Earrings",
     price: 756,
-    image: "/products/product1.jpg",
+    imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
     slug: "starburst-earrings"
   },
 ];
@@ -116,9 +116,8 @@ export function RelatedProductsInDrawer() {
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
-              className={`w-2.5 h-2.5 rounded-full ${
-                index === selectedIndex ? "bg-orange-100" : "bg-orange-400"
-              }`}
+              className={`w-2.5 h-2.5 rounded-full ${index === selectedIndex ? "bg-orange-100" : "bg-orange-400"
+                }`}
               onClick={() => scrollTo(index)}
             />
           ))}

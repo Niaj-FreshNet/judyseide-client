@@ -10,18 +10,9 @@ import AllFilters, {
 import FilterBar from "@/src/components/modules/shop/FilterBar";
 import ProductGrid from "@/src/components/modules/shop/ProductGrid";
 import LoadMoreFooter from "@/src/components/modules/shop/LoadMoreFooter";
+import { Product } from "@/src/types";
 
 const PRODUCTS_PER_PAGE = 9;
-
-type Product = {
-  name: string;
-  price: number;
-  image: string;
-  badge: string;
-  material: string;
-  category: string;
-  slug: string;
-};
 
 const productNames = [
   "Starburst Earrings",
@@ -46,12 +37,12 @@ const badges = ["Best selling", "New Arrival", "Limited Edition", "Exclusive"];
 
 const allProducts: Product[] = Array(16)
   .fill(null)
-  .map((_, i) => ({
+  .map((_, i): Product => ({
     name: productNames[i],
     price: 756 - i * 10,
-    image: `/products/product${(i % 2) + 1}.jpg`,
+    imageUrl: `/products/product${(i % 2) + 1}.jpg`,
     badge: badges[i % badges.length],
-    material: "18k Gold Vermeil",
+    material: { name: "18k Gold Vermeil" },
     category: ["Earrings", "Bracelets", "Necklaces", "Rings"][i % 4],
     slug: productNames[i].toLowerCase().replace(/\s+/g, "-"),
   }));
@@ -79,9 +70,11 @@ export default function EarringProductPage() {
       const matchesCategory =
         !filters.category ||
         product.category.replace(/\s+/g, "").toLowerCase() ===
-          filters.category.replace(/\s+/g, "").toLowerCase();
+        filters.category.replace(/\s+/g, "").toLowerCase();
       const matchesMaterial =
-        !filters.material || product.material.toLowerCase() === filters.material;
+        !filters.material ||
+        product.material?.name?.toLowerCase() === filters.material.toLowerCase()
+
 
       return matchesCategory && matchesMaterial;
     })

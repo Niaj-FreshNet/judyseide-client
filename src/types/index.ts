@@ -18,13 +18,23 @@ export interface IInput {
 
 export interface IUser {
   _id: string;
-  name: string;
-  role: string;
-  email: string;
-  status: string;
-  mobileNumber: string;
-  profilePhoto: string;
+  name?: string;
+  role?: string;
+  email?: string;
+  status?: string;
+  mobileNumber?: string;
+  profilePhoto?: string;
   createdAt?: string;
   updatedAt?: string;
   __v?: number;
 }
+
+export type Product = {
+  name: string;
+  price: number;
+  imageUrl: string;
+  category: string;
+  badge: string;
+  material: { name: string };
+  slug: string;
+};

@@ -11,7 +11,7 @@ const reviews = [
   {
     stars: 5,
     title: "Psum elit viverra scelerisque",
-    description:
+    comment:
       "We were extremely pleased with the roofing replacement Infinity Exteriors did for us! They got our job ready and on the schedule quickly. Our project manager kept us informed throughout.",
     name: "John Doe",
     date: "September 12, 2022",
@@ -20,7 +20,7 @@ const reviews = [
   {
     stars: 4,
     title: "Psum elit viverra scelerisque",
-    description:
+    comment:
       "We were extremely pleased with the roofing replacement Infinity Exteriors did for us! They got our job ready and on the schedule quickly. Our project manager kept us informed throughout.",
     name: "John Doe",
     date: "September 12, 2022",
@@ -29,7 +29,7 @@ const reviews = [
   {
     stars: 3,
     title: "Psum elit viverra scelerisque",
-    description:
+    comment:
       "We were extremely pleased with the roofing replacement Infinity Exteriors did for us! They got our job ready and on the schedule quickly. Our project manager kept us informed throughout.",
     name: "John Doe",
     date: "September 12, 2022",
@@ -38,7 +38,7 @@ const reviews = [
   {
     stars: 2,
     title: "Psum elit viverra scelerisque",
-    description:
+    comment:
       "We were extremely pleased with the roofing replacement Infinity Exteriors did for us! They got our job ready and on the schedule quickly. Our project manager kept us informed throughout.",
     name: "John Doe",
     date: "September 12, 2022",
@@ -47,7 +47,7 @@ const reviews = [
   {
     stars: 5,
     title: "Psum elit viverra scelerisque",
-    description:
+    comment:
       "We were extremely pleased with the roofing replacement Infinity Exteriors did for us! They got our job ready and on the schedule quickly. Our project manager kept us informed throughout.",
     name: "John Doe",
     date: "September 12, 2022",
@@ -56,7 +56,7 @@ const reviews = [
   {
     stars: 3,
     title: "Psum elit viverra scelerisque",
-    description:
+    comment:
       "We were extremely pleased with the roofing replacement Infinity Exteriors did for us! They got our job ready and on the schedule quickly. Our project manager kept us informed throughout.",
     name: "John Doe",
     date: "September 12, 2022",
