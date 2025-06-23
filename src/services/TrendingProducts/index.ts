@@ -1,12 +1,17 @@
 import envConfig from "@/src/config/envConfig";
-// import { delay } from "@/src/utils/delay";
 
 export const getTrendingProducts = async () => {
-    const res = await fetch(
-        `${envConfig.baseApi}/products/get-trending-products`,
-    );
+  try {
+    const res = await fetch(`${envConfig.baseApi}/products/get-trending-products`);
 
-    // await delay(2000);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch trending products: ${res.statusText}`);
+    }
 
-    return res.json();
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching trending products:', error);
+    return [];  // Return empty array as fallback in case of error
+  }
 };

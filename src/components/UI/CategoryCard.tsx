@@ -20,7 +20,7 @@ export function CategoryCard({ categoryName, imageUrl }: CategoryCardProps) {
               src={imageUrl}
               className="w-full h-full object-cover" />
           ) : (
-            <div className="text-7xl text-gray-300">{categoryName.charAt(0)}</div>
+            <div className="text-7xl text-gray-300">{categoryName?.charAt(0)}</div>
           )}
         </div>
         <h3 className="text-xl text-black my-2 uppercase tracking-wider">{categoryName}</h3>

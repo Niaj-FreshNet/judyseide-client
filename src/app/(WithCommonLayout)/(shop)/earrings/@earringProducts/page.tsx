@@ -1,51 +1,15 @@
 "use client";
 
-import { useState } from "react";
-
-import AllFilters, {
-  CategoryOption,
-  Filters,
-  SortByOption,
-} from "@/src/components/modules/shop/AllFilters";
+import { useState, useEffect } from "react";
 import FilterBar from "@/src/components/modules/shop/FilterBar";
 import ProductGrid from "@/src/components/modules/shop/ProductGrid";
 import LoadMoreFooter from "@/src/components/modules/shop/LoadMoreFooter";
-import { Product } from "@/src/types";
+import { Category, Filters, Product } from "@/src/types";
+import { getProducts } from "@/src/services/Products";
+import AllFilters, { CategoryOption, SortByOption } from "@/src/components/modules/shop/AllFilters";
+import { getCategories } from "@/src/services/Categories";
 
 const PRODUCTS_PER_PAGE = 9;
-
-const productNames = [
-  "Starburst Earrings",
-  "Celestial Hoops",
-  "Twilight Necklace",
-  "Sunray Bracelet",
-  "Aurora Ring",
-  "Galaxy Studs",
-  "Lunar Cuff",
-  "Starlit Pendant",
-  "Nova Bangles",
-  "Meteorite Earrings",
-  "Solar Choker",
-  "Radiant Ring",
-  "Orbit Bracelet",
-  "Comet Hoops",
-  "Shimmer Studs",
-  "Eclipse Pendant",
-];
-
-const badges = ["Best selling", "New Arrival", "Limited Edition", "Exclusive"];
-
-const allProducts: Product[] = Array(16)
-  .fill(null)
-  .map((_, i): Product => ({
-    name: productNames[i],
-    price: 756 - i * 10,
-    imageUrl: `/products/product${(i % 2) + 1}.jpg`,
-    badge: badges[i % badges.length],
-    material: { name: "18k Gold Vermeil" },
-    category: ["Earrings", "Bracelets", "Necklaces", "Rings"][i % 4],
-    slug: productNames[i].toLowerCase().replace(/\s+/g, "-"),
-  }));
 
 export default function EarringProductPage() {
   const [showAllFilters, setShowAllFilters] = useState(true);
@@ -63,29 +27,49 @@ export default function EarringProductPage() {
     material: "",
   });
 
-  const isAllFilterView = showAllFilters;
+  const [allProducts, setAllProducts] = useState<Product[]>([]); // Initialize as an empty array
+  const [loading, setLoading] = useState(false);
 
-  const filteredProducts = allProducts
-    .filter((product) => {
-      const matchesCategory =
-        !filters.category ||
-        product.category.replace(/\s+/g, "").toLowerCase() ===
-        filters.category.replace(/\s+/g, "").toLowerCase();
-      const matchesMaterial =
-        !filters.material ||
-        product.material?.name?.toLowerCase() === filters.material.toLowerCase()
+  // Function to fetch filtered products
+  const fetchFilteredProducts = async () => {
+    setLoading(true);
+    try {
+      const products = await getProducts(filters, 1, visibleCount);
+      console.log("Fetched products:", products); // Debugging log
 
+      // Ensure the response is in the expected format
+      if (Array.isArray(products)) {
+        setAllProducts(products); // Set products if the response is valid
+      } else {
+        setAllProducts([]); // Set empty array in case of unexpected response format
+      }
+    } catch (error) {
+      console.error("Failed to fetch filtered products", error);
+      setAllProducts([]); // Ensure we don't set undefined in case of error
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      return matchesCategory && matchesMaterial;
-    })
-    .sort((a, b) => {
-      if (filters.sortBy === "price-low-to-high") return a.price - b.price;
-      if (filters.sortBy === "price-high-to-low") return b.price - a.price;
+  const [categories, setCategories] = useState<Category[]>([]);
 
-      return 0;
-    });
+  // Fetch categories using the provided function
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoriesData = await getCategories();
+      setCategories(categoriesData);
+    };
 
-  const visibleProducts = filteredProducts.slice(0, visibleCount);
+    fetchCategories();
+  }, []);
+
+  // Fetch products whenever filters or pagination change
+  useEffect(() => {
+    fetchFilteredProducts();
+  }, [filters, visibleCount]);
+
+  // Ensure visibleProducts has a fallback in case of issues
+  const visibleProducts = allProducts.slice(0, visibleCount);
 
   return (
     <>
@@ -100,12 +84,15 @@ export default function EarringProductPage() {
               category: "",
             }));
           } else {
-            const formattedCategory = cat.toLowerCase() as CategoryOption;
-
-            setFilters((f) => ({
-              ...f,
-              category: formattedCategory,
-            }));
+            const selectedCategory = categories.find(
+              (category) => category.name.toLowerCase() === cat.toLowerCase()
+            );
+            if (selectedCategory) {
+              setFilters((f) => ({
+                ...f,
+                category: selectedCategory.id, // Use category ID instead of name
+              }));
+            }
           }
         }}
         onSortChange={(sort) => {
@@ -117,20 +104,24 @@ export default function EarringProductPage() {
       />
 
       <div className="flex gap-6">
-        {isAllFilterView && (
+        {showAllFilters && (
           <div className="hidden lg:block w-1/4">
             <AllFilters filters={filters} setFilters={setFilters} />
           </div>
         )}
 
-        <div className={`${isAllFilterView ? "lg:w-3/4" : "w-full"}`}>
-          <ProductGrid cols={isAllFilterView ? 3 : 4} products={visibleProducts} />
+        <div className={`${showAllFilters ? "lg:w-3/4" : "w-full"}`}>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <ProductGrid cols={showAllFilters ? 3 : 4} products={visibleProducts} />
+          )}
           <LoadMoreFooter
-            total={filteredProducts.length}
+            total={allProducts.length}
             viewed={visibleCount}
             onLoadMore={() =>
               setVisibleCount((prev) =>
-                Math.min(prev + PRODUCTS_PER_PAGE, filteredProducts.length)
+                Math.min(prev + PRODUCTS_PER_PAGE, allProducts.length)
               )
             }
           />

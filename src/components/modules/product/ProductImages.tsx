@@ -68,7 +68,7 @@ export default function ProductImages({ images }: { images: string[] }) {
           >
             <Image
               alt="Main product image"
-              className="opacity-0 w-full h-full"
+              className="w-full h-full"
               height={512}
               src={selectedImage}
               width={648}

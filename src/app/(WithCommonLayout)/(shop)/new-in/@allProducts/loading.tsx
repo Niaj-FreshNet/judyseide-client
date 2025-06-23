@@ -2,9 +2,7 @@
 
 import React from "react";
 import AllFilters, {
-    CategoryOption,
     Filters,
-    SortByOption,
 } from "@/src/components/modules/shop/AllFilters";
 import FilterBar from "@/src/components/modules/shop/FilterBar";
 import LoadMoreFooter from "@/src/components/modules/shop/LoadMoreFooter";

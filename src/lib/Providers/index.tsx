@@ -11,6 +11,8 @@ import { Toaster } from "sonner";
 
 import { DrawerProvider } from "@/src/components/drawers/DrawerManager";
 import UserProvider from "@/src/context/user.proider";
+import { CartProvider } from "@/src/context/cart.context";
+import { WishlistProvider } from "@/src/context/wishlist.context";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -36,14 +38,18 @@ export function Providers({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <UserProvider>
-        <HeroUIProvider navigate={router.push}>
-          <Toaster />
-          <DrawerProvider>
-            <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-          </DrawerProvider>
-        </HeroUIProvider>
-      </UserProvider>
+      <CartProvider>
+        <WishlistProvider>
+          <UserProvider>
+            <HeroUIProvider navigate={router.push}>
+              <Toaster />
+              <DrawerProvider>
+                <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+              </DrawerProvider>
+            </HeroUIProvider>
+          </UserProvider>
+        </WishlistProvider>
+      </CartProvider>
     </QueryClientProvider>
   );
 }

@@ -1,37 +1,28 @@
-"use client";
-
+import { getCategories } from "@/src/services/Categories";
+import { getMaterials } from "@/src/services/Materials";
+import { Category, Material } from "@/src/types";
 import { Checkbox } from "@heroui/checkbox";
 import { Radio, RadioGroup } from "@heroui/radio";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-interface AvailabilityFilter {
-  inStock: boolean;
-  outOfStock: boolean;
-}
-
-interface PriceFilter {
-  under150: boolean;
-  "150to300": boolean;
-  "300to500": boolean;
-  above500: boolean;
-}
-
-export type CategoryOption = "earrings" | "bracelets" | "necklaces" | "rings" | "";
 export type SortByOption = "price-low-to-high" | "price-high-to-low";
-export type MaterialOption =
-  | "14k yellow gold"
-  | "18k gold vermeil"
-  | "sterling silver"
-  | "link"
-  | "";
 
-export interface Filters {
-  availability: AvailabilityFilter;
-  price: PriceFilter;
-  sortBy: SortByOption;
-  category: CategoryOption;
-  material: MaterialOption;
-}
+export type Filters = {
+  availability: {
+    inStock: boolean;
+    outOfStock: boolean;
+  };
+  price: {
+    under150: boolean;
+    "150to300": boolean;
+    "300to500": boolean;
+    above500: boolean;
+  };
+  sortBy: "price-low-to-high" | "price-high-to-low";
+  category: string;  // Can be an empty string if no category is selected
+  material: string;  // Material is now a string ID
+  size?: string; // Optional field for size
+};
 
 interface AllFiltersProps {
   filters: Filters;
@@ -40,34 +31,47 @@ interface AllFiltersProps {
 }
 
 export default function AllFilters({ filters, setFilters, isLoading = false }: AllFiltersProps) {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [materials, setMaterials] = useState<Material[]>([]); // State for materials
 
-  if (isLoading) {
-    return (
-      <div className="bg-[#fef6f1] p-6 rounded-md border text-sm space-y-5 w-full animate-pulse">
-        {/* Title */}
-        <div className="h-6 w-1/3 bg-gray-300 rounded" />
+  // Fetch categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getCategories();
+        const fetchedCategories = response.data.data;
+        console.log("Fetched categories:", fetchedCategories); 
+        if (Array.isArray(fetchedCategories)) {
+          setCategories(fetchedCategories);
+        } else {
+          console.error("Fetched categories is not an array:", fetchedCategories);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
 
-        {/* Divider */}
-        <div className="border-t border-orange-200" />
+    fetchCategories();
+  }, []);
 
-        {/* Sections */}
-        {[...Array(5)].map((_, index) => (
-          <div key={index} className="space-y-4">
-            <div className="h-5 w-1/2 bg-gray-300 rounded" />
-            <div className="space-y-2">
-              <div className="h-4 w-3/4 bg-gray-200 rounded" />
-              <div className="h-4 w-2/3 bg-gray-200 rounded" />
-              <div className="h-4 w-1/2 bg-gray-200 rounded" />
-            </div>
-            <div className="border-t border-orange-200" />
-          </div>
-        ))}
+  // Fetch materials
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      try {
+        const response = await getMaterials(); // Fetch materials using the getMaterials function
+        const fetchedMaterials = response.data.data; // Assuming response structure
+        if (Array.isArray(fetchedMaterials)) {
+          setMaterials(fetchedMaterials);
+        } else {
+          console.error("Fetched materials is not an array:", fetchedMaterials);
+        }
+      } catch (error) {
+        console.error("Error fetching materials:", error);
+      }
+    };
 
-        {/* Button */}
-        <div className="h-10 w-full bg-orange-300 rounded" />
-      </div>
-    );
-  }
+    fetchMaterials();
+  }, []);
 
   const toggleFilter = (
     filterType: keyof Pick<Filters, "availability" | "price">,
@@ -84,13 +88,21 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
 
   const handleRadioChange = (
     filterType: "sortBy" | "category" | "material",
-    value: SortByOption | CategoryOption | MaterialOption
+    value: string
   ) => {
     setFilters((prev) => ({
       ...prev,
       [filterType]: value,
     }));
   };
+
+  if (isLoading) {
+    return (
+      <div className="bg-[#fef6f1] p-6 rounded-md border text-sm space-y-5 w-full animate-pulse">
+        {/* Loading Skeleton */}
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#fef6f1] p-6 rounded-md border text-sm space-y-5 w-full">
@@ -173,11 +185,11 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
         <div className="flex flex-col gap-2">
           <RadioGroup
             value={filters.category}
-            onValueChange={(val) => handleRadioChange("category", val as CategoryOption)}
+            onValueChange={(val) => handleRadioChange("category", val)}
           >
-            {["Earrings", "Bracelets", "Necklaces", "Rings"].map((cat) => (
-              <Radio key={cat} value={cat.toLowerCase()}>
-                {cat}
+            {categories.map((cat) => (
+              <Radio key={cat.id} value={cat.id}> {/* Use category ID here */}
+                {cat.categoryName?.charAt(0).toUpperCase() + cat.categoryName?.slice(1)} {/* Capitalize category name */}
               </Radio>
             ))}
           </RadioGroup>
@@ -192,11 +204,11 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
         <div className="flex flex-col gap-2">
           <RadioGroup
             value={filters.material}
-            onValueChange={(val) => handleRadioChange("material", val as MaterialOption)}
+            onValueChange={(val) => handleRadioChange("material", val)} // Now passing material ID
           >
-            {["14k Yellow Gold", "18k Gold Vermeil", "Sterling Silver"].map((mat) => (
-              <Radio key={mat} value={mat.toLowerCase()}>
-                {mat}
+            {materials.map((mat) => (
+              <Radio key={mat.id} value={mat.id}>
+                {mat.materialName?.charAt(0).toUpperCase() + mat.materialName.slice(1)} {/* Capitalize material name */}
               </Radio>
             ))}
           </RadioGroup>

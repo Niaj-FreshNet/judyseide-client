@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import Footer from "@/src/components/layout/footer";
 import { Navbar } from "@/src/components/layout/navbar";
 import { Topbar } from "@/src/components/layout/topbar";
+import TawkTo from "@/src/services/ChatService";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -17,7 +18,10 @@ export default function Layout({ children }: { children: ReactNode }) {
       </header>
 
       {/* Main content area (optional max-width applied here) */}
-      <main className="flex-1 w-full max-w-full mx-auto">{children}</main>
+      <main className="flex-1 w-full max-w-full mx-auto">
+        {children}
+        <TawkTo />
+      </main>
 
       {/* Footer */}
       <footer className="w-full mt-10">
