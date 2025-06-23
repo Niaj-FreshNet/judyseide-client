@@ -46,7 +46,7 @@ export default function ReviewSectionClient({ reviews }: { reviews: Review[] }) 
 
         <div className="relative">
           <button
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+            className="absolute -left-6 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
             onClick={scrollPrev}
           >
             <ChevronLeft color="white" size={28} />
@@ -66,7 +66,7 @@ export default function ReviewSectionClient({ reviews }: { reviews: Review[] }) 
           </div>
 
           <button
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+            className="absolute -right-6 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
             onClick={scrollNext}
           >
             <ChevronRight color="white" size={28} />

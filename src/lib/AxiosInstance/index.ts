@@ -3,10 +3,6 @@ import { cookies } from "next/headers";
 
 import envConfig from "@/src/config/envConfig";
 
-export const config = {
-  runtime: 'nodejs',  // Forces Node.js runtime (avoiding Edge runtime issues)
-};
-
 const axiosInstance = axios.create({
   baseURL: envConfig.baseApi,
 });

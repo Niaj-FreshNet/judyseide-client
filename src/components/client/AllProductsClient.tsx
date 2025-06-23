@@ -1,26 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import AllFilters, {
-  CategoryOption,
-  Filters,
-  SortByOption,
-} from "@/src/components/modules/shop/AllFilters";
+import AllFilters, { Filters, SortByOption } from "@/src/components/modules/shop/AllFilters";
 import FilterBar from "@/src/components/modules/shop/FilterBar";
 import ProductGrid from "@/src/components/modules/shop/ProductGrid";
 import LoadMoreFooter from "@/src/components/modules/shop/LoadMoreFooter";
+import { Category, Product } from "@/src/types";
+import { useCategory } from "@/src/hooks/category.hook";
 
 const PRODUCTS_PER_PAGE = 9;
-
-type Product = {
-  name: string;
-  price: number;
-  imageUrl: string;
-  badge: string;
-  material: { name: string };
-  category: string;
-  slug: string;
-};
 
 export default function AllProductsClient({ allProducts }: { allProducts: Product[] }) {
   const [showAllFilters, setShowAllFilters] = useState(true);
@@ -38,25 +26,18 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
     material: "",
   });
 
-  const filteredProducts = allProducts
-    .filter((product) => {
-      const matchesCategory =
-        !filters.category ||
-        product.category.replace(/\s+/g, "").toLowerCase() ===
-        filters.category.replace(/\s+/g, "").toLowerCase();
+  const { categories, loading, error } = useCategory();  // Use the custom hook for categories
 
-      const matchesMaterial =
-        !filters.material || product.material?.name.toLowerCase() === filters.material;
+  // Directly use the `allProducts` without filtering or sorting
+  const visibleProducts = Array.isArray(allProducts) ? allProducts.slice(0, visibleCount) : [];
 
-      return matchesCategory && matchesMaterial;
-    })
-    .sort((a, b) => {
-      if (filters.sortBy === "price-low-to-high") return a.price - b.price;
-      if (filters.sortBy === "price-high-to-low") return b.price - a.price;
-      return 0;
-    });
+  if (loading) {
+    return <div>Loading products...</div>;
+  }
 
-  const visibleProducts = filteredProducts.slice(0, visibleCount);
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <>
@@ -68,14 +49,20 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
             setShowAllFilters((prev) => !prev);
             setFilters((f) => ({
               ...f,
-              category: "",
+              category: "", // Clear the category filter
             }));
           } else {
-            const formattedCategory = cat.toLowerCase() as CategoryOption;
-            setFilters((f) => ({
-              ...f,
-              category: formattedCategory,
-            }));
+            const selectedCategory = categories.find(
+              (category) => category.categoryName.toLowerCase() === cat.toLowerCase()
+            );
+            if (selectedCategory) {
+              setFilters((f) => ({
+                ...f,
+                category: selectedCategory.id, // Use category ID instead of name
+              }));
+            } else {
+              console.error("Category not found:", cat);
+            }
           }
         }}
         onSortChange={(sort) => {
@@ -96,11 +83,11 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
         <div className={`${showAllFilters ? "lg:w-3/4" : "w-full"}`}>
           <ProductGrid cols={showAllFilters ? 3 : 4} products={visibleProducts} />
           <LoadMoreFooter
-            total={filteredProducts.length}
+            total={allProducts.length}
             viewed={visibleCount}
             onLoadMore={() =>
               setVisibleCount((prev) =>
-                Math.min(prev + PRODUCTS_PER_PAGE, filteredProducts.length)
+                Math.min(prev + PRODUCTS_PER_PAGE, allProducts.length)
               )
             }
           />

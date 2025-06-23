@@ -1,5 +1,6 @@
 import ReviewSectionClient from "@/src/components/client/ReviewSectionClient";
 import { getReviews } from "@/src/services/Reviews";
+import { UserIcon } from "lucide-react";
 
 export default async function ReviewsPage() {
   const res = await getReviews();
@@ -8,7 +9,7 @@ export default async function ReviewsPage() {
     comment: r.comment,
     rating: r.rating,
     name: r.user?.name || "Anonymous",
-    image: r.user?.image || "/reviewers/default.jpg",
+    image: r.user?.image || <UserIcon />,
     date: new Date(r.createdAt).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",

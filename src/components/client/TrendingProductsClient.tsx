@@ -7,15 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Container from "@/src/components/UI/Container";
 import ProductCard from "@/src/components/UI/ProductCard";
 import SectionTitle from "@/src/components/UI/SectionTitle";
-
-type Product = {
-  name: string;
-  price: number;
-  imageUrl: string;
-  badge: string;
-  material: { name: string };
-  slug: string;
-};
+import { Product } from "@/src/types";
 
 export default function TrendingProductsClient({
   products,
@@ -37,6 +29,7 @@ export default function TrendingProductsClient({
     emblaApi.on("select", onSelect);
     onSelect();
   }, [emblaApi]);
+  // console.log("Trending:", products);
 
   return (
     <Container>
@@ -50,7 +43,7 @@ export default function TrendingProductsClient({
 
         <div className="relative">
           <button
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+            className="absolute -left-6 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
             onClick={scrollPrev}
           >
             <ChevronLeft color="white" size={28} />
@@ -70,7 +63,7 @@ export default function TrendingProductsClient({
           </div>
 
           <button
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+            className="absolute -right-6 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
             onClick={scrollNext}
           >
             <ChevronRight color="white" size={28} />

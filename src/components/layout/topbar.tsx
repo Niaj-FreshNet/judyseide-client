@@ -35,7 +35,7 @@ export const Topbar = () => {
 
   return (
     <HeroUINavbar
-      className="relative max-w-screen-2xl mx-auto top-0 z-[50] shadow-sm overflow-visible"
+      className="relative max-w-screen-2xl mx-auto top-0 z-[40] px-2 lg:px-24 pt-2 pb-4 shadow-sm overflow-visible"
       maxWidth="full"
       position="sticky"
     >
