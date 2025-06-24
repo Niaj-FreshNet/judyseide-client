@@ -7,15 +7,15 @@ interface ProductCardProps {
   showAddToBag?: boolean;
 }
 
-export default function ProductCard({ product, showAddToBag }: ProductCardProps) {
+export default function ProductCardForAllProductsPage({ product, showAddToBag }: ProductCardProps) {
   // Get the first image from the imageUrl array, or use a placeholder if empty
-  const imageUrl = product.imageUrl?.[0];
-  console.log("Image URL:", imageUrl?.[0]);
+  const imageUrl = product.imageUrl;
+  console.log("Image URL:", imageUrl);
 
   // Get the price from the first variant (if any), otherwise use a fallback
   const price = product.variants?.[0]?.price || 0;
 
-  // console.log("ProductCard:", product);
+  // console.log("ProductCardForAllProductsPage:", product);
 
   return (
     <Link href={`/products/${product.id}`} className="block">

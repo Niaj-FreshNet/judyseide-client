@@ -1,4 +1,3 @@
-// services/Products.ts
 import envConfig from "@/src/config/envConfig";
 import { Filters } from "@/src/types";
 
@@ -23,22 +22,35 @@ export const getProducts = async (
     // Initialize URLSearchParams
     const queryParams = new URLSearchParams();
 
-    // Only add filters if they are set
-    if (filters.category) queryParams.append("categories", filters.category);
-    if (filters.material) queryParams.append("materials", filters.material);
-    
-    // Add price range filters if selected
-    if (filters.price?.above500) queryParams.append("priceRange", "above500");
-    if (filters.price["300to500"]) queryParams.append("priceRange", "300to500");
-    if (filters.price["150to300"]) queryParams.append("priceRange", "150to300");
-    if (filters.price.under150) queryParams.append("priceRange", "under150");
+    // Add search term if needed (can be added in Filter state)
+    // if (filters.searchTerm) queryParams.append("searchTerm", filters.searchTerm);
 
     // Add availability filter if any option is selected
-    if (filters.availability.inStock) queryParams.append("availability", "in stock");
-    if (filters.availability.outOfStock) queryParams.append("availability", "out of stock");
+    if (filters.availability.inStock) queryParams.append("stock", "in");
+    if (filters.availability.outOfStock) queryParams.append("stock", "out");
 
-    // Add sorting filter
-    queryParams.append("sortPrice", filters.sortBy);
+    // Add sorting filter based on selected sort option
+    if (filters.sortBy === "price-low-to-high") {
+      queryParams.append("sortBy", "price_asc");
+    } else if (filters.sortBy === "price-high-to-low") {
+      queryParams.append("sortBy", "price_desc");
+    }
+
+    // Add category and material filters if available
+    if (filters.category) queryParams.append("categoryName", filters.category);
+    if (filters.material) queryParams.append("materialName", filters.material);
+
+    // Add price filters (handling ranges)
+    if (filters.price?.under150) queryParams.append("maxPrice", "150");
+    if (filters.price["150to300"]) {
+      queryParams.append("minPrice", "150");
+      queryParams.append("maxPrice", "300");
+    }
+    if (filters.price["300to500"]) {
+      queryParams.append("minPrice", "300");
+      queryParams.append("maxPrice", "500");
+    }
+    if (filters.price.above500) queryParams.append("minPrice", "500");
 
     // Add pagination
     queryParams.append("page", page.toString());
@@ -53,7 +65,7 @@ export const getProducts = async (
     if (!res.ok) {
       throw new Error(`Failed to fetch products: ${res.statusText}`);
     }
-    
+
     const data = await res.json();
 
     // Map the response to match the data structure for products

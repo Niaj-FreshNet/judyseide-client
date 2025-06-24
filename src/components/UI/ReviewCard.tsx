@@ -7,7 +7,7 @@ interface ReviewCardProps {
   name: string;
   date: string;
   rating?: number;
-  image: string;
+  // image: string;
 }
 
 export default function ReviewCard({
@@ -16,9 +16,10 @@ export default function ReviewCard({
   name,
   date,
   rating = 5,
-  image,
+  // image,
 }: ReviewCardProps) {
-  console.log(image, "image in ReviewCard");
+  // console.log(image, "image in ReviewCard");
+
   return (
     <div className="border border-orange-100 p-6 rounded-none shadow-sm space-y-4 flex flex-col">
       {/* rating */}
@@ -36,7 +37,7 @@ export default function ReviewCard({
 
       <div className="flex items-center space-x-3 pt-2">
   <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-300">
-    {image ? (
+    {/* {image ? (
       <Image
         src={image}
         alt={name}
@@ -46,7 +47,8 @@ export default function ReviewCard({
       />
     ) : (
       <UserIcon size={40} className="text-white p-1" />
-    )}
+    )} */}
+    <UserIcon size={40} className="text-white p-1" />
   </div>
   <div>
     <p className="font-semibold text-default-800 text-sm">{name}</p>

@@ -1,7 +1,25 @@
 "use client";
 
-import ProductCard from "@/src/components/UI/ProductCard";
-import { Product } from "@/src/types";
+import { Category, Material } from "@/src/types";
+import { Variant } from "framer-motion";
+import ProductCardForAllProductsPage from "../../UI/ProductCardForAllProductsPage";
+
+type Product = {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string; // Changed from Array<string> to string[] for simplicity
+  tags: string[];
+  salesCount: number;
+  published: boolean;
+  materialId: string;
+  categoryId: string;
+  createdAt: string;
+  updatedAt: string;
+  category: Category; // Assuming 'category' is an object based on the response
+  material: Material; // Assuming 'material' is an object based on the response
+  variants: Variant[]; // Assuming 'variants' is an array of objects
+};
 
 interface ProductGridProps {
   products: Product[];
@@ -16,7 +34,7 @@ export default function ProductGrid({ products, cols = 4 }: ProductGridProps) {
   return (
     <div className={`grid ${colClass} gap-3 md:gap-6 lg:gap-8`}>
       {products?.map((product, index) => (
-        <ProductCard key={index} showAddToBag product={product} />
+        <ProductCardForAllProductsPage key={index} showAddToBag product={product} />
       ))}
     </div>
   );

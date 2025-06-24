@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AllFilters, { Filters, SortByOption } from "@/src/components/modules/shop/AllFilters";
 import FilterBar from "@/src/components/modules/shop/FilterBar";
 import ProductGrid from "@/src/components/modules/shop/ProductGrid";
 import LoadMoreFooter from "@/src/components/modules/shop/LoadMoreFooter";
-import { Category, Product } from "@/src/types";
-import { useCategory } from "@/src/hooks/category.hook";
+import { Category, Material } from "@/src/types";
+import { getProducts } from "@/src/services/Products"; // Import the getProducts function
 
 const PRODUCTS_PER_PAGE = 9;
 
-export default function AllProductsClient({ allProducts }: { allProducts: Product[] }) {
+export default function AllProductsClient() {
   const [showAllFilters, setShowAllFilters] = useState(true);
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
   const [filters, setFilters] = useState<Filters>({
@@ -26,14 +26,27 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
     material: "",
   });
 
-  const { categories, loading, error } = useCategory();  // Use the custom hook for categories
+  const [products, setProducts] = useState([]); // State for holding the fetched products
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  console.log("allProducts:", allProducts); // Debugging log for allProducts
+  // Fetch the products based on filters
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError(""); // Reset error before fetching
+      try {
+        const { products: fetchedProducts } = await getProducts(filters, 1, PRODUCTS_PER_PAGE);
+        setProducts(fetchedProducts); // Update products state with fetched data
+      } catch (error) {
+        setError("Failed to fetch products.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Directly use the `allProducts` without filtering or sorting
-  const visibleProducts = Array.isArray(allProducts) ? allProducts.slice(0, visibleCount) : [];
-
-  console.log("Visible Products:", visibleProducts); // Debugging log
+    fetchProducts();
+  }, [filters]); // Re-run the effect whenever the filters change
 
   if (loading) {
     return <div>Loading products...</div>;
@@ -42,10 +55,6 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
   if (error) {
     return <div>{error}</div>;
   }
-
-  console.log('filers:', filters); // Debugging log for filters
-  console.log('setfilers:', setFilters); // Debugging log for filters
-
 
   return (
     <>
@@ -60,17 +69,10 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
               category: "", // Clear the category filter
             }));
           } else {
-            const selectedCategory = categories.find(
-              (category) => category.categoryName.toLowerCase() === cat.toLowerCase()
-            );
-            if (selectedCategory) {
-              setFilters((f) => ({
-                ...f,
-                category: selectedCategory.id, // Use category ID instead of name
-              }));
-            } else {
-              console.error("Category not found:", cat);
-            }
+            setFilters((f) => ({
+              ...f,
+              category: cat, // Use the category name or ID based on your API
+            }));
           }
         }}
         onSortChange={(sort) => {
@@ -89,14 +91,12 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
         )}
 
         <div className={`${showAllFilters ? "lg:w-3/4" : "w-full"}`}>
-          <ProductGrid cols={showAllFilters ? 3 : 4} products={visibleProducts} />
+          <ProductGrid cols={showAllFilters ? 3 : 4} products={products} />
           <LoadMoreFooter
-            total={allProducts.length}
+            total={products.length}
             viewed={visibleCount}
             onLoadMore={() =>
-              setVisibleCount((prev) =>
-                Math.min(prev + PRODUCTS_PER_PAGE, allProducts.length)
-              )
+              setVisibleCount((prev) => Math.min(prev + PRODUCTS_PER_PAGE, products.length))
             }
           />
         </div>

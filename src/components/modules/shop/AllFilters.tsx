@@ -19,7 +19,7 @@ export type Filters = {
     above500: boolean;
   };
   sortBy: "price-low-to-high" | "price-high-to-low";
-  category: string;  // Can be an empty string if no category is selected
+  categoryName: string;  // Can be an empty string if no category is selected
   material: string;  // Material is now a string ID
   size?: string; // Optional field for size
 };
@@ -87,7 +87,7 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
   };
 
   const handleRadioChange = (
-    filterType: "sortBy" | "category" | "material",
+    filterType: "sortBy" | "categoryName" | "material",
     value: string
   ) => {
     setFilters((prev) => ({
@@ -184,8 +184,8 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
         <h3 className="text-lg font-semibold text-gray-700">Category</h3>
         <div className="flex flex-col gap-2">
           <RadioGroup
-            value={filters.category}
-            onValueChange={(val) => handleRadioChange("category", val)}
+            value={filters.categoryName}
+            onValueChange={(val) => handleRadioChange("categoryName", val)}
           >
             {categories.map((cat) => (
               <Radio key={cat.id} value={cat.id}> {/* Use category ID here */}
