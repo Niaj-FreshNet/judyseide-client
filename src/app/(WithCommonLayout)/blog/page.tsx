@@ -1,28 +1,33 @@
 import BlogCard from "@/src/components/UI/BlogCard";
 import SectionTitle from "@/src/components/UI/SectionTitle";
+import { getBlogs } from "@/src/services/Blog";
 
-const blogs = Array.from({ length: 9 }).map((_, i) => ({
-  id: i,
-  title: "Blog name",
-  excerpt: "Lorem ipsum dolor sit amet consectetur. At ullamcorper dolor...",
-  imageUrl: "/blog/blog1.jpg",
-}));
+export default async function BlogPage() {
+  const { data, loading, error } = await getBlogs(); // Destructure `data` from API
+  const blogs = data?.data || []; // Safe fallback
 
-export default function BlogPage() {
+  console.log("Blogs Data:", blogs); // Debugging log
+
   return (
     <div className="flex flex-col gap-8">
       <SectionTitle align="center" subtitle="" title="Our Blog" titleClassName="text-default-900" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {blogs.map((blog) => (
-          <BlogCard
-            key={blog.id}
-            excerpt={blog.excerpt}
-            imageUrl={blog.imageUrl}
-            title={blog.title}
-          />
-        ))}
-      </div>
+      {error ? (
+        <p className="text-red-500 text-center">Failed to load blogs.</p>
+      ) : blogs.length === 0 ? (
+        <p className="text-center">No blogs found.</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {blogs?.map((blog) => (
+            <BlogCard
+              key={blog?.id}
+              title={blog?.title}
+              excerpt={ blog?.content?.slice(0, 120) + "..."}
+              imageUrl={blog.imageUrl}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

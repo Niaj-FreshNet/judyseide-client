@@ -15,7 +15,7 @@ export type Product = {
   id: string;
   name: string;
   description: string;
-  imageUrl: string[]; // Changed from Array<string> to string[] for simplicity
+  imageUrl: string; // Changed from Array<string> to string[] for simplicity
   tags: string[];
   salesCount: number;
   published: boolean;
@@ -23,6 +23,8 @@ export type Product = {
   categoryId: string;
   createdAt: string;
   updatedAt: string;
+  relatedProducts: string[]; // Assuming this is an array of product IDs
+  goodReviews: string;
   category: Category; // Assuming 'category' is an object based on the response
   material: Material; // Assuming 'material' is an object based on the response
   variants: Variant[]; // Assuming 'variants' is an array of objects

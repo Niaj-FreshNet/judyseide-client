@@ -28,8 +28,12 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
 
   const { categories, loading, error } = useCategory();  // Use the custom hook for categories
 
+  console.log("allProducts:", allProducts); // Debugging log for allProducts
+
   // Directly use the `allProducts` without filtering or sorting
   const visibleProducts = Array.isArray(allProducts) ? allProducts.slice(0, visibleCount) : [];
+
+  console.log("Visible Products:", visibleProducts); // Debugging log
 
   if (loading) {
     return <div>Loading products...</div>;
@@ -38,6 +42,10 @@ export default function AllProductsClient({ allProducts }: { allProducts: Produc
   if (error) {
     return <div>{error}</div>;
   }
+
+  console.log('filers:', filters); // Debugging log for filters
+  console.log('setfilers:', setFilters); // Debugging log for filters
+
 
   return (
     <>

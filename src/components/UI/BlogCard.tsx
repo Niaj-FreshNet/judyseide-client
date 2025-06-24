@@ -22,6 +22,8 @@ export default function BlogCard({ title, excerpt, imageUrl }: BlogCardProps) {
           alt={title}
           className="w-full h-64 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
           src={imageUrl}
+          width={400}
+          height={320}
         />
       </div>
       <div className="border-b border-orange-100 " />
@@ -33,7 +35,10 @@ export default function BlogCard({ title, excerpt, imageUrl }: BlogCardProps) {
         </div>
         <div className="border-b border-orange-100 " />
         <div className="px-4 py-1">
-          <h3 className="text-base text-default-600">{excerpt}</h3>
+          <h3
+            className="text-base text-default-600"
+            dangerouslySetInnerHTML={{ __html: excerpt }}
+          />
         </div>
         <div className="border-b border-orange-100 " />
         <div className="px-4 py-1">

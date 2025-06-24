@@ -9,7 +9,8 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, showAddToBag }: ProductCardProps) {
   // Get the first image from the imageUrl array, or use a placeholder if empty
-  const imageUrl = product.imageUrl?.[0] || "/placeholder.jpg";
+  const imageUrl = product.imageUrl;
+  console.log("Image URL:", imageUrl);
   
   // Get the price from the first variant (if any), otherwise use a fallback
   const price = product.variants?.[0]?.price || 0;
@@ -28,7 +29,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
         <div className="relative overflow-hidden bg-gray-100">
           <Image
             alt={product.name}
-            src={imageUrl.startsWith("/") ? imageUrl : `/${imageUrl}`}  // Ensure relative paths have a leading slash
+            src={imageUrl}  // Ensure relative paths have a leading slash
             className="w-full h-64 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
             width={1200}
             height={600}

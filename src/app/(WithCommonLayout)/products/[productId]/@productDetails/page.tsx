@@ -14,6 +14,7 @@ export default function ProductDetails() {
   const singleProductId = Array.isArray(productId) ? productId[0] : productId; // Ensure it's a string
 
   const { product, loading, error } = useProductById(singleProductId); // Use the custom hook to fetch product data
+  // console.log("Product Data:", product); // Log the fetched product data for debugging
 
   // Initialize state before fetching data
   const [selectedSize, setSelectedSize] = useState<string | null>(null);

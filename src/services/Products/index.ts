@@ -38,7 +38,7 @@ export const getProducts = async (
     if (filters.availability.outOfStock) queryParams.append("availability", "out of stock");
 
     // Add sorting filter
-    queryParams.append("sortPrice", filters.sortBy || "price-low-to-high");
+    queryParams.append("sortPrice", filters.sortBy);
 
     // Add pagination
     queryParams.append("page", page.toString());

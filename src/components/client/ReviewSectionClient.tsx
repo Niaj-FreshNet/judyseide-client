@@ -18,6 +18,7 @@ type Review = {
 };
 
 export default function ReviewSectionClient({ reviews }: { reviews: Review[] }) {
+  // console.log("ReviewSectionClient rendered with reviews:", reviews);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);

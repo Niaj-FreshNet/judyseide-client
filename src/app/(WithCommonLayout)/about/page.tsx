@@ -82,6 +82,8 @@ export default function AboutPage() {
               alt={section.title}
               className="w-full rounded-none shadow-md"
               src={section.imageUrl}
+              width={600}
+              height={400}
             />
           </div>
         </div>
