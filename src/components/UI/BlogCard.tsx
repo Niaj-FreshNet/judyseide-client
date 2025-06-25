@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 // type Blog = {
 //   name: string;
@@ -8,12 +9,13 @@ import Image from "next/image";
 // };
 
 interface BlogCardProps {
+  id:string;
   title: string;
   excerpt: string;
   imageUrl: string;
 }
 
-export default function BlogCard({ title, excerpt, imageUrl }: BlogCardProps) {
+export default function BlogCard({ id, title, excerpt, imageUrl }: BlogCardProps) {
   return (
     <div className="w-full border border-orange-200 text-default-900 rounded-none group relative transition-all duration-300">
       {/* Image Wrapper with hover button */}
@@ -41,9 +43,11 @@ export default function BlogCard({ title, excerpt, imageUrl }: BlogCardProps) {
           />
         </div>
         <div className="border-b border-orange-100 " />
+        <Link  href={`/blogs/${id}`}>
         <div className="px-4 py-1">
           <h3 className="underline text-md font-semibold">Read more</h3>
         </div>
+        </Link>
       </div>
     </div>
   );
