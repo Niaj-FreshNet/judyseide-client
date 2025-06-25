@@ -29,6 +29,7 @@ export type Product = {
 };
 
 export type Variant = {
+  id: string;
   size: string;
   color: string;
   price: number;
@@ -58,8 +59,8 @@ export type Filters = {
     above500: boolean;
   };
   sortBy: "price-low-to-high" | "price-high-to-low";
-  category: string; // Could be an empty string if no category is selected
-  material: string; // Could be an empty string if no material is selected
+  categoryName: string;  // Can be an empty string if no category is selected
+  material: string;  // Material is now a string ID
   size?: string; // Optional field for size
 };
 

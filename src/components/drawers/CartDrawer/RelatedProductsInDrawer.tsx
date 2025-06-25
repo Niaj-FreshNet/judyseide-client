@@ -5,7 +5,6 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import ProductCard from "@/src/components/UI/ProductCard";
-import SectionTitle from "@/src/components/UI/SectionTitle";
 
 const sampleProducts = [
   {
@@ -13,7 +12,7 @@ const sampleProducts = [
     price: 756,
     imageUrl: "/hero1.jpg",
     badge: "Best selling",
-    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
   {
@@ -21,7 +20,7 @@ const sampleProducts = [
     price: 756,
     imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
   {
@@ -29,7 +28,7 @@ const sampleProducts = [
     price: 756,
     imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
   {
@@ -37,7 +36,7 @@ const sampleProducts = [
     price: 756,
     imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
   {
@@ -45,7 +44,7 @@ const sampleProducts = [
     price: 756,
     imageUrl: "/products/product1.jpg",
     badge: "Best selling",
-    material: { name: "18k Gold Vermeil" }, // ✅ Fixed here
+    material: { name: "18k Gold Vermeil" },
     slug: "starburst-earrings"
   },
 ];
@@ -72,14 +71,14 @@ export function RelatedProductsInDrawer() {
   }, [emblaApi]);
 
   return (
-    <div className="w-full mx-auto pt-16 flex-grow">
+    <div className="w-full mx-auto pt-4 flex-grow">
       <div className="flex flex-col gap-6">
-        <SectionTitle
-          align="left"
-          subtitle=""
-          title="You May Also Like"
-          titleClassName="text-default-900"
-        />
+        {/* Hardcoded Section Title */}
+        <div className="mb-4 text-left">
+          <h2 className="font-serif text-xl lg:text-4xl font-bold text-default-900">
+            You May Also Like
+          </h2>
+        </div>
 
         <div className="relative">
           {/* Arrows */}

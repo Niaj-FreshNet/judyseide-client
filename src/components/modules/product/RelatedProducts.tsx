@@ -8,6 +8,7 @@ import ProductCard from "@/src/components/UI/ProductCard";
 import SectionTitle from "@/src/components/UI/SectionTitle";
 import { useParams } from "next/navigation";
 import { useProductById } from "@/src/hooks/product.hook";
+import RelatedProductsLoading from "../../loading/RelatedProductsLoading";
 
 export default function RelatedProducts() {
   const { productId } = useParams();
@@ -38,7 +39,7 @@ export default function RelatedProducts() {
   console.log("Related Products:", relatedProducts); // Debugging log
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 -mt-12">
       <SectionTitle
         align="left"
         subtitle=""
@@ -47,7 +48,7 @@ export default function RelatedProducts() {
       />
 
       {loading ? (
-        <p className="text-center">Loading related products...</p>
+        <RelatedProductsLoading />
       ) : error ? (
         <p className="text-center text-red-500">Failed to load related products.</p>
       ) : relatedProducts.length === 0 ? (
@@ -93,9 +94,8 @@ export default function RelatedProducts() {
             {scrollSnaps.map((_, index) => (
               <button
                 key={index}
-                className={`w-2.5 h-2.5 rounded-full ${
-                  index === selectedIndex ? "bg-orange-100" : "bg-orange-400"
-                }`}
+                className={`w-2.5 h-2.5 rounded-full ${index === selectedIndex ? "bg-orange-100" : "bg-orange-400"
+                  }`}
                 onClick={() => scrollTo(index)}
               />
             ))}

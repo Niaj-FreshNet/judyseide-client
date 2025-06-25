@@ -21,9 +21,8 @@ export const getProducts = async (
   try {
     // Initialize URLSearchParams
     const queryParams = new URLSearchParams();
-
-    // Add search term if needed (can be added in Filter state)
-    // if (filters.searchTerm) queryParams.append("searchTerm", filters.searchTerm);
+    
+    console.log("filter", filters)
 
     // Add availability filter if any option is selected
     if (filters.availability.inStock) queryParams.append("stock", "in");
@@ -37,7 +36,7 @@ export const getProducts = async (
     }
 
     // Add category and material filters if available
-    if (filters.category) queryParams.append("categoryName", filters.category);
+    if (filters.categoryName) queryParams.append("categoryName", filters.categoryName);
     if (filters.material) queryParams.append("materialName", filters.material);
 
     // Add price filters (handling ranges)
@@ -56,9 +55,6 @@ export const getProducts = async (
     queryParams.append("page", page.toString());
     queryParams.append("limit", limit.toString());
 
-    // Log the query string for debugging
-    console.log("Fetching products with query:", queryParams.toString());
-
     // Make the request with the constructed query string
     const res = await fetch(`${envConfig.baseApi}/products/get-all-products?${queryParams.toString()}`);
 
@@ -69,27 +65,9 @@ export const getProducts = async (
     const data = await res.json();
 
     // Map the response to match the data structure for products
-    const products = data?.data?.data || []; // Adjust based on the API response structure
-    console.log("Products:", products); // Log fetched products for debugging
-
+    const products = data?.data?.data || [];
     return {
-      products: products.map((product: any) => ({
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        imageUrl: product.imageUrl[0], // Assuming you want the first image URL
-        tags: product.tags,
-        salesCount: product.salesCount,
-        published: product.published,
-        category: product.category?.categoryName,
-        material: product.material?.materialName,
-        variants: product.variants.map((variant: any) => ({
-          size: variant.size,
-          color: variant.color,
-          price: variant.price,
-          quantity: variant.quantity,
-        })),
-      })),
+      products,
       meta: data?.data?.meta || {
         page: 1,
         limit: 10,

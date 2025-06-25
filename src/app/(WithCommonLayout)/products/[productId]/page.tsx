@@ -6,7 +6,7 @@ import RelatedProducts from "@/src/components/modules/product/RelatedProducts";
 export default function ProductPage() {
 
   return (
-    <div className="mt-44 mb-52 space-y-32">
+    <div className="mt-44 mb-52 space-y-16">
       <RelatedProducts />
       <ProductReviews />
     </div>

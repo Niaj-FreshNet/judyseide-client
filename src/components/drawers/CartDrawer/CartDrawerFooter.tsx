@@ -1,14 +1,49 @@
 import Link from "next/link";
-import { CartDrawerCalculations } from "./CartDrawerCalculations";
 
-export function CartDrawerFooter() {
+export function CartDrawerFooter({
+  subtotal,
+  taxes,
+  shipping,
+  total,
+  onCheckout,
+}: {
+  subtotal: number;
+  taxes: number;
+  shipping: number;
+  total: number;
+  onCheckout: () => void;
+}) {
   return (
     <footer className="px-8 py-4 bottom-0 bg-white">
-      <CartDrawerCalculations />
+      <div className="space-y-4 text-sm">
+        <div className="space-y-2 text-md font-bold border-y border-orange-200 py-4">
+          <div className="flex justify-between">
+            <span>Subtotal</span>
+            <span>${subtotal.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Taxes</span>
+            <span>${taxes.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Estimated Shipping</span>
+            <span>${shipping.toFixed(2)}</span>
+          </div>
+        </div>
+        <div className="flex justify-between font-bold text-base">
+          <span>Total</span>
+          <span>${total.toFixed(2)}</span>
+        </div>
+      </div>
       <Link href={"/checkout"}>
-        <button className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded">
+
+        <button
+          className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded"
+          onClick={onCheckout}  // Trigger checkout when clicked
+        >
           Checkout
-        </button></Link>
+        </button>
+      </Link>
     </footer>
   );
 }

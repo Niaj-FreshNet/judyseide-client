@@ -1,6 +1,23 @@
-import { Product } from "@/src/types";
+import { Category, Material, Variant } from "@/src/types";
 import Image from "next/image";
 import Link from "next/link";
+
+type Product = {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string[]; // Update to string[] to match the expected type
+  tags: string[];
+  salesCount: number;
+  published: boolean;
+  materialId: string;
+  categoryId: string;
+  createdAt: string;
+  updatedAt: string;
+  category: Category[];
+  material: Material[];
+  variants: Variant[];
+};
 
 interface ProductCardProps {
   product: Product;
@@ -10,7 +27,7 @@ interface ProductCardProps {
 export default function ProductCardForAllProductsPage({ product, showAddToBag }: ProductCardProps) {
   // Get the first image from the imageUrl array, or use a placeholder if empty
   const imageUrl = product.imageUrl;
-  console.log("Image URL:", imageUrl);
+  // console.log("Image URL:", imageUrl);
 
   // Get the price from the first variant (if any), otherwise use a fallback
   const price = product.variants?.[0]?.price || 0;
@@ -29,7 +46,7 @@ export default function ProductCardForAllProductsPage({ product, showAddToBag }:
         <div className="relative overflow-hidden bg-gray-100">
           <Image
             alt={product.name}
-            src={imageUrl}  // Ensure relative paths have a leading slash
+            src={imageUrl?.[0]}  // Ensure relative paths have a leading slash
             className="w-full h-64 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
             width={1200}
             height={600}
@@ -55,7 +72,7 @@ export default function ProductCardForAllProductsPage({ product, showAddToBag }:
           <div className="flex items-center px-4 py-2 gap-2 text-xs">
             <span className="w-3 h-3 bg-yellow-400 rounded-full" />
             <span className="w-3 h-3 bg-gray-400 rounded-full" />
-            <span className="text-sm">{product.material?.materialName}</span>
+            <span className="text-sm">{product.material?.[0]?.materialName}</span>
           </div>
         </div>
       </div>

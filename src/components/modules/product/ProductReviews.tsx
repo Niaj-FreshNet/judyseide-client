@@ -8,6 +8,7 @@ import SectionTitle from "@/src/components/UI/SectionTitle";
 import ReviewCard from "@/src/components/UI/ReviewCard";
 import { useParams } from "next/navigation";
 import { useProductById } from "@/src/hooks/product.hook";
+import ProductReviewLoading from "../../loading/ProductReviewLoading copy";
 
 export default function ProductReviews() {
   const { productId } = useParams();
@@ -48,7 +49,7 @@ export default function ProductReviews() {
       />
 
       {loading ? (
-        <p className="text-center">Loading reviews...</p>
+        <ProductReviewLoading />
       ) : error ? (
         <p className="text-center text-red-500">Failed to load reviews.</p>
       ) : goodReviews.length === 0 ? (

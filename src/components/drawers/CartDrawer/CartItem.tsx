@@ -60,7 +60,8 @@ export default function CartItem({
         </div>
 
         <div className="text-xs text-gray-400 mt-1">
-          Size: {size}, Color: {color}
+          <p className="mb-2">Size: {size} </p>
+          <p>Color: {color}</p>
         </div>
 
         <div className="flex items-end justify-start gap-2">
