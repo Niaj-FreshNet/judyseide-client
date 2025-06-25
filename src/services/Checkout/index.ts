@@ -5,7 +5,7 @@ export const createCheckoutSession = async (requestData: any) => {
     const token = Cookies.get("accessToken"); // or whatever your token name is
 
     try {
-        const response = await fetch(${envConfig.baseApi}/payment/create-checkout-session, {
+        const response = await fetch(`${envConfig.baseApi}/payment/create-checkout-session`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const createCheckoutSession = async (requestData: any) => {
         if (!response.ok) {
             const errorData = await parseResponse(response);
             console.error('API Error Response:', errorData);
-            throw new Error(errorData.message || Request failed with status ${response.status});
+            throw new Error(errorData.message || `Request failed with status ${response.status}`);
         }
 
         const result = await response.json();

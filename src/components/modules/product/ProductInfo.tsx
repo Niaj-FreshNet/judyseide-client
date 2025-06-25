@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import { toast } from "sonner";
 
 
 const colorToHex = (color: string): string => {
@@ -94,6 +95,13 @@ export default function ProductInfo({
       setQuantity(newQuantity);
     } else if (selectedVariant) {
       setQuantity(selectedVariant.quantity); // Max quantity available
+      toast.error(`This product is only ${selectedVariant.quantity} pcs available.`, {
+        position: "top-right",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        },
+      });
     }
   };
 
@@ -125,7 +133,7 @@ export default function ProductInfo({
               <button
                 key={color}
                 onClick={() => handleColorChange(color)}
-                className={`px-4 py-2 rounded-md ${selectedColor === color ? "border border-orange-200" : "border border-gray-200"}`}
+                className={`px-4 py-2 rounded-md ${selectedColor === color ? "border bg-gray-200 border-orange-200" : "border border-gray-200"}`}
               >
                 <div
                   className="w-10 h-10 rounded-full"
@@ -148,7 +156,7 @@ export default function ProductInfo({
             <button
               key={size}
               onClick={() => handleSizeChange(size)}
-              className={`px-4 py-2 rounded-md ${selectedSize === size ? "border border-orange-200" : "border border-gray-200"}`}
+              className={`px-4 py-2 rounded-md ${selectedSize === size ? "border bg-gray-200 border-orange-200" : "border border-gray-200"}`}
             >
               {size}
             </button>
@@ -161,14 +169,32 @@ export default function ProductInfo({
       {/* Quantity Input */}
       <div className="space-y-4">
         <h2 className="font-semibold text-lg">Select Quantity</h2>
-        <input
-          type="number"
-          value={quantity}
-          onChange={handleQuantityChange}
-          min={1}
-          className="border px-4 py-2 rounded-md"
-        />
-        <p className="text-sm text-gray-500">Available: {variants.find(variant => variant.size === selectedSize && variant.color === selectedColor)?.quantity || 0}</p>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 mt-2 p-1 border border-orange-200">
+            <button
+              className="w-8 h-8 text-xl leading-none"
+              onClick={() => handleQuantityChange({ target: { value: (quantity + 1).toString() } } as React.ChangeEvent<HTMLInputElement>)}
+            >
+              +
+            </button>
+            <span className="w-6 text-center text-orange-400">{quantity}</span>
+            <button
+              className="w-8 h-8 text-xl leading-none"
+              onClick={() => handleQuantityChange({ target: { value: (quantity - 1).toString() } } as React.ChangeEvent<HTMLInputElement>)}
+              disabled={quantity <= 1}
+            >
+              -
+            </button>
+          </div>
+          <div>
+            <p className="text-sm text-red-500">
+              {variants.find((variant) => variant.size === selectedSize && variant.color === selectedColor)?.quantity
+                // ? `Available: ${variants.find((variant) => variant.size === selectedSize && variant.color === selectedColor)?.quantity
+                ? ""
+                : "Out of stock"}
+            </p>
+          </div>
+        </div>
       </div>
 
       <hr className="border-t border-orange-200" />

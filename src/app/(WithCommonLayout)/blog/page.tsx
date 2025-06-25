@@ -1,3 +1,4 @@
+
 import BlogCard from "@/src/components/UI/BlogCard";
 import SectionTitle from "@/src/components/UI/SectionTitle";
 import { getBlogs } from "@/src/services/Blog";
@@ -18,9 +19,10 @@ export default async function BlogPage() {
         <p className="text-center">No blogs found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {blogs?.map((blog) => (
+          {blogs?.map((blog:any) => (
             <BlogCard
               key={blog?.id}
+              id={blog?.id}
               title={blog?.title}
               excerpt={ blog?.content?.slice(0, 120) + "..."}
               imageUrl={blog.imageUrl}

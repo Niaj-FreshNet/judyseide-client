@@ -5,6 +5,7 @@ import { useDrawerManager } from "../../drawers/DrawerManager";
 import { useCart } from "@/src/context/cart.context";
 import { Product } from "@/src/types";
 import { useWishlist } from "@/src/context/wishlist.context";
+import { toast } from "sonner";
 
 export default function ProductActions({
   product,
@@ -21,23 +22,49 @@ export default function ProductActions({
 }) {
   const { openDrawer } = useDrawerManager();
   const { addToCart } = useCart(); // Get the addToCart function from the CartContext
-    const { addToWishlist } = useWishlist(); // Use the addToWishlist from WishlistContext
+  const { addToWishlist } = useWishlist(); // Use the addToWishlist from WishlistContext
 
   const handleAddToCart = () => {
     if (selectedSize && selectedColor) {
-      addToCart(product, variantId, quantity); // Add the product to the cart
-      openDrawer("cart"); // Optionally open the cart drawer after adding the product
+      toast.success("Item added to cart!", {
+        position: "top-center",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        }
+      });
+      addToCart(product, variantId, quantity);
+      openDrawer("cart");
     } else {
-      alert("Please select size and color.");
+      toast.error("Please select size and color.", {
+        position: "top-right",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        }
+      });
     }
   };
 
-    const handleAddToWishlist = () => {
+  const handleAddToWishlist = () => {
     if (selectedSize && selectedColor) {
+      toast.success("Item added to wishlist!", {
+        position: "top-center",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        }
+      });
       addToWishlist(product, variantId); // Add to wishlist without quantity
       openDrawer("wishlist"); // Optionally open the wishlist drawer
     } else {
-      alert("Please select size and color.");
+      toast.error("Please select size and color.", {
+        position: "top-right",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        }
+      });
     }
   };
 

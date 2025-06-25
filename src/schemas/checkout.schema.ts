@@ -4,7 +4,7 @@ const checkoutValidationSchema = z.object({
     fullAddress: z.string().min(1, "Please enter your full address!"),
     contactNumber: z
         .string()
-        .regex(/^\+?\d{10,15}$/, "Please enter a valid contact number!"), // You can adjust the regex to your format
+        .regex(/^\+?\d{6,15}$/, "Please enter a valid contact number!"), // You can adjust the regex to your format
     contactEmail: z.string().email("Please enter a valid email address!"),
     shippingMethod: z.string().min(1, "Please select a shipping method!"),
     additionalNotes: z.string().optional(), // Optional field

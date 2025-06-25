@@ -15,7 +15,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
   // Get the price from the first variant (if any), otherwise use a fallback
   const price = product.variants?.[0]?.price || 0;
 
-  // console.log("ProductCard:", product);
+  console.log("Productprice:", price);
 
   return (
     <Link href={`/products/${product.id}`} className="block">

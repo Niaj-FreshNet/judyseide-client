@@ -10,7 +10,7 @@ interface CategoryCardProps {
 export function CategoryCard({ categoryName, imageUrl }: CategoryCardProps) {
   return (
     <div className="w-full text-center font-semibold">
-      <Link href={`/shop/${categoryName.toLowerCase()}`}>
+      <Link href={`/${categoryName.toLowerCase()}`}>
         <div className="w-full h-96 bg-gray-100 flex items-center justify-center mb-2 overflow-hidden">
           {imageUrl ? (
             <Image

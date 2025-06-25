@@ -38,6 +38,10 @@ export default function CartItem({
     removeFromCart(id, variantId);
   };
 
+  const handleMoveToWishlist = () => {
+    alert("Move to Bag functionality is not implemented.");
+  };
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 border-b border-orange-200 py-6 my-4">
       <Image
@@ -55,11 +59,10 @@ export default function CartItem({
         </div>
 
         <div className="flex items-center gap-2 text-sm mt-1">
-          <span className="w-4 h-4 rounded-full bg-yellow-400 border" />
           <span className="text-default-600">{material}</span>
         </div>
 
-        <div className="text-xs text-gray-400 mt-1">
+        <div className="text-xs text-gray-600 mt-1">
           <p className="mb-2">Size: {size} </p>
           <p>Color: {color}</p>
         </div>
@@ -84,7 +87,9 @@ export default function CartItem({
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">
-          <button className="text-sm font-medium underline underline-offset-2 hover:text-orange-600 transition">
+          <button
+            onClick={handleMoveToWishlist}
+            className="text-sm font-medium underline underline-offset-2 hover:text-orange-600 transition">
             Move to Wishlist
           </button>
           <button

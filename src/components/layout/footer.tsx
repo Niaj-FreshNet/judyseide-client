@@ -1,32 +1,35 @@
 import Link from "next/link";
-import { Share2, Camera, MessageCircle } from "lucide-react";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   return (
     <footer className="max-w-full mx-auto bg-default-100 border-t border-orange-200 text-default-700">
-      <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-8 lg:px-24 pt-12 pb-8 place-items-center">
+      <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-8 lg:px-24 pt-12 pb-8 place-items-center items-start">
         {/* Brand Section */}
         <div className="space-y-8 flex flex-col items-center md:items-start">
-          <h1 className="text-5xl font-serif text-orange-400 font-bold">Judyseide</h1>
+          <h1 className="text-5xl font-serif text-orange-400 font-bold">Bella D'or</h1>
           <p className="text-lg text-balance leading-relaxed">
-            Lorem ipsum dolor sit amet consectetur. Mollis at in suscipit est morbi. Eget cras vitae
-            imperdiet a felis et massa lorem.
+            Get The Best Jewellery in Your City.
           </p>
 
           {/* Social Icons */}
-          <div className="flex space-x-4 pt-2 text-orange-400">
-            <a href="https://x.com" rel="noopener noreferrer" target="_blank">
-              <Share2 className="w-5 h-5 hover:text-black transition-colors" />
+          <div className="flex space-x-6 pt-2 text-orange-400">
+            {/* TikTok Icon from react-icons */}
+            <a href="https://www.tiktok.com" rel="noopener noreferrer" target="_blank">
+              <FaTiktok className="w-8 h-8 text-black hover:text-gray-700 transition-colors" />
             </a>
+
+            {/* Instagram Icon from react-icons */}
             <a href="https://instagram.com" rel="noopener noreferrer" target="_blank">
-              <Camera className="w-5 h-5 hover:text-black transition-colors" />
+              <FaInstagram className="w-8 h-8 text-[#E1306C] hover:text-[#C13584] transition-colors" />
             </a>
+
+            {/* Facebook Icon from react-icons */}
             <a href="https://facebook.com" rel="noopener noreferrer" target="_blank">
-              <MessageCircle className="w-5 h-5 hover:text-black transition-colors" />
+              <FaFacebook className="w-8 h-8 text-[#1877F2] hover:text-[#0A64BC] transition-colors" />
             </a>
           </div>
-
-          <div className="pt-4 space-y-1 text-sm text-default-800">
+          <div className="pt-4 space-y-1 text-sm text-default-800 text-center hidden md:block">
             <p>Legal & Policies</p>
             <p>© 2025 CraftTrain. All Rights Reserved.</p>
           </div>
@@ -42,7 +45,7 @@ export default function Footer() {
                 <li key={item}>
                   <Link
                     className="text-lg text-default-600 hover:text-black transition-colors"
-                    href="#"
+                    href={`/${item.toLowerCase()}`}
                   >
                     {item}
                   </Link>
@@ -57,7 +60,7 @@ export default function Footer() {
           <h2 className="text-3xl font-serif text-orange-400 font-semibold">Contact Us</h2>
           <div className="space-y-2 text-lg text-default-600">
             <p>
-              <Link className="hover:text-black transition-colors" href="#">
+              <Link className="hover:text-black transition-colors" href="/contact">
                 Help Center
               </Link>
             </p>
@@ -76,6 +79,12 @@ export default function Footer() {
             <p>Location: Arizona, USA</p>
           </div>
         </div>
+      </div>
+
+      {/* Legal & Policies Section (Mobile-only, at the bottom) */}
+      <div className="pt-4 space-y-1 text-sm text-default-800 text-center md:hidden">
+        <p>Legal & Policies</p>
+        <p>© 2025 CraftTrain. All Rights Reserved.</p>
       </div>
 
       {/* Divider Lines for md+ screens */}
