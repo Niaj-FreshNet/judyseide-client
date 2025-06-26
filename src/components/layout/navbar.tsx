@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -13,8 +15,70 @@ import { siteConfig } from "@/src/config/site";
 import { SearchIcon } from "@/src/components/icons";
 import { NavItemWithDropdown } from "../menu/NavItemWithDropdown";
 import { ThemeSwitch } from "../UI/theme-switch";
+import { getProducts } from "@/src/services/Products";
+import { useEffect, useRef, useState } from "react";
+import SearchResults from "../search/SearchResults";
+import { Filters } from "@/src/types";
 
 export const Navbar = () => {
+  const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
+  const [searchResults, setSearchResults] = useState<any[]>([]); // State to store search results
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [showResults, setShowResults] = useState(false); // Control visibility of search results
+
+  const searchInputRef = useRef<HTMLInputElement | null>(null); // Ref to the search input
+  const searchResultsRef = useRef<HTMLDivElement | null>(null); // Ref to search results container
+
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      setIsLoading(true);
+      const fetchData = async () => {
+        try {
+          const filters: Filters = {
+            availability: { inStock: false, outOfStock: false },
+            price: {
+              under150: false,
+              "150to300": false,
+              "300to500": false,
+              above500: false,
+            },
+            sortBy: "price-low-to-high",
+            category: "",
+            material: "",
+          };
+          const response = await getProducts(filters, 1, 10, searchTerm); // Pass search term here
+          setSearchResults(response.products);
+        } catch (error) {
+          console.error("Search error: ", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchData();
+    } else {
+      setSearchResults([]); // Clear results if no search term
+    }
+  }, [searchTerm]); // Run whenever the search term changes
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchResultsRef.current &&
+        !searchResultsRef.current.contains(event.target as Node) &&
+        searchInputRef.current &&
+        !searchInputRef.current.contains(event.target as Node)
+      ) {
+        setShowResults(false); // Hide search results if clicked outside of both input and results
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -24,10 +88,14 @@ export const Navbar = () => {
       }}
       labelPlacement="outside"
       placeholder="Search Jewellery"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
       startContent={
         <SearchIcon className="text-base text-orange-400 pointer-events-none flex-shrink-0 mr-2" />
       }
       type="search"
+      onFocus={() => setShowResults(true)} // Show results when the input is focused
+      ref={searchInputRef} // Attach ref to the search input
     />
   );
 
@@ -41,7 +109,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <p className="text-5xl font-serif font-bold text-inherit text-orange-400">JudySeide</p>
+            <p className="text-5xl font-serif font-bold text-inherit text-orange-400">Bella D'or</p>
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
@@ -60,7 +128,7 @@ export const Navbar = () => {
       {/* Desktop Search + Theme */}
       <NavbarContent className="hidden lg:flex basis-1/5" justify="end">
         <NavbarItem className="flex gap-2">
-          <ThemeSwitch  />
+          <ThemeSwitch />
         </NavbarItem>
         <NavbarItem>
           <div className="w-64">{searchInput}</div>
@@ -86,6 +154,19 @@ export const Navbar = () => {
           </ul>
         </div>
       </NavbarMenu>
+
+      {/* Search Results Component */}
+      {showResults && searchTerm.length > 0 && !isLoading && (
+        <div
+          ref={searchResultsRef} // Attach ref to the results container
+          className="absolute top-20 right-0 bg-[#FEF6F1] shadow-lg rounded-md max-h-96 max-w-96 overflow-y-auto z-50"
+        >
+          <SearchResults
+            results={isLoading ? [] : searchResults} // Pass empty array if loading
+            isLoading={isLoading}
+          />
+        </div>
+      )}
     </HeroUINavbar>
   );
 };

@@ -5,49 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import ProductCard from "@/src/components/UI/ProductCard";
-
-const sampleProducts = [
-  {
-    name: "Starburst Earrings",
-    price: 756,
-    imageUrl: "/hero1.jpg",
-    badge: "Best selling",
-    material: { name: "18k Gold Vermeil" },
-    slug: "starburst-earrings"
-  },
-  {
-    name: "Starburst Earrings",
-    price: 756,
-    imageUrl: "/products/product1.jpg",
-    badge: "Best selling",
-    material: { name: "18k Gold Vermeil" },
-    slug: "starburst-earrings"
-  },
-  {
-    name: "Starburst Earrings",
-    price: 756,
-    imageUrl: "/products/product1.jpg",
-    badge: "Best selling",
-    material: { name: "18k Gold Vermeil" },
-    slug: "starburst-earrings"
-  },
-  {
-    name: "Starburst Earrings",
-    price: 756,
-    imageUrl: "/products/product1.jpg",
-    badge: "Best selling",
-    material: { name: "18k Gold Vermeil" },
-    slug: "starburst-earrings"
-  },
-  {
-    name: "Starburst Earrings",
-    price: 756,
-    imageUrl: "/products/product1.jpg",
-    badge: "Best selling",
-    material: { name: "18k Gold Vermeil" },
-    slug: "starburst-earrings"
-  },
-];
+import { getTrendingProducts } from "@/src/services/TrendingProducts";
 
 export function RelatedProductsInDrawer() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
@@ -91,16 +49,15 @@ export function RelatedProductsInDrawer() {
   return (
     <div className="w-full mx-auto pt-4 flex-grow">
       <div className="flex flex-col gap-6">
-        {/* Hardcoded Section Title */}
-        <div className="mb-4 text-left">
-          <h2 className="font-serif text-xl lg:text-4xl font-bold text-default-900">
+        <div className="mb-0 text-left">
+          <h2 className="font-serif text-xl lg:text-2xl font-bold text-default-900">
             You May Also Like
           </h2>
         </div>
 
         <div className="relative">
           <button
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+            className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
             onClick={scrollPrev}
           >
             <ChevronLeft color="white" size={28} />
@@ -109,7 +66,18 @@ export function RelatedProductsInDrawer() {
           <div ref={emblaRef} className="overflow-hidden">
             <div className="flex gap-4">
               {loading ? (
-                <p className="p-4">Loading...</p>
+                // Skeleton Loader: Create loading skeletons for product cards
+                Array.from({ length: 5 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="min-w-[250px] flex-[0_0_80%] sm:flex-[0_0_45%] md:flex-[0_0_33%] lg:flex-[0_0_25%] bg-gray-200 rounded-md animate-pulse"
+                  >
+                    {/* Skeleton Loader for Product Card */}
+                    <div className="w-full h-64 bg-gray-300 rounded-t-md mb-2" />
+                    <div className="w-3/4 h-4 bg-gray-300 rounded mb-2 mx-auto" />
+                    <div className="w-1/2 h-4 bg-gray-300 rounded mx-auto" />
+                  </div>
+                ))
               ) : (
                 products.map((product, index) => (
                   <div
@@ -134,7 +102,7 @@ export function RelatedProductsInDrawer() {
           </div>
 
           <button
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
+            className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 bg-[#FB923C] shadow-md shadow-gray-400 p-2 rounded-full"
             onClick={scrollNext}
           >
             <ChevronRight color="white" size={28} />

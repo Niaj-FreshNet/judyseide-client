@@ -16,11 +16,15 @@ export const getProducts = async (
     material: "",
   },
   page: number = 1,
-  limit: number = 10
+  limit: number = 10,
+  searchTerm: string = ""
 ) => {
   try {
     // Initialize URLSearchParams
     const queryParams = new URLSearchParams();
+
+    if (searchTerm) queryParams.append("searchTerm", searchTerm);
+    console.log("searchTerm", searchTerm)
     
     console.log("filter", filters)
 

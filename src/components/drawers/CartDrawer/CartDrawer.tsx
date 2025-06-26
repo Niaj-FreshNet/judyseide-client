@@ -5,6 +5,7 @@ import { useDrawerManager } from "../../drawers/DrawerManager";  // Assuming you
 import { CartDrawerFooter } from "./CartDrawerFooter";
 import CartItem from "./CartItem";
 import { RelatedProductsInDrawer } from "./RelatedProductsInDrawer";
+import { FaShoppingCart } from "react-icons/fa";
 
 export function CartDrawer() {
   const { cart } = useCart();
@@ -29,7 +30,17 @@ export function CartDrawer() {
       <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-2 space-y-8">
         <div className="pt-2">
           {cart.length === 0 ? (
-            <p>Your cart is empty.</p>
+            <div className="flex flex-col items-center justify-center py-8">
+              <FaShoppingCart className="text-6xl text-gray-400 mb-4" /> {/* Empty Cart Icon */}
+              <p className="text-lg text-gray-600 mb-2">Your cart is empty</p>
+              <p className="text-sm text-gray-500 mb-4">Start shopping now and add some items to your cart.</p>
+              <button
+                onClick={() => closeDrawer()} // Close drawer on button click
+                className="px-6 py-2 text-white bg-orange-500 rounded-full hover:bg-orange-600 focus:outline-none"
+              >
+                Browse Products
+              </button>
+            </div>
           ) : (
             cart.map((item) => (
               <CartItem

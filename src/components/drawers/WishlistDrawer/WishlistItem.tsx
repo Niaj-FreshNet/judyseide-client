@@ -48,12 +48,12 @@ export default function WishlistItem({
         </div>
 
         <div className="flex items-center gap-2 text-sm mt-1">
-          <span className="w-4 h-4 rounded-full bg-yellow-400 border" />
           <span className="text-default-600">{material}</span>
         </div>
 
-        <div className="text-xs text-gray-400 mt-1">
-          Size: {size}, Color: {color}
+        <div className="text-xs text-gray-600 mt-1">
+          <p className="mb-2">Size: {size} </p>
+          <p>Color: {color}</p>
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">

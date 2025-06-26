@@ -10,7 +10,6 @@ export const createCheckoutSession = async (requestData: any) => {
     const token = Cookies.get("accessToken"); // or whatever your token name is
 
     try {
-        const response = await fetch(${envConfig.baseApi}/payment/create-checkout-session, {
         const response = await fetch(`${envConfig.baseApi}/payment/create-checkout-session`, {
             method: 'POST',
             headers: {
@@ -26,12 +25,6 @@ export const createCheckoutSession = async (requestData: any) => {
         if (!response.ok) {
             const errorData = await parseResponse(response);
             console.error('API Error Response:', errorData);
-            throw new Error(errorData.message || Request failed with status ${response.status});
-        }
-
-        if (!response.ok) {
-            const errorData = await parseResponse(response);
-            console.error('API Error Response:', errorData);
             throw new Error(errorData.message || `Request failed with status ${response.status}`);
         }
 
@@ -42,36 +35,6 @@ export const createCheckoutSession = async (requestData: any) => {
         return result;
 
     } catch (error) {
-        console.error('API Request Failed:', error);
-        throw error instanceof Error ? error : new Error('Network request failed');
-    }
-};
-
-// Helper for response parsing
-async function parseResponse(response: Response) {
-    const contentType = response.headers.get('content-type');
-
-    try {
-        if (contentType?.includes('application/json')) {
-            return await response.json();
-        } else if (contentType?.includes('text/')) {
-            const text = await response.text();
-            return { message: text };
-        } else {
-            return {
-                status: response.status,
-                statusText: response.statusText,
-                message: 'Unknown error occurred'
-            };
-        }
-    } catch (parseError) {
-        return {
-            status: response.status,
-            statusText: response.statusText,
-            message: 'Could not parse error details'
-        };
-    }
-}
         console.error('API Request Failed:', error);
         throw error instanceof Error ? error : new Error('Network request failed');
     }

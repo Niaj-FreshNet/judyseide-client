@@ -59,9 +59,10 @@ export type Filters = {
     above500: boolean;
   };
   sortBy: "price-low-to-high" | "price-high-to-low";
-  categoryName: string;  // Can be an empty string if no category is selected
+  categoryName?: string;  // Can be an empty string if no category is selected
   material: string;  // Material is now a string ID
   size?: string; // Optional field for size
+  searchTerm?: string;
 };
 
 export type CartItem = {
@@ -74,6 +75,20 @@ export type CartItem = {
   color: string;
   size: string;
 };
+
+export interface ContactInfo {
+  icon: React.ReactNode
+  title: string
+  description: string
+  details: string
+}
+
+export interface ContactFormData {
+  fullName: string
+  email: string
+  subjects: string
+  message: string
+}
 
 export interface IUser {
   _id: string;

@@ -40,7 +40,7 @@ export const siteConfig = {
     },
     {
       label: "Help",
-      href: "/help",
+      href: "/contact",
     },
   ],
   navMenuItems: [

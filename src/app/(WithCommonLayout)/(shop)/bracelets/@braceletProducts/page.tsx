@@ -28,7 +28,7 @@ export default function Page({ allProducts }: AllProductsClientProps) {
       above500: false,
     },
     sortBy: "price-low-to-high",
-    categoryName: "BRACELET",
+    categoryName: "BRACELETS",
     material: "",
   });
 

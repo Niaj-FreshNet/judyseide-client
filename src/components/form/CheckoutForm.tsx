@@ -12,7 +12,7 @@ import { createCheckoutSession } from "@/src/services/Checkout";
 import { useCart } from "@/src/context/cart.context";
 
 const CheckoutForm = () => {
-    const { cart } = useCart();
+    const { cart, clearCart } = useCart();
 
     const methods = useForm({
         resolver: zodResolver(checkoutValidationSchema),
@@ -79,6 +79,7 @@ const CheckoutForm = () => {
             // ✅ Redirect to Stripe Checkout if URL exists
             if (result?.data?.url) {
                 window.location.href = result.data.url;
+                clearCart();
             } else {
                 throw new Error("Checkout session created but redirect URL was not provided.");
             }
