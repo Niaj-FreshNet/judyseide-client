@@ -52,8 +52,7 @@ export const resendVerifyEmailToken = async (email: string) => {
     
     if (data.success) {
       return data;
-    }
-    
+    }    
     throw new Error("Failed to resend OTP. Please try again.");
   } catch (error: any) {
     if (error.response?.data?.message) {

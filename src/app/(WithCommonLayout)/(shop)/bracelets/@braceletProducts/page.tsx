@@ -82,7 +82,7 @@ export default function Page({ allProducts }: AllProductsClientProps) {
         {/* Filter Bar remains static, unaffected by loading state */}
         <div className="w-full -ml-8">
           <FilterBar
-            selectedCategory={filters.categoryName}
+            selectedCategory={filters.categoryName || ""}
             selectedSort={filters.sortBy}
             onCategoryChange={(cat) => {
               // Update the filters and trigger the product fetch
