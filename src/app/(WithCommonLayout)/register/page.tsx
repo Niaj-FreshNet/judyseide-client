@@ -35,13 +35,13 @@ export default function RegisterPage() {
         </div>
 
         {/* Form Side */}
-        <div className="w-full md:w-1/2 p-6 sm:p-10 lg:p-12 flex justify-center items-center">
+        <div className="w-full md:w-1/2 p-2 md:p-12 flex justify-center items-center">
           <div className="w-full max-w-md">
             <h2 className="text-3xl sm:text-4xl font-bold text-orange-500 text-center mb-4">
               Register
             </h2>
 
-            <div className="bg-white rounded-md shadow-md px-6 py-8 space-y-6 border border-gray-50">
+            <div className="bg-white rounded-md shadow-md px-4 pt-4 pb-8 md:px-8 md:pt-8 md:pb-16 space-y-6 border border-gray-50">
               <JudyForm
                 resolver={zodResolver(registerValidationSchema)}
                 onSubmit={onSubmit}
