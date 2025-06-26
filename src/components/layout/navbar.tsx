@@ -43,7 +43,7 @@ export const Navbar = () => {
               above500: false,
             },
             sortBy: "price-low-to-high",
-            category: "",
+            categoryName: "",
             material: "",
           };
           const response = await getProducts(filters, 1, 10, searchTerm); // Pass search term here

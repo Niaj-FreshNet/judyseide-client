@@ -69,14 +69,14 @@ export default function RegisterPage() {
               </JudyForm>
 
               {/* Divider */}
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 <div className="flex-1 h-px bg-gray-200" />
                 <span className="text-xs text-gray-600">Other log in options</span>
                 <div className="flex-1 h-px bg-gray-200" />
-              </div>
+              </div> */}
 
               {/* Social Auth */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Button
                   className="w-full bg-white text-sm font-medium text-gray-700 border-2 border-gray-200 hover:bg-gray-50 flex items-center justify-center space-x-2 rounded-md py-3"
                   size="sm"
@@ -90,7 +90,7 @@ export default function RegisterPage() {
                   />
                   <span>Log In with Google</span>
                 </Button>
-              </div>
+              </div> */}
             </div>
 
             {/* Login Link */}

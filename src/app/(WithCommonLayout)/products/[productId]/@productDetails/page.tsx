@@ -37,7 +37,7 @@ export default function ProductDetails() {
 
   // Access the product data inside the 'data' key
   const singleProduct = product.data;
-  console.log("Single Product:", singleProduct); // Log the product data for debugging
+  // console.log("Single Product:", singleProduct); // Log the product data for debugging
 
   return (
     <div className="grid md:grid-cols-2 gap-8 mx-auto">

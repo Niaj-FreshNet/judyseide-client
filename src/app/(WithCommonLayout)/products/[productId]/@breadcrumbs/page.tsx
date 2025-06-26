@@ -3,7 +3,7 @@ import CustomBreadcrumbs from "@/src/components/UI/CustomBreadcrumbs";
 export default function page() {
   return (
     <>
-      <CustomBreadcrumbs items={["Home", "All Category", "Starburst Earrings"]} />
+      <CustomBreadcrumbs items={["Home", "All Category", "Product Details"]} />
     </>
   );
 }
