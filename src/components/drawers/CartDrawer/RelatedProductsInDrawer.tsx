@@ -5,8 +5,49 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import ProductCard from "@/src/components/UI/ProductCard";
-import { getTrendingProducts } from "@/src/services/TrendingProducts";
 
+const sampleProducts = [
+  {
+    name: "Starburst Earrings",
+    price: 756,
+    imageUrl: "/hero1.jpg",
+    badge: "Best selling",
+    material: { name: "18k Gold Vermeil" },
+    slug: "starburst-earrings"
+  },
+  {
+    name: "Starburst Earrings",
+    price: 756,
+    imageUrl: "/products/product1.jpg",
+    badge: "Best selling",
+    material: { name: "18k Gold Vermeil" },
+    slug: "starburst-earrings"
+  },
+  {
+    name: "Starburst Earrings",
+    price: 756,
+    imageUrl: "/products/product1.jpg",
+    badge: "Best selling",
+    material: { name: "18k Gold Vermeil" },
+    slug: "starburst-earrings"
+  },
+  {
+    name: "Starburst Earrings",
+    price: 756,
+    imageUrl: "/products/product1.jpg",
+    badge: "Best selling",
+    material: { name: "18k Gold Vermeil" },
+    slug: "starburst-earrings"
+  },
+  {
+    name: "Starburst Earrings",
+    price: 756,
+    imageUrl: "/products/product1.jpg",
+    badge: "Best selling",
+    material: { name: "18k Gold Vermeil" },
+    slug: "starburst-earrings"
+  },
+];
 
 export function RelatedProductsInDrawer() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
@@ -50,6 +91,7 @@ export function RelatedProductsInDrawer() {
   return (
     <div className="w-full mx-auto pt-4 flex-grow">
       <div className="flex flex-col gap-6">
+        {/* Hardcoded Section Title */}
         <div className="mb-4 text-left">
           <h2 className="font-serif text-xl lg:text-4xl font-bold text-default-900">
             You May Also Like

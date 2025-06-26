@@ -1,28 +1,13 @@
+'use client';
+
 import { getCategories } from "@/src/services/Categories";
 import { getMaterials } from "@/src/services/Materials";
-import { Category, Material } from "@/src/types";
-import { Checkbox } from "@heroui/checkbox";
+import { Category, Filters, Material } from "@/src/types";
+import { Checkbox} from "@heroui/checkbox";
 import { Radio, RadioGroup } from "@heroui/radio";
 import React, { useEffect, useState } from "react";
 
 export type SortByOption = "price-low-to-high" | "price-high-to-low";
-
-export type Filters = {
-  availability: {
-    inStock: boolean;
-    outOfStock: boolean;
-  };
-  price: {
-    under150: boolean;
-    "150to300": boolean;
-    "300to500": boolean;
-    above500: boolean;
-  };
-  sortBy: "price-low-to-high" | "price-high-to-low";
-  categoryName: string;  // Can be an empty string if no category is selected
-  material: string;  // Material is now a string ID
-  size?: string; // Optional field for size
-};
 
 interface AllFiltersProps {
   filters: Filters;
@@ -33,6 +18,7 @@ interface AllFiltersProps {
 export default function AllFilters({ filters, setFilters, isLoading = false }: AllFiltersProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [materials, setMaterials] = useState<Material[]>([]); // State for materials
+  // console.log("isLoading ALLFilter", isLoading)
 
   // Fetch categories
   useEffect(() => {
@@ -40,11 +26,11 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
       try {
         const response = await getCategories();
         const fetchedCategories = response.data.data;
-        console.log("Fetched categories:", fetchedCategories); 
+        // console.log("Fetched categories:", fetchedCategories);
         if (Array.isArray(fetchedCategories)) {
           setCategories(fetchedCategories);
         } else {
-          console.error("Fetched categories is not an array:", fetchedCategories);
+          // console.error("Fetched categories is not an array:", fetchedCategories);
         }
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -63,7 +49,7 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
         if (Array.isArray(fetchedMaterials)) {
           setMaterials(fetchedMaterials);
         } else {
-          console.error("Fetched materials is not an array:", fetchedMaterials);
+          // console.error("Fetched materials is not an array:", fetchedMaterials);
         }
       } catch (error) {
         console.error("Error fetching materials:", error);
@@ -99,7 +85,7 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
   if (isLoading) {
     return (
       <div className="bg-[#fef6f1] p-6 rounded-md border text-sm space-y-5 w-full animate-pulse">
-        {/* Loading Skeleton */}
+        {/* Placeholder for filter options */}
       </div>
     );
   }
@@ -188,7 +174,7 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
             onValueChange={(val) => handleRadioChange("categoryName", val)}
           >
             {categories.map((cat) => (
-              <Radio key={cat.id} value={cat.id}> {/* Use category ID here */}
+              <Radio key={cat.categoryName} value={cat.categoryName}> {/* Use category ID here */}
                 {cat.categoryName?.charAt(0).toUpperCase() + cat.categoryName?.slice(1)} {/* Capitalize category name */}
               </Radio>
             ))}
@@ -207,7 +193,7 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
             onValueChange={(val) => handleRadioChange("material", val)} // Now passing material ID
           >
             {materials.map((mat) => (
-              <Radio key={mat.id} value={mat.id}>
+              <Radio key={mat.materialName} value={mat.materialName}>
                 {mat.materialName?.charAt(0).toUpperCase() + mat.materialName.slice(1)} {/* Capitalize material name */}
               </Radio>
             ))}
@@ -226,3 +212,6 @@ export default function AllFilters({ filters, setFilters, isLoading = false }: A
     </div>
   );
 }
+
+
+

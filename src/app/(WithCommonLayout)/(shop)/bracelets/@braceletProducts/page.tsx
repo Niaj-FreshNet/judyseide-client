@@ -1,54 +1,23 @@
 "use client";
 
-import { useState } from "react";
-
-import AllFilters, {
-  CategoryOption,
-  Filters,
-  SortByOption,
-} from "@/src/components/modules/shop/AllFilters";
+import { useState, useEffect } from "react";
+import AllFilters, { SortByOption } from "@/src/components/modules/shop/AllFilters";
 import FilterBar from "@/src/components/modules/shop/FilterBar";
 import ProductGrid from "@/src/components/modules/shop/ProductGrid";
 import LoadMoreFooter from "@/src/components/modules/shop/LoadMoreFooter";
-import { Product } from "@/src/types";
+import { getProducts } from "@/src/services/Products";
+import { SlidersHorizontal } from "lucide-react";
+import { Filters, Product } from "@/src/types";
+import ProductGridLoading from "@/src/components/loading/ProductGridLoading";
 
 const PRODUCTS_PER_PAGE = 9;
 
-const productNames = [
-  "Starburst Earrings",
-  "Celestial Hoops",
-  "Twilight Necklace",
-  "Sunray Bracelet",
-  "Aurora Ring",
-  "Galaxy Studs",
-  "Lunar Cuff",
-  "Starlit Pendant",
-  "Nova Bangles",
-  "Meteorite Earrings",
-  "Solar Choker",
-  "Radiant Ring",
-  "Orbit Bracelet",
-  "Comet Hoops",
-  "Shimmer Studs",
-  "Eclipse Pendant",
-];
+interface AllProductsClientProps {
+  allProducts: Product[];
+}
 
-const badges = ["Best selling", "New Arrival", "Limited Edition", "Exclusive"];
-
-const allProducts: Product[] = Array(16)
-  .fill(null)
-  .map((_, i): Product => ({
-    name: productNames[i],
-    price: 756 - i * 10,
-    imageUrl: `/products/product${(i % 2) + 1}.jpg`,
-    badge: badges[i % badges.length],
-    material: { name: "18k Gold Vermeil" },
-    category: ["Earrings", "Bracelets", "Necklaces", "Rings"][i % 4],
-    slug: productNames[i].toLowerCase().replace(/\s+/g, "-"),
-  }));
-
-export default function BraceletProductPage() {
-  const [showAllFilters, setShowAllFilters] = useState(true);
+export default function Page({ allProducts }: AllProductsClientProps) {
+  const [showAllFilters, setShowAllFilters] = useState(false); // Initially, filter options are hidden
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
   const [filters, setFilters] = useState<Filters>({
     availability: { inStock: false, outOfStock: false },
@@ -59,81 +28,106 @@ export default function BraceletProductPage() {
       above500: false,
     },
     sortBy: "price-low-to-high",
-    category: "",
+    categoryName: "BRACELET",
     material: "",
   });
 
-  const isAllFilterView = showAllFilters;
+  const [products, setProducts] = useState([]); // State for holding the fetched products
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const filteredProducts = allProducts
-    .filter((product) => {
-      const matchesCategory =
-        !filters.category ||
-        product.category.replace(/\s+/g, "").toLowerCase() ===
-        filters.category.replace(/\s+/g, "").toLowerCase();
-      const matchesMaterial =
-        !filters.material ||
-        product.material?.name?.toLowerCase() === filters.material.toLowerCase()
+  // Fetch the products based on filters
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError(""); // Reset error before fetching
+      try {
+        const { products: fetchedProducts } = await getProducts(filters, 1, PRODUCTS_PER_PAGE);
+        setProducts(fetchedProducts); // Update products state with fetched data
+      } catch (error) {
+        setError("Failed to fetch products.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchProducts();
+  }, [filters]); // Re-run the effect whenever the filters change
 
-      return matchesCategory && matchesMaterial;
-    })
-    .sort((a, b) => {
-      if (filters.sortBy === "price-low-to-high") return a.price - b.price;
-      if (filters.sortBy === "price-high-to-low") return b.price - a.price;
-
-      return 0;
-    });
-
-const visibleProducts: Product[] = filteredProducts.slice(0, visibleCount);
+  // Toggle function for All Filter button
+  const toggleAllFilters = () => {
+    setShowAllFilters(!showAllFilters);
+  };
 
   return (
     <>
-      <FilterBar
-        selectedCategory={filters.category}
-        selectedSort={filters.sortBy}
-        onCategoryChange={(cat) => {
-          if (cat === "All Filter") {
-            setShowAllFilters((prev) => !prev);
-            setFilters((f) => ({
-              ...f,
-              category: "",
-            }));
-          } else {
-            const formattedCategory = cat.toLowerCase() as CategoryOption;
+      <div className="w-full flex">
+        <div className="w-1/6">
+          <button
+            className={`mr-0 border px-4 py-2 rounded-none text-lg transition
+    ${showAllFilters
+                ? "border-orange-400 bg-orange-500 text-white"
+                : "border-orange-200 text-default-900 hover:bg-gray-100"
+              }`}
+            onClick={toggleAllFilters} // Toggle the visibility of the filter options
+          >
+            <div className="flex items-center">
+              <span className="mr-2">All Filter</span>
+              <span className="ml-1 text-gray-200 font-medium">
+                <SlidersHorizontal size={20} />
+              </span>
+            </div>
+          </button>
+        </div>
+        {/* Filter Bar remains static, unaffected by loading state */}
+        <div className="w-full -ml-8">
+          <FilterBar
+            selectedCategory={filters.categoryName}
+            selectedSort={filters.sortBy}
+            onCategoryChange={(cat) => {
+              // Update the filters and trigger the product fetch
+              setFilters((f) => ({
+                ...f,
+                categoryName: cat, // Set category filter
 
-            setFilters((f) => ({
-              ...f,
-              category: formattedCategory,
-            }));
-          }
-        }}
-        onSortChange={(sort) => {
-          setFilters((f) => ({
-            ...f,
-            sortBy: sort as SortByOption,
-          }));
-        }}
-      />
+              }));
+            }}
+            onSortChange={(sort) => {
+              // Update the filters for sorting and trigger the product fetch
+              setFilters((f) => ({
+                ...f,
+                sortBy: sort as SortByOption,
+              }));
+            }}
+          />
+        </div>
+      </div>
 
       <div className="flex gap-6">
-        {isAllFilterView && (
+        {/* Only show All Filters when showAllFilters is true */}
+        {showAllFilters && (
           <div className="hidden lg:block w-1/4">
-            <AllFilters filters={filters} setFilters={setFilters} />
+            {/* Filter options should not be loading */}
+            <AllFilters filters={filters} setFilters={setFilters} isLoading={false} />
           </div>
         )}
 
-        <div className={`${isAllFilterView ? "lg:w-3/4" : "w-full"}`}>
-          <ProductGrid cols={isAllFilterView ? 3 : 4} products={visibleProducts} />
-          <LoadMoreFooter
-            total={filteredProducts.length}
-            viewed={visibleCount}
-            onLoadMore={() =>
-              setVisibleCount((prev) =>
-                Math.min(prev + PRODUCTS_PER_PAGE, filteredProducts.length)
-              )
-            }
-          />
+        <div className={showAllFilters ? "lg:w-3/4" : "w-full"}>
+          {/* Only the product grid should show loading skeleton */}
+          {loading ? (
+            <ProductGridLoading /> // Show loading skeleton only for the product grid
+          ) : (
+            <>
+              <ProductGrid cols={showAllFilters ? 3 : 4} products={products} />
+              <LoadMoreFooter
+                total={products.length}
+                viewed={visibleCount}
+                onLoadMore={() =>
+                  setVisibleCount((prev) => Math.min(prev + PRODUCTS_PER_PAGE, products.length))
+                }
+              />
+            </>
+          )}
         </div>
       </div>
     </>

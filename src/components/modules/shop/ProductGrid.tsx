@@ -1,14 +1,16 @@
+// In ProductGrid component
 "use client";
 
-import { Category, Material } from "@/src/types";
+import { Category, Material } from "@/src/types"; // Assuming the correct imports
 import { Variant } from "framer-motion";
 import ProductCardForAllProductsPage from "../../UI/ProductCardForAllProductsPage";
 
+// Update the Product type to match the one in src/types/index.ts
 type Product = {
   id: string;
   name: string;
   description: string;
-  imageUrl: string; // Changed from Array<string> to string[] for simplicity
+  imageUrl: string[]; // Update to string[] to match the expected type
   tags: string[];
   salesCount: number;
   published: boolean;
@@ -16,9 +18,9 @@ type Product = {
   categoryId: string;
   createdAt: string;
   updatedAt: string;
-  category: Category; // Assuming 'category' is an object based on the response
-  material: Material; // Assuming 'material' is an object based on the response
-  variants: Variant[]; // Assuming 'variants' is an array of objects
+  category: Category[];
+  material: Material[];
+  variants: Variant[];
 };
 
 interface ProductGridProps {
@@ -29,7 +31,6 @@ interface ProductGridProps {
 export default function ProductGrid({ products, cols = 4 }: ProductGridProps) {
   const colClass =
     cols === 3 ? "grid-cols-2 md:grid-cols-3" : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4";
-    console.log("ProductGrid products:", products); // Debugging log
 
   return (
     <div className={`grid ${colClass} gap-3 md:gap-6 lg:gap-8`}>

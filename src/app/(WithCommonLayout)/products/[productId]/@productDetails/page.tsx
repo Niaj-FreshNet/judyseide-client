@@ -6,6 +6,7 @@ import ProductImages from "@/src/components/modules/product/ProductImages";
 import ProductInfo from "@/src/components/modules/product/ProductInfo";
 import { useProductById } from "@/src/hooks/product.hook";
 import { useState } from "react";
+import ProductDetailsLoading from "../loading";
 
 export default function ProductDetails() {
   const { productId } = useParams(); // Get the product ID from the route
@@ -23,7 +24,7 @@ export default function ProductDetails() {
 
   // Handle loading, error, or missing product
   if (loading) {
-    return <div>Loading...</div>;
+    return <ProductDetailsLoading />;
   }
 
   if (error) {
@@ -44,7 +45,7 @@ export default function ProductDetails() {
       <div className="space-y-12">
         <ProductInfo
           description={singleProduct.description}
-          material={singleProduct.material.materialName}
+          material={singleProduct.material?.[0]?.materialName}
           price={singleProduct.variants?.[0]?.price.toString() || "0"}
           title={singleProduct.name}
           variants={singleProduct.variants || []} // Pass variants here
