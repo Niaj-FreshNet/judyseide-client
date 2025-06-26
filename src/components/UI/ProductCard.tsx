@@ -1,9 +1,15 @@
-import { Product } from "@/src/types";
+import { Product, Variant } from "@/src/types";
 import Image from "next/image";
 import Link from "next/link";
 
 interface ProductCardProps {
-  product: Product;
+  product: {
+    id: string;
+    name: string;
+    price: number;  // Ensure price is passed directly
+    imageUrl: string;
+    material?: string; // Optional if you want to display material
+  };
   showAddToBag?: boolean;
 }
 
@@ -12,8 +18,8 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
   const imageUrl = product.imageUrl?.[0];
   // console.log("Image URL:", imageUrl?.[0]);
 
-  // Get the price from the first variant (if any), otherwise use a fallback
-  const price = product.variants?.[0]?.price || 0;
+  // Use the price directly from the product object
+  const price = product.price;
 
   // console.log("Productprice:", price);
 

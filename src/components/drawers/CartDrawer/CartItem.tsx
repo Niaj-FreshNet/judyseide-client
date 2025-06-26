@@ -87,11 +87,11 @@ export default function CartItem({
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">
-          <button
+          {/* <button
             onClick={handleMoveToWishlist}
             className="text-sm font-medium underline underline-offset-2 hover:text-orange-600 transition">
             Move to Wishlist
-          </button>
+          </button> */}
           <button
             className="text-sm font-medium underline underline-offset-2 hover:text-orange-600 transition"
             onClick={handleRemove}

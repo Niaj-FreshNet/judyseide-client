@@ -24,9 +24,9 @@ export const getProducts = async (
     const queryParams = new URLSearchParams();
 
     if (searchTerm) queryParams.append("searchTerm", searchTerm);
-    console.log("searchTerm", searchTerm)
+    // console.log("searchTerm", searchTerm)
     
-    console.log("filter", filters)
+    // console.log("filter", filters)
 
     // Add availability filter if any option is selected
     if (filters.availability.inStock) queryParams.append("stock", "in");
