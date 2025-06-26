@@ -3,13 +3,36 @@
 import { Button } from "@heroui/button"
 import JudyForm from "./JudyForm"
 import JudyInput from "./JudyInput"
-import type { ContactFormData } from "@/src/types"
 import JudyTextarea from "./JudyTextarea"
+import type { ContactFormData } from "@/src/types"
+
+import { useState } from "react"
+import { contactApi } from "@/src/services/Contact"
+import { toast } from "sonner"
 
 export default function ContactForm() {
-  const handleSubmit = (data: ContactFormData) => {
-    console.log("Form submitted:", data)
-    // Handle form submission here
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (data: ContactFormData) => {
+    // Map form data to API structure
+    const payload = {
+      name: data.fullName,
+      email: data.email,
+      subject: data.subjects,
+      message: data.message,
+    }
+
+    try {
+      setLoading(true)
+      const response = await contactApi(payload)
+
+      console.log("Contact form submitted successfully:", response)
+      toast.success("Contact form submitted successfully!", {position: "top-right"})
+    } catch (error) {
+      toast.error("Error submitting contact form:", {position: "top-right"})
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -22,7 +45,6 @@ export default function ContactForm() {
             <JudyInput
               name="fullName"
               label="Full name*"
-            //   placeholder="Enter your name"
               required
               variant="bordered"
               className="bg-white rounded-none"
@@ -32,7 +54,6 @@ export default function ContactForm() {
               name="email"
               label="Email*"
               type="email"
-            //   placeholder="Enter your email"
               required
               variant="bordered"
               className="bg-white rounded-none"
@@ -41,7 +62,6 @@ export default function ContactForm() {
             <JudyInput
               name="subjects"
               label="Subjects*"
-            //   placeholder="Subject"
               required
               variant="bordered"
               className="bg-white rounded-none"
@@ -60,8 +80,9 @@ export default function ContactForm() {
               type="submit"
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-none"
               size="lg"
+              disabled={loading}
             >
-              Send Now
+              {loading ? "Sending..." : "Send Now"}
             </Button>
           </div>
         </JudyForm>

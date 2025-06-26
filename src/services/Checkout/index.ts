@@ -1,5 +1,4 @@
-import envConfig from "@/src/config/envConfig";
-import Cookies from "js-cookie";
+
 
 import envConfig from "@/src/config/envConfig";
 import Cookies from "js-cookie";
@@ -7,7 +6,6 @@ import Cookies from "js-cookie";
 export const createCheckoutSession = async (requestData: any) => {
     const token = Cookies.get("accessToken"); // or whatever your token name is
 
-    const token = Cookies.get("accessToken"); // or whatever your token name is
 
     try {
         const response = await fetch(`${envConfig.baseApi}/payment/create-checkout-session`, {
