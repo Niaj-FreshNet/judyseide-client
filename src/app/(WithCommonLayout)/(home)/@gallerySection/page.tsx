@@ -64,7 +64,7 @@ function GalleryImage({ src, alt, className = "" }: GalleryImageProps) {
         src={src}
       />
       <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-        <ZoomIn className="text-white w-8 h-8" />
+        {/* <ZoomIn className="text-white w-8 h-8" /> */}
       </div>
     </div>
   );

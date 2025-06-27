@@ -15,7 +15,7 @@ export default function ProductDetailsLoading() {
       {/* Product Images Loading */}
       <div className="w-full flex flex-col mx-auto gap-6">
         <div
-          className="relative w-full md:w-[500px] lg:w-[648px] h-[240px] md:h-[400px] lg:h-[512px] border border-orange-200 shadow-sm cursor-zoom-in overflow-hidden"
+          className="relative w-full h-[240px] md:h-[400px] lg:h-[512px] border border-orange-200 shadow-sm cursor-zoom-in overflow-hidden"
           role="button"
           tabIndex={0}
         >

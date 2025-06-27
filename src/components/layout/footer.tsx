@@ -38,7 +38,7 @@ export default function Footer() {
         {/* Quick Links Section */}
         <div className="space-y-8 flex flex-col items-center md:items-start">
           <h2 className="text-3xl font-serif text-orange-400 font-semibold">Quick Links</h2>
-          <div>
+          <div className=" text-center md:text-left">
             <h3 className="font-medium">Category</h3>
             <ul className="mt-2 space-y-2">
               {["Earrings", "Bracelets", "Necklaces", "Rings"].map((item) => (
@@ -58,7 +58,7 @@ export default function Footer() {
         {/* Contact Section */}
         <div className="space-y-8 flex flex-col items-center md:items-start">
           <h2 className="text-3xl font-serif text-orange-400 font-semibold">Contact Us</h2>
-          <div className="space-y-2 text-lg text-default-600">
+          <div className="space-y-2 text-lg text-center md:text-left text-default-600">
             <p>
               <Link className="hover:text-black transition-colors" href="/contact">
                 Help Center

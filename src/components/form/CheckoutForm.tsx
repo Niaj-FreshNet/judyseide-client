@@ -40,7 +40,7 @@ const CheckoutForm = () => {
 
     const onSubmit = async (data: any) => {
         console.log("Form submission started with data:", data);
-        
+
         try {
             if (!cart || cart.length === 0) {
                 throw new Error("Your cart is empty");
@@ -86,17 +86,17 @@ const CheckoutForm = () => {
 
         } catch (error) {
             console.error("Full error details:", error);
-            
+
             let errorMessage = "Checkout failed. Please try again.";
-            
+
             if (error instanceof Error) {
                 errorMessage = error.message;
-                
+
                 if (error.message.includes("Unexpected token '<'")) {
                     errorMessage = "Server returned an invalid response. Please contact support.";
                 }
             }
-            
+
             setError("root", {
                 type: "manual",
                 message: errorMessage
@@ -146,16 +146,16 @@ const CheckoutForm = () => {
                             className="mb-2"
                         />
 
-                        <div className="mb-4">
+                        {/* <div className="mb-4">
                             <label className="flex items-center">
                                 <Checkbox
                                     {...register("sameBilling")}
-                                    checked={sameBilling}
+                                    // checked={sameBilling}
                                     onChange={(e) => methods.setValue("sameBilling", e.target.checked)}
                                 />
                                 <span className="ml-2">Same as shipping address</span>
                             </label>
-                        </div>
+                        </div> */}
 
                         <div className="mb-4">
                             <label className="block my-2  text-gray-700">Shipping Method</label>
@@ -178,37 +178,36 @@ const CheckoutForm = () => {
                             />
                         </div>
 
-                        {!sameBilling && (
-                            <div className="mb-4 space-y-2">
-                                <JudyInput
-                                    label="Billing Address Line 1"
-                                    name="billingAddress.line1"
-                                    required={true}
-                                />
-                                <JudyInput
-                                    label="Billing Address Line 2"
-                                    name="billingAddress.line2"
-                                />
-                                <JudyInput
-                                    label="Billing City"
-                                    name="billingAddress.city"
-                                    required={true}
-                                />
-                                <JudyInput
-                                    label="Billing Country"
-                                    name="billingAddress.country"
-                                    required={true}
-                                />
-                            </div>
-                        )}
+
+                        <div className="mb-4 space-y-2">
+                            <JudyInput
+                                label="Billing Address Line 1"
+                                name="billingAddress.line1"
+                                required={true}
+                            />
+                            <JudyInput
+                                label="Billing Address Line 2"
+                                name="billingAddress.line2"
+                            />
+                            <JudyInput
+                                label="Billing City"
+                                name="billingAddress.city"
+                                required={true}
+                            />
+                            <JudyInput
+                                label="Billing Country"
+                                name="billingAddress.country"
+                                required={true}
+                            />
+                        </div>
+
 
                         <div className="text-center">
                             <Button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className={`bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-600 ${
-                                    isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-                                }`}
+                                className={`bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-600 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                                    }`}
                             >
                                 {isSubmitting ? 'Processing...' : 'Checkout'}
                             </Button>

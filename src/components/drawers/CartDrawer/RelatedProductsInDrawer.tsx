@@ -84,18 +84,7 @@ export function RelatedProductsInDrawer() {
                     key={product.id || index}
                     className="min-w-[250px] flex-[0_0_80%] sm:flex-[0_0_45%] md:flex-[0_0_33%] lg:flex-[0_0_25%]"
                   >
-                    <ProductCard
-                      showAddToBag
-                      product={{
-                        id: product.id,
-                        name: product.name,
-                        // Get price from the first variant
-                        price: product.variants?.[0]?.price || 0,
-                        imageUrl: product.imageUrl ?? "/placeholder.jpg",
-                        // material: { name: product.material?.materialName },
-                        // slug: product.slug || product.id, // fallback
-                      }}
-                    />
+                    <ProductCard showAddToBag product={product} />
                   </div>
                 ))
               )}

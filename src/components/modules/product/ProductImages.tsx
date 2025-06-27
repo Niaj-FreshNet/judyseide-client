@@ -47,7 +47,7 @@ export default function ProductImages({ images }: { images: string[] }) {
         }}
       >
         <div
-          className="relative w-full md:w-[500px] lg:w-[648px] h-[240px] md:h-[400px] lg:h-[512px] border border-orange-200 shadow-sm cursor-zoom-in overflow-hidden"
+          className="relative w-full h-[240px] md:h-[400px] lg:h-[512px] border border-orange-200 shadow-sm cursor-zoom-in overflow-hidden"
           role="button"
           tabIndex={0}
           onClick={() => {

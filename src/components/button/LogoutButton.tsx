@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"; // Import useRouter for client-side navigation
 import { useState } from "react";
 import { logout as serverLogout } from "@/src/services/AuthService"; // Your logout hook
+import { Button } from "@heroui/button";
 
 const LogoutButton = () => {
   const router = useRouter();
@@ -17,6 +18,9 @@ const LogoutButton = () => {
 
       // Redirect to login page after successful logout
       router.push("/login");
+
+      window.location.reload();
+
     } catch (error) {
       console.error("Error during logout", error);
     } finally {
@@ -25,13 +29,13 @@ const LogoutButton = () => {
   };
 
   return (
-    <button
+    <Button
       onClick={handleLogout}
       disabled={isLoggingOut} // Disable the button while logging out
-      className="text-red-500"
+      className="text-red-500 font-semibold rounded-none px-4 py-2 text-md bg-gray-200"
     >
       {isLoggingOut ? "Logging out..." : "Sign Out"}
-    </button>
+    </Button>
   );
 };
 

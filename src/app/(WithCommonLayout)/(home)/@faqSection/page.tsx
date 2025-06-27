@@ -39,13 +39,15 @@ export default function FAQSection() {
       <div className="flex flex-col space-y-8">
         <JudyAccordion items={faqItems} />
         <div>
-          <p className="text-xl">
-            Have more questions?
-            <Link className="underline" href={"/#"}>
-              Visit our Help Center
-            </Link>{" "}
+          <div className="text-xl">
+            <span> Have more questions? </span>
+            <span>
+              <Link className="underline" href="/contact">
+                Visit our Help Center
+              </Link>{" "}
+            </span>
             to find answers to all your questions.
-          </p>
+          </div>
         </div>
       </div>
       <br />

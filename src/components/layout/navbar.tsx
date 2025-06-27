@@ -87,7 +87,7 @@ export const Navbar = () => {
         input: "text-md",
       }}
       labelPlacement="outside"
-      placeholder="Search Jewellery"
+      placeholder="Search"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
       startContent={
@@ -101,7 +101,7 @@ export const Navbar = () => {
 
   return (
     <HeroUINavbar
-      className="relative max-w-screen-2xl mx-auto top-0 z-[40] px-2 lg:px-24 pt-2 pb-4 shadow-sm overflow-visible"
+      className="relative max-w-screen-2xl mx-auto top-0 z-[40] px-2 lg:px-12 xl:px-24 pt-2 pb-4 shadow-sm overflow-visible  "
       maxWidth="full"
       position="sticky"
     >
@@ -116,7 +116,7 @@ export const Navbar = () => {
 
       {/* Desktop Nav Items */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="center">
-        <ul className="hidden lg:flex gap-6 justify-start items-center">
+        <ul className="hidden lg:flex gap-4 xl:gap-6 justify-start items-center">
           {siteConfig.navItems.map((item) => (
             <li key={item.href} className="relative">
               <NavItemWithDropdown label={item.label} href={item.href} />
@@ -128,11 +128,11 @@ export const Navbar = () => {
       {/* Desktop Search + Theme */}
       <NavbarContent className="hidden lg:flex basis-1/5" justify="end">
         <NavbarItem className="flex gap-2">
-          <ThemeSwitch />
         </NavbarItem>
         <NavbarItem>
-          <div className="w-64">{searchInput}</div>
+          <div className="w-44 lg:w-48 xl:w-72">{searchInput}</div>
         </NavbarItem>
+        <ThemeSwitch />
       </NavbarContent>
 
       {/* Mobile & Tablet Toggle */}
@@ -143,6 +143,12 @@ export const Navbar = () => {
 
       {/* Mobile Menu */}
       <NavbarMenu className="pt-[72px]">
+        <div>
+          <NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
+            <ThemeSwitch />
+            <NavbarMenuToggle />
+          </NavbarContent>
+        </div>
         <div className="px-4 pt-4">{searchInput}</div>
         <div className="mx-4 mt-4 flex flex-col gap-4">
           <ul className="flex flex-col gap-2 px-4 pt-4">
@@ -159,7 +165,7 @@ export const Navbar = () => {
       {showResults && searchTerm.length > 0 && !isLoading && (
         <div
           ref={searchResultsRef} // Attach ref to the results container
-          className="absolute top-20 right-0 bg-[#FEF6F1] shadow-lg rounded-md max-h-96 max-w-96 overflow-y-auto z-50"
+          className="absolute top-20 right-0 bg-[#FEF6F1] shadow-lg rounded-md max-h-96 max-w-96 overflow-y-auto "
         >
           <SearchResults
             results={isLoading ? [] : searchResults} // Pass empty array if loading

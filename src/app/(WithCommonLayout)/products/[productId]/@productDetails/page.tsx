@@ -40,7 +40,7 @@ export default function ProductDetails() {
   // console.log("Single Product:", singleProduct); // Log the product data for debugging
 
   return (
-    <div className="grid md:grid-cols-2 gap-8 mx-auto">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-auto">
       <ProductImages images={singleProduct.imageUrl || []} />
       <div className="space-y-12">
         <ProductInfo

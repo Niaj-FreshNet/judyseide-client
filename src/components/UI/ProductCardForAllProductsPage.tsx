@@ -38,9 +38,9 @@ export default function ProductCardForAllProductsPage({ product, showAddToBag }:
     <Link href={`/products/${product.id}`} className="block">
       <div className="w-full border border-orange-200 text-default-900 rounded-none group relative transition-all duration-300 cursor-pointer">
         {/* Badge */}
-        <span className="absolute top-2 left-2 bg-orange-100 text-default-800 text-sm px-2 py-1 rounded-none z-10">
+        {/* <span className="absolute top-2 left-2 bg-orange-100 text-default-800 text-sm px-2 py-1 rounded-none z-10"> */}
           {/* {product.badge} */}
-        </span>
+        {/* </span> */}
 
         {/* Image Wrapper with hover button */}
         <div className="relative overflow-hidden bg-gray-100">
@@ -56,7 +56,7 @@ export default function ProductCardForAllProductsPage({ product, showAddToBag }:
               className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-[#FB923C] text-white px-4 py-2 text-sm rounded-none shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               onClick={(e) => e.preventDefault()} // prevent link navigation on button click
             >
-              Add to Bag
+              View Product
             </button>
           )}
         </div>
