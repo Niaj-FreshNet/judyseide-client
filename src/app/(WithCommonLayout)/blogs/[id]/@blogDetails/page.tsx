@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/src/components/UI/SectionTitle";
 import { getBlogDetails } from "@/src/services/BlogDetails";
+import Loading from "./loading";
 
 export default function BlogDetails() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export default function BlogDetails() {
     }
   }, [id]);
 
-  if (loading) return <p className="text-center">Loading blog...</p>;
+  if (loading) return <Loading />;
   if (error || !blog) return <p className="text-center text-red-500">Failed to load blog.</p>;
 
   return (
@@ -41,17 +42,17 @@ export default function BlogDetails() {
 
       <div className="flex flex-col  items-start gap-16">
 
-          <div className="">
+        <div className="w-full">
           <Image
             alt={blog.title}
-            className="w-full h-[200px] rounded-none shadow-md"
+            className="w-full object-cover h-[400px] rounded-none"
             src={blog.imageUrl}
             width={600}
             height={200}
           />
         </div>
         <div className="flex-1 text-default-900">
-          
+
           <h2 className="text-xl font-bold mb-6">{blog.title}</h2>
           <div
             className="text-default-600 text-md leading-relaxed"

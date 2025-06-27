@@ -46,6 +46,22 @@ export const verifyUser = async (userData: FieldValues) => {
   }
 };
 
+export const resendVerifyEmailToken = async (email: string) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/resend-verify-email-token", { email });
+    
+    if (data.success) {
+      return data;
+    }    
+    throw new Error("Failed to resend OTP. Please try again.");
+  } catch (error: any) {
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error("Failed to resend OTP. Please try again.");
+  }
+};
+
 export const loginUser = async (userData: FieldValues) => {
   try {
     const { data } = await axiosInstance.post("/auth/login", userData);

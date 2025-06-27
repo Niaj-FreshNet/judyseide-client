@@ -7,8 +7,8 @@ import JudyTextarea from "./JudyTextarea"
 import type { ContactFormData } from "@/src/types"
 
 import { useState } from "react"
-import { contactApi } from "@/src/services/Contact"
 import { toast } from "sonner"
+import { contactApi } from "@/src/services/Contact"
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false)

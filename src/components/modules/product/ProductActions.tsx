@@ -13,16 +13,25 @@ export default function ProductActions({
   selectedSize,
   selectedColor,
   quantity,
+  variants = [],
 }: {
   product: Product;
   variantId: string;
   selectedSize: string | null;
   selectedColor: string | null;
   quantity: number;
+  variants: { size: string; color: string; price: number; quantity: number }[]; // Adding variants to check availability
 }) {
   const { openDrawer } = useDrawerManager();
   const { addToCart } = useCart(); // Get the addToCart function from the CartContext
   const { addToWishlist } = useWishlist(); // Use the addToWishlist from WishlistContext
+
+  // Check if the selected variant (size & color) is available
+  const selectedVariant = variants.find(
+    (variant) => variant.size === selectedSize && variant.color === selectedColor
+  );
+
+  // console.log(variants)
 
   const handleAddToCart = () => {
     if (selectedSize && selectedColor) {
@@ -71,6 +80,7 @@ export default function ProductActions({
   return (
     <div className="w-full flex gap-4 mt-8">
       <button
+        disabled={!selectedVariant || selectedVariant.quantity === 0}
         className="w-2/3 bg-orange-500 hover:bg-orange-600 text-lg text-white px-6 py-4"
         onClick={handleAddToCart} // Use handleAddToCart on click
       >
@@ -78,6 +88,7 @@ export default function ProductActions({
       </button>
 
       <button
+        disabled={!selectedVariant}
         className="w-1/3 border border-orange-200 text-white px-6 py-4 flex justify-center items-center"
         onClick={handleAddToWishlist}
       >

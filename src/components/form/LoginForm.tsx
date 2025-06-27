@@ -57,13 +57,13 @@ const LoginForm = () => {
         </div>
 
         {/* Right Side - Registration Form */}
-        <div className="w-full md:w-1/2 p-12 flex justify-center items-center">
+        <div className="w-full md:w-1/2 p-2 md:p-12 flex justify-center items-center">
           <div className="w-full">
             <div className="text-center">
               <h2 className="text-4xl font-bold text-orange-500 mb-4">Login</h2>
             </div>
 
-            <div className="px-8 pt-8 pb-16  rounded-md shadow-2xl border border-gray-50 space-y-6">
+            <div className="px-4 pt-4 pb-8 md:px-8 md:pt-8 md:pb-16  rounded-md shadow-2xl border border-gray-50 space-y-6">
               {/* Form */}
               <JudyForm
                 resolver={zodResolver(loginValidationSchema)}
@@ -88,15 +88,22 @@ const LoginForm = () => {
                 </div>
               </JudyForm>
 
+              {/* Forgot Password Link */}
+              <div className="mt-4 text-center">
+                <Link href="/forgot-password" className="text-sm text-orange-500 hover:underline">
+                  Forgot Password?
+                </Link>
+              </div>
+
               {/* Divider */}
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 <div className="h-px flex-1 bg-gray-200" />
                 <span className="text-xs text-gray-600">Other log in options</span>
                 <div className="h-px flex-1 bg-gray-200" />
-              </div>
+              </div> */}
 
               {/* Social Auth Buttons */}
-              <div className="flex flex-col space-y-2">
+              {/* <div className="flex flex-col space-y-2">
                 <h1>Log In with Open Account</h1>
                 <Button
                   className="w-full rounded-md bg-white py-4 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 border-2 border-gray-200 flex items-center justify-center space-x-2"
@@ -111,7 +118,7 @@ const LoginForm = () => {
                   />
                   <span>Log In with Google</span>
                 </Button>
-              </div>
+              </div> */}
             </div>
 
             {/* Login Link */}

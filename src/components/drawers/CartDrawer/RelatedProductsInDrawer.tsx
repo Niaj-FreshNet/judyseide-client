@@ -89,7 +89,8 @@ export function RelatedProductsInDrawer() {
                       product={{
                         id: product.id,
                         name: product.name,
-                        price: product.variants?.[0]?.price ?? 0,
+                        // Get price from the first variant
+                        price: product.variants?.[0]?.price || 0,
                         imageUrl: product.imageUrl ?? "/placeholder.jpg",
                         // material: { name: product.material?.materialName },
                         // slug: product.slug || product.id, // fallback

@@ -3,14 +3,14 @@
 import JudyForm from "@/src/components/form/JudyForm";
 import JudyInput from "@/src/components/form/JudyInput";
 import { useUser } from "@/src/context/user.proider";
-import { useUserVerification } from "@/src/hooks/auth.hook";
+import { useResendOtp, useUserVerification } from "@/src/hooks/auth.hook";
 import otpValidationSchema from "@/src/schemas/otp.schema";
 import { Button } from "@heroui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 export default function EmailVerificationForm() {
@@ -21,10 +21,12 @@ export default function EmailVerificationForm() {
     const email = searchParams.get("email");
     const redirect = searchParams.get("redirect");
 
+    const [isOtpResent, setIsOtpResent] = useState(false); // State for OTP resend confirmation
+
     const { mutate: handleUserVerification, isPending, isSuccess } = useUserVerification();
+    const { mutate: resendOtp, isPending: isResendingOtp } = useResendOtp(); // Hook for resend OTP
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        // Add email to the data object
         const formData = { ...data, email };
         console.log("Form Data:", formData); // Check if email is passed correctly
 
@@ -41,6 +43,13 @@ export default function EmailVerificationForm() {
             }
         }
     }, [isPending, isSuccess]);
+
+    const handleResendOtp = () => {
+        if (email) {
+            resendOtp({ email });
+            setIsOtpResent(true); // Show confirmation that OTP is resent
+        }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center">
@@ -97,6 +106,21 @@ export default function EmailVerificationForm() {
                                     </Button>
                                 </div>
                             </JudyForm>
+
+                            {/* Resend OTP Button */}
+                            <div className="text-center mt-4">
+                                {isOtpResent ? (
+                                    <p className="text-green-500 text-sm">OTP has been resent to your email.</p>
+                                ) : (
+                                    <Button
+                                        onClick={handleResendOtp}
+                                        className="text-sm text-orange-500 hover:underline"
+                                        disabled={isResendingOtp}
+                                    >
+                                        {isResendingOtp ? "Resending..." : "Resend OTP"}
+                                    </Button>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

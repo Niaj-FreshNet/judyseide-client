@@ -25,6 +25,6 @@ export const contactApi = async (payload: ContactPayload) => {
     return await response.json()
   } catch (error) {
     console.error("Contact API error:", error)
-    throw error
-  }
+    throw error
+  }
 }

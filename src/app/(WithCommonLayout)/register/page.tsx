@@ -35,13 +35,13 @@ export default function RegisterPage() {
         </div>
 
         {/* Form Side */}
-        <div className="w-full md:w-1/2 p-6 sm:p-10 lg:p-12 flex justify-center items-center">
+        <div className="w-full md:w-1/2 p-2 md:p-12 flex justify-center items-center">
           <div className="w-full max-w-md">
             <h2 className="text-3xl sm:text-4xl font-bold text-orange-500 text-center mb-4">
               Register
             </h2>
 
-            <div className="bg-white rounded-md shadow-md px-6 py-8 space-y-6 border border-gray-50">
+            <div className="bg-white rounded-md shadow-md px-4 pt-4 pb-8 md:px-8 md:pt-8 md:pb-16 space-y-6 border border-gray-50">
               <JudyForm
                 resolver={zodResolver(registerValidationSchema)}
                 onSubmit={onSubmit}
@@ -69,14 +69,14 @@ export default function RegisterPage() {
               </JudyForm>
 
               {/* Divider */}
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 <div className="flex-1 h-px bg-gray-200" />
                 <span className="text-xs text-gray-600">Other log in options</span>
                 <div className="flex-1 h-px bg-gray-200" />
-              </div>
+              </div> */}
 
               {/* Social Auth */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Button
                   className="w-full bg-white text-sm font-medium text-gray-700 border-2 border-gray-200 hover:bg-gray-50 flex items-center justify-center space-x-2 rounded-md py-3"
                   size="sm"
@@ -90,7 +90,7 @@ export default function RegisterPage() {
                   />
                   <span>Log In with Google</span>
                 </Button>
-              </div>
+              </div> */}
             </div>
 
             {/* Login Link */}

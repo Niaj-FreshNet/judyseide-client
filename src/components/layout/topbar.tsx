@@ -16,6 +16,7 @@ import { useDrawerManager } from "../drawers/DrawerManager";
 import { getCurrentUser } from "@/src/services/AuthService";
 import { siteConfig } from "@/src/config/site";
 import LogoutButton from "../button/LogoutButton";
+import Link from "next/link";
 
 export const Topbar = () => {
   const { openDrawer } = useDrawerManager();
@@ -82,16 +83,16 @@ export const Topbar = () => {
             </NextLink>
           )}
           {isDropdownOpen && (
-            <div className="absolute top-full right-0 mt-2 w-48 bg-white shadow-lg rounded-md transform translate-y-1">
+            <div className="absolute top-full right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-[50]">
               <div className="px-4 py-2 text-sm text-gray-800 font-semibold">
                 Welcome back, {user?.name}
               </div>
-              <NextLink href="/profile">
+              <Link href="/profile">
                 <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">My Profile</div>
-              </NextLink>
-              <NextLink href="/orders">
+              </Link>
+              <Link href="/orders">
                 <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">My Orders</div>
-              </NextLink>
+              </Link>
               <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-red-500"><LogoutButton /></div>
             </div>
           )}

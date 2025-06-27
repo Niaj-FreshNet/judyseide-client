@@ -27,10 +27,6 @@ export const siteConfig = {
   ],
   topItems: [
     {
-      label: "+1234567890",
-      href: "tel:+1234567890",
-    },
-    {
       label: "Blog",
       href: "/blog",
     },

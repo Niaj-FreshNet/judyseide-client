@@ -105,6 +105,21 @@ export default function ProductInfo({
     }
   };
 
+  const selectedVariant = variants.find(
+    (variant) => variant.size === selectedSize && variant.color === selectedColor
+  );
+  // console.log("selectedVariant:", selectedVariant)
+
+  if (selectedSize && selectedColor && !selectedVariant) {
+    toast.error(`This product with ${selectedSize} size and ${selectedColor} color is not available.`, {
+      position: "top-right",
+      style: {
+        backgroundColor: "#FB923C",
+        color: "#fff",
+      },
+    });
+  }
+
   return (
     <div className="space-y-6">
       {/* Title & Price */}
@@ -169,7 +184,7 @@ export default function ProductInfo({
       {/* Quantity Input */}
       <div className="space-y-4">
         <h2 className="font-semibold text-lg">Select Quantity</h2>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-8">
           <div className="flex items-center gap-2 mt-2 p-1 border border-orange-200">
             <button
               className="w-8 h-8 text-xl leading-none"
@@ -177,7 +192,14 @@ export default function ProductInfo({
             >
               +
             </button>
-            <span className="w-6 text-center text-orange-400">{quantity}</span>
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => handleQuantityChange(e)}
+              className="w-12 text-center text-orange-400 border-none outline-none"
+              min="1"
+              max={variants.find((variant) => variant.size === selectedSize && variant.color === selectedColor)?.quantity || 0}
+            />
             <button
               className="w-8 h-8 text-xl leading-none"
               onClick={() => handleQuantityChange({ target: { value: (quantity - 1).toString() } } as React.ChangeEvent<HTMLInputElement>)}
@@ -186,14 +208,24 @@ export default function ProductInfo({
               -
             </button>
           </div>
-          <div>
-            <p className="text-sm text-red-500">
+          {/* <div
+            className={`${variants.find((variant) => variant.size === selectedSize && variant.color === selectedColor)?.quantity === 0
+              ? null
+              : "text-xl p-2 font-semibold border bg-[#FEF6F1] border-orange-200 text-red-500"
+              }`}
+          >
+            <p>
               {variants.find((variant) => variant.size === selectedSize && variant.color === selectedColor)?.quantity
                 // ? `Available: ${variants.find((variant) => variant.size === selectedSize && variant.color === selectedColor)?.quantity
-                ? ""
+                ? null
                 : "Out of stock"}
             </p>
-          </div>
+          </div> */}
+          {selectedVariant?.quantity === 0 && (
+            <p className="text-xl p-2 font-semibold text-red-500 border bg-[#FEF6F1] border-orange-200">
+              Out of stock
+            </p>
+          )}
         </div>
       </div>
 

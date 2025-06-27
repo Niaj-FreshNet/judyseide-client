@@ -1,21 +1,27 @@
-import { Product } from "@/src/types";
+import { Product, Variant } from "@/src/types";
 import Image from "next/image";
 import Link from "next/link";
 
 interface ProductCardProps {
-  product: Product;
+  product: {
+    id: string;
+    name: string;
+    price: number;  // Ensure price is passed directly
+    imageUrl: string;
+    material?: string; // Optional if you want to display material
+  };
   showAddToBag?: boolean;
 }
 
 export default function ProductCard({ product, showAddToBag }: ProductCardProps) {
   // Get the first image from the imageUrl array, or use a placeholder if empty
   const imageUrl = product.imageUrl?.[0];
-  console.log("Image URL:", imageUrl?.[0]);
+  // console.log("Image URL:", imageUrl?.[0]);
 
-  // Get the price from the first variant (if any), otherwise use a fallback
-  const price = product.variants?.[0]?.price || 0;
+  // Use the price directly from the product object
+  const price = product.price;
 
-  console.log("Productprice:", price);
+  // console.log("Productprice:", price);
 
   return (
     <Link href={`/products/${product.id}`} className="block">
@@ -39,7 +45,7 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
               className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-[#FB923C] text-white px-4 py-2 text-sm rounded-none shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               onClick={(e) => e.preventDefault()} // prevent link navigation on button click
             >
-              Add to Bag
+              View Product
             </button>
           )}
         </div>

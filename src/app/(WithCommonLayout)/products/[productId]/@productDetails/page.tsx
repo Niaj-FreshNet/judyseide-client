@@ -11,7 +11,7 @@ import ProductDetailsLoading from "../loading";
 export default function ProductDetails() {
   const { productId } = useParams(); // Get the product ID from the route
   console.log("Product ID:", productId); // Log the product ID for debugging
-  
+
   const singleProductId = Array.isArray(productId) ? productId[0] : productId; // Ensure it's a string
 
   const { product, loading, error } = useProductById(singleProductId); // Use the custom hook to fetch product data
@@ -37,7 +37,7 @@ export default function ProductDetails() {
 
   // Access the product data inside the 'data' key
   const singleProduct = product.data;
-  console.log("Single Product:", singleProduct); // Log the product data for debugging
+  // console.log("Single Product:", singleProduct); // Log the product data for debugging
 
   return (
     <div className="grid md:grid-cols-2 gap-8 mx-auto">
@@ -62,6 +62,7 @@ export default function ProductDetails() {
           selectedSize={selectedSize}
           selectedColor={selectedColor}
           quantity={quantity}
+          variants={singleProduct.variants || []}
         />
       </div>
     </div>
