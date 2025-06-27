@@ -14,8 +14,6 @@ export const createCheckoutSession = async (requestData: any) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'Authorization': ` ${token}` // ✅ Correct format
-                'Accept': 'application/json',
-                'Authorization': ` ${token}` // ✅ Correct format
             },
             body: JSON.stringify(requestData),
         });

@@ -6,20 +6,28 @@ interface ProductCardProps {
   product: {
     id: string;
     name: string;
-    price: number;  // Ensure price is passed directly
-    imageUrl: string;
-    material?: string; // Optional if you want to display material
+    price: number; // Optional, not used in render
+    imageUrl: string[];
+    material?: {
+      materialName: string;
+    };
+    variants: {
+      price: number;
+      color: string;
+      size: string;
+    }[]; // ← Properly typed as an array of variant objects
   };
   showAddToBag?: boolean;
 }
 
 export default function ProductCard({ product, showAddToBag }: ProductCardProps) {
   // Get the first image from the imageUrl array, or use a placeholder if empty
-  const imageUrl = product.imageUrl?.[0];
+  const imageUrl = product.imageUrl?.[0] || "/placeholder.png"; // 👈 Add a local fallback
+
   // console.log("Image URL:", imageUrl?.[0]);
 
   // Use the price directly from the product object
-  const price = product.price;
+  const price = product?.variants[0]?.price;
 
   // console.log("Productprice:", price);
 
@@ -35,11 +43,13 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
         <div className="relative overflow-hidden bg-gray-100">
           <Image
             alt={product.name}
-            src={imageUrl}  // Ensure relative paths have a leading slash
+            src={imageUrl}
+            unoptimized // 👈 skip loader for testing
             className="w-full h-64 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
             width={1200}
             height={600}
           />
+
           {showAddToBag && (
             <button
               className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-[#FB923C] text-white px-4 py-2 text-sm rounded-none shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"

@@ -29,7 +29,8 @@ export default function TrendingProductsClient({
     emblaApi.on("select", onSelect);
     onSelect();
   }, [emblaApi]);
-  // console.log("Trending:", products);
+  
+  console.log("Trending:", products);
 
   return (
     <Container>
