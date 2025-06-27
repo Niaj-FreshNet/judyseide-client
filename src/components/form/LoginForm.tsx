@@ -63,7 +63,7 @@ const LoginForm = () => {
               <h2 className="text-4xl font-bold text-orange-500 mb-4">Login</h2>
             </div>
 
-            <div className="px-4 pt-4 pb-8 md:px-8 md:pt-8 md:pb-16  rounded-md shadow-2xl border border-gray-50 space-y-6">
+            <div className="px-4 pt-4 pb-8 md:px-8 md:pt-8 md:pb-16  rounded-md shadow-md border border-gray-50 space-y-6">
               {/* Form */}
               <JudyForm
                 resolver={zodResolver(loginValidationSchema)}

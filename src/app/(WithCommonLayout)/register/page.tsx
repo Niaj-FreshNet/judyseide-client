@@ -22,9 +22,9 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="flex flex-col md:flex-row w-full max-w-5xl bg-white border border-gray-100 rounded-md shadow-lg overflow-hidden">
-        
+
         {/* Image Side */}
-        <div className="w-full md:w-1/2 h-64 md:h-auto">
+        {/* <div className="w-full md:w-1/2 h-64 md:h-auto">
           <Image
             alt="Registration Illustration"
             className="object-cover w-full h-full"
@@ -32,6 +32,19 @@ export default function RegisterPage() {
             width={1024}
             height={1024}
           />
+        </div> */}
+        <div className="hidden md:block md:w-1/2 border-r-2">
+          <div className="h-full flex items-center justify-center p-10">
+            <div className="text-white text-center">
+              <Image
+                alt="Registration Illustration"
+                className="object-cover w-full h-full"
+                src="/products/bracelet.jpg"
+                width={1024}
+                height={1024}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Form Side */}

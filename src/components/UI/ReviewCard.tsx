@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Star, UserIcon } from "lucide-react";
 
 interface ReviewCardProps {

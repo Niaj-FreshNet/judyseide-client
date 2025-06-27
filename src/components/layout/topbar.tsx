@@ -7,6 +7,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@heroui/navbar";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/dropdown";
 import NextLink from "next/link";
 import { link as linkStyles } from "@heroui/theme";
 import clsx from "clsx";
@@ -17,11 +18,11 @@ import { getCurrentUser } from "@/src/services/AuthService";
 import { siteConfig } from "@/src/config/site";
 import LogoutButton from "../button/LogoutButton";
 import Link from "next/link";
+import { Button } from "@heroui/button";
 
 export const Topbar = () => {
   const { openDrawer } = useDrawerManager();
   const [user, setUser] = useState<any>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // To toggle the dropdown
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -32,11 +33,9 @@ export const Topbar = () => {
     fetchUser();
   }, []);
 
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
   return (
     <HeroUINavbar
-      className="relative max-w-screen-2xl mx-auto top-0 z-[40] px-2 lg:px-24 pt-2 pb-4 shadow-sm overflow-visible"
+      className="relative max-w-screen-2xl mx-auto top-0 px-2 lg:px-12 xl:px-24 pt-2 pb-4 shadow-sm overflow-visible"
       maxWidth="full"
       position="sticky"
     >
@@ -71,31 +70,39 @@ export const Topbar = () => {
             <ShoppingBagIcon />
           </NextLink>
         </NavbarItem>
-        <NavbarItem
-          className="cursor-pointer hover:text-gray-600 relative"
-          onClick={toggleDropdown}
-        >
-          {user ? (
-            <span>{user.name}</span> // Display user's name
-          ) : (
-            <NextLink href="/login">
-              <User />
-            </NextLink>
-          )}
-          {isDropdownOpen && (
-            <div className="absolute top-full right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-[50]">
-              <div className="px-4 py-2 text-sm text-gray-800 font-semibold">
-                Welcome back, {user?.name}
-              </div>
-              <Link href="/profile">
-                <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">My Profile</div>
-              </Link>
-              <Link href="/orders">
-                <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">My Orders</div>
-              </Link>
-              <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-red-500"><LogoutButton /></div>
-            </div>
-          )}
+        <NavbarItem className="cursor-pointer hover:text-gray-600 relative z-[90]">
+          <Dropdown>
+            <DropdownTrigger>
+              <button className="bg-none rounded-none font-semibold">
+                {user ? user.name : <User />}
+              </button>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="User Actions">
+              {user ? (
+                <>
+                  <DropdownItem key="profile">
+                    <a href="https://judy-seide-dashboard.vercel.app/dashboard">
+                      My Profile
+                    </a>
+                  </DropdownItem>
+                  <DropdownItem key="orders">
+                    <a href="https://judy-seide-dashboard.vercel.app/dashboard/order-list">
+                      My Orders
+                    </a>
+                  </DropdownItem>
+                  <DropdownItem key="logout" className="text-danger" color="danger">
+                    <LogoutButton />
+                  </DropdownItem>
+                </>
+              ) : (
+                <DropdownItem key="login">
+                  <Link href="/login">
+                    <p className="font-semibold">Sign in</p>
+                  </Link>
+                </DropdownItem>
+              )}
+            </DropdownMenu>
+          </Dropdown>
         </NavbarItem>
       </NavbarContent>
 
@@ -111,33 +118,39 @@ export const Topbar = () => {
             <ShoppingBagIcon />
           </NextLink>
         </NavbarItem>
-        <NavbarItem
-          className="cursor-pointer hover:text-gray-600 relative"
-          onClick={toggleDropdown}
-        >
-          {user ? (
-            <span>{user.name}</span> // Display user's name on mobile too
-          ) : (
-            <NextLink href="/login">
-              <User />
-            </NextLink>
-          )}
-          {isDropdownOpen && (
-            <div className="absolute top-full right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-50 transform translate-y-1">
-              <div className="px-4 py-2 text-sm text-gray-800 font-semibold">
-                Welcome back, {user?.name}
-              </div>
-              <NextLink href="/profile">
-                <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">My Profile</div>
-              </NextLink>
-              <NextLink href="/orders">
-                <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer">My Orders</div>
-              </NextLink>
-              <NextLink href="/logout">
-                <div className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-red-500">Sign Out</div>
-              </NextLink>
-            </div>
-          )}
+        <NavbarItem className="cursor-pointer hover:text-gray-600 relative">
+          <Dropdown>
+            <DropdownTrigger>
+              <button className="bg-none rounded-none font-semibold">
+                {user ? user.name : <User />}
+              </button>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="User Actions">
+              {user ? (
+                <>
+                  <DropdownItem key="profile">
+                    <a href="https://judy-seide-dashboard.vercel.app/dashboard">
+                      My Profile
+                    </a>
+                  </DropdownItem>
+                  <DropdownItem key="orders">
+                    <a href="https://judy-seide-dashboard.vercel.app/dashboard/order-list">
+                      My Orders
+                    </a>
+                  </DropdownItem>
+                  <DropdownItem key="logout" className="text-danger" color="danger">
+                    <LogoutButton />
+                  </DropdownItem>
+                </>
+              ) : (
+                <DropdownItem key="login">
+                  <Link href="/login">
+                    <p className="font-semibold">Sign in</p>
+                  </Link>
+                </DropdownItem>
+              )}
+            </DropdownMenu>
+          </Dropdown>
         </NavbarItem>
       </NavbarContent>
 

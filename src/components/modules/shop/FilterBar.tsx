@@ -54,12 +54,12 @@ export default function FilterBar({
   };
 
   return (
-    <div className="w-full flex justify-between items-center mb-8">
-      <div className="flex flex-grow gap-4 lg:gap-6">
+    <div className="w-full flex justify-between items-center mb-8 ml-0 lg:ml-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-4">
         {categories.map((label) => (
           <button
             key={label}
-            className={`px-4 py-2 border rounded-none text-lg transition
+            className={`px-2 py-2 border rounded-none text-center text-md transition
               ${selectedCategory.toLowerCase() === label.toLowerCase()
                 ? "border-orange-300 bg-orange-400 text-white"
                 : "border-orange-200 text-default-900 hover:bg-gray-100"
@@ -73,9 +73,9 @@ export default function FilterBar({
         ))}
       </div>
 
-      <div className="flex">
+      <div className="hidden lg:flex lg:ml-4">
         <select
-          className="border border-orange-200 rounded-none px-4 py-2 text-lg text-default-900 bg-white cursor-pointer shadow-sm hover:border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-200"
+          className="border border-orange-200 rounded-none px-4 py-2 text-md text-default-900 bg-white cursor-pointer shadow-sm hover:border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-200"
           value={selectedSort}
           onChange={(e) => handleSortChange(e.target.value)}
         >

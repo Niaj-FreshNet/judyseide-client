@@ -64,6 +64,8 @@ export const useUserLogin = () => {
 
       // Optionally, you can store the name in cookies (if needed for persistent session)
       document.cookie = `userName=${name}; path=/`;
+      
+      window.location.reload();
     },
     onError: (error) => {
       toast.error(error.message);

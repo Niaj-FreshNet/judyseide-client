@@ -1,19 +1,9 @@
-
 import { ReactNode } from "react";
 
-import Container from "@/src/components/UI/Container";
-
-export default function layout({
-  children,
-  
-}: {
-  children: ReactNode;
- 
-}) {
+export default function layout({ children }: { children: ReactNode }) {
   return (
-    <Container className="pt-8">
-     
-      {children}
-    </Container>
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-1 w-full max-w-full mx-auto">{children}</main>
+    </div>
   );
 }
