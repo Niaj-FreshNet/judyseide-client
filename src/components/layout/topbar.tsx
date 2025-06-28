@@ -22,28 +22,6 @@ import Link from "next/link";
 export const Topbar = () => {
   const { openDrawer } = useDrawerManager();
   const [user, setUser] = useState<any>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Access cookies from document.cookie on the client side
-    const cookieValue = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("accessToken="))?.split("=")[1];
-
-    setAccessToken(cookieValue ?? null); // If cookieValue is undefined, set it to null
-
-    // Fetch user info if accessToken exists
-    if (cookieValue) {
-      const fetchUser = async () => {
-        const currentUser = await getCurrentUser(); // Your function to fetch the current user
-        setUser(currentUser);
-      };
-      fetchUser();
-    }
-  }, []);
-
-  // Construct the URL with the accessToken as a query parameter
-  const dashboardUrl = accessToken ? `https://judy-seide-dashboard.vercel.app?token=${accessToken}` : "/login";
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -53,6 +31,10 @@ export const Topbar = () => {
 
     fetchUser();
   }, []);
+
+  const dashboardUrl = user?.role === "ADMIN"
+    ? "https://judy-seide-dashboard.vercel.app/admin"
+    : "/profile";
 
   return (
     <HeroUINavbar
