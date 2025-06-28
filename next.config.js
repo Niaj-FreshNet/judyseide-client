@@ -3,14 +3,14 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: true,  // This will skip type checks during the build, but it’s not recommended in production
+    ignoreBuildErrors: true, // ⚠️ Only in dev, not recommended in prod
   },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'nyc3.digitaloceanspaces.com',
-        pathname: '',
+        pathname: '**', // ✅ Correct wildcard pattern
       },
       {
         protocol: 'https',
@@ -18,14 +18,15 @@ module.exports = {
         pathname: '**',
       },
       {
-        protocol: 'http', // Allow HTTP protocol for api.judy-seide.code-commando.com
+        protocol: 'http',
         hostname: 'api.judy-seide.code-commando.com',
         pathname: '**',
       },
       {
-        protocol: 'http', // Allow HTTP protocol for localhost
+        protocol: 'http',
         hostname: 'localhost',
-        port: '3000', // Specify the port your local server is running on
+        port: '3000',
+        pathname: '**', // ✅ You also need pathname here
       },
     ],
   },
