@@ -5,7 +5,6 @@ import { Table, Tag, Button, Tooltip } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 
-
 import UserInvoice from "@/src/components/userInvoice/UserInvoice";
 import { getUserOrders } from "@/src/services/UserDashboard";
 import { useUser } from "@/src/context/user.proider";
@@ -44,10 +43,13 @@ interface Order {
 const UserOrderList = () => {
   const router = useRouter();
   const { user, isLoading: isUserLoading } = useUser();
-  console.log('user data', user);
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [meta, setMeta] = useState<any>({});
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: 0,
+  });
   const [hasMounted, setHasMounted] = useState(false);
 
   // Set mounted state to avoid hydration issues
@@ -55,16 +57,7 @@ const UserOrderList = () => {
     setHasMounted(true);
   }, []);
 
-  // Debugging logs - only run on client side
-  useEffect(() => {
-    if (hasMounted) {
-      console.log("Current user state:", user);
-      console.log("Current orders state:", orders);
-      console.log("Current meta state:", meta);
-    }
-  }, [user, orders, meta, hasMounted]);
-
-  // Fetch orders when user is available
+  // Fetch orders when user or pagination changes
   useEffect(() => {
     const fetchOrders = async () => {
       if (!hasMounted || !user?._id || isUserLoading) {
@@ -72,19 +65,21 @@ const UserOrderList = () => {
         return;
       }
       
-      console.log("Starting to fetch orders for user ID:", user._id);
       setIsLoading(true);
       
       try {
-        const response = await getUserOrders(user._id);
-        console.log("Full API response:", response);
+        const response = await getUserOrders(
+          user._id, 
+          pagination.current, 
+          pagination.pageSize
+        );
         
         if (response?.success) {
-          console.log("Orders data:", response.Data?.data);
-          console.log("Meta data:", response.Data?.meta);
-          
           setOrders(response.Data?.data || []);
-          setMeta(response.Data?.meta || {});
+          setPagination(prev => ({
+            ...prev,
+            total: response.Data?.meta?.total || 0,
+          }));
           
           if (!response.Data?.data || response.Data.data.length === 0) {
             console.log("No orders found for this user");
@@ -99,12 +94,19 @@ const UserOrderList = () => {
         console.error("Error fetching orders:", error);
       } finally {
         setIsLoading(false);
-        console.log("Finished loading orders");
       }
     };
 
     fetchOrders();
-  }, [user, hasMounted, isUserLoading]);
+  }, [user, hasMounted, isUserLoading, pagination.current, pagination.pageSize]);
+
+  const handleTableChange = (newPagination: any) => {
+    setPagination({
+      current: newPagination.current,
+      pageSize: newPagination.pageSize,
+      total: newPagination.total,
+    });
+  };
 
   const columns = [
     {
@@ -147,7 +149,7 @@ const UserOrderList = () => {
       title: "Amount",
       dataIndex: "amount",
       key: "amount",
-      render: (amount: number) => amount ? `$${amount}` : "$0",
+      render: (amount: number) => amount ? `$${amount.toFixed(2)}` : "$0.00",
     },
     {
       title: "Status",
@@ -160,6 +162,7 @@ const UserOrderList = () => {
         if (status === "DELIVERED") color = "green";
         else if (status === "CANCELED") color = "red";
         else if (status === "PROCESSING") color = "orange";
+        else if (status === "PENDING") color = "gold";
         
         return <Tag color={color}>{status}</Tag>;
       },
@@ -192,34 +195,46 @@ const UserOrderList = () => {
   ];
 
   if (!hasMounted || isUserLoading) {
-    return <div>Loading user data...</div>;
+    return (
+      <Container>
+        <div style={{ padding: 20, textAlign: "center" }}>Loading user data...</div>
+      </Container>
+    );
   }
 
   if (!user) {
-    return <div>Please login to view your orders</div>;
+    return (
+      <Container>
+        <div style={{ padding: 20, textAlign: "center" }}>Please login to view your orders</div>
+      </Container>
+    );
   }
 
   return (
-    <Container >
-    <div style={{ padding: 20 }}>
-      <Table
-        columns={columns}
-        dataSource={orders}
-        rowKey={(record) => record.id}
-        loading={isLoading}
-        pagination={{
-          current: meta?.page || 1,
-          pageSize: meta?.limit || 10,
-          total: meta?.total || 0,
-          showTotal: (total) => `Total ${total} orders`,
-        }}
-        bordered
-        scroll={{ x: true }}
-        locale={{
-          emptyText: isLoading ? "Loading orders..." : "No orders found"
-        }}
-      />
-    </div>
+    <Container>
+      <div style={{ padding: 20 }}>
+        <Table
+          columns={columns}
+          dataSource={orders}
+          rowKey={(record) => record.id}
+          loading={isLoading}
+          pagination={{
+            current: pagination.current,
+            pageSize: pagination.pageSize,
+            total: pagination.total,
+            showSizeChanger: true,
+            pageSizeOptions: ['10', '20', '50'],
+            showTotal: (total, range) => 
+              `${range[0]}-${range[1]} of ${total} orders`,
+          }}
+          onChange={handleTableChange}
+          bordered
+          scroll={{ x: true }}
+          locale={{
+            emptyText: isLoading ? "Loading orders..." : "No orders found"
+          }}
+        />
+      </div>
     </Container>
   );
 };
