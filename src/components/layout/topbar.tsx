@@ -18,11 +18,32 @@ import { getCurrentUser } from "@/src/services/AuthService";
 import { siteConfig } from "@/src/config/site";
 import LogoutButton from "../button/LogoutButton";
 import Link from "next/link";
-import { Button } from "@heroui/button";
 
 export const Topbar = () => {
   const { openDrawer } = useDrawerManager();
   const [user, setUser] = useState<any>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Access cookies from document.cookie on the client side
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("accessToken="))?.split("=")[1];
+
+    setAccessToken(cookieValue ?? null); // If cookieValue is undefined, set it to null
+
+    // Fetch user info if accessToken exists
+    if (cookieValue) {
+      const fetchUser = async () => {
+        const currentUser = await getCurrentUser(); // Your function to fetch the current user
+        setUser(currentUser);
+      };
+      fetchUser();
+    }
+  }, []);
+
+  // Construct the URL with the accessToken as a query parameter
+  const dashboardUrl = accessToken ? `https://judy-seide-dashboard.vercel.app?token=${accessToken}` : "/login";
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -81,12 +102,12 @@ export const Topbar = () => {
               {user ? (
                 <>
                   <DropdownItem key="profile">
-                    <a href="https://judy-seide-dashboard.vercel.app/dashboard">
+                    <a href={dashboardUrl}>
                       My Profile
                     </a>
                   </DropdownItem>
                   <DropdownItem key="orders">
-                    <a href="https://judy-seide-dashboard.vercel.app/dashboard/order-list">
+                    <a href={dashboardUrl}>
                       My Orders
                     </a>
                   </DropdownItem>
@@ -96,7 +117,7 @@ export const Topbar = () => {
                 </>
               ) : (
                 <DropdownItem key="login">
-                  <Link href="/login">
+                  <Link href={dashboardUrl}>
                     <p className="font-semibold">Sign in</p>
                   </Link>
                 </DropdownItem>
@@ -129,12 +150,20 @@ export const Topbar = () => {
               {user ? (
                 <>
                   <DropdownItem key="profile">
+<<<<<<< HEAD
                     <a href="http://localhost:5173/dashboard">
+=======
+                    <a href={dashboardUrl}>
+>>>>>>> 8588c506162005d758a1177405797671b4ada8ae
                       My Profile
                     </a>
                   </DropdownItem>
                   <DropdownItem key="orders">
+<<<<<<< HEAD
                     <a href="http://localhost:5173/dashboard/order-list">
+=======
+                    <a href={dashboardUrl}>
+>>>>>>> 8588c506162005d758a1177405797671b4ada8ae
                       My Orders
                     </a>
                   </DropdownItem>
@@ -144,7 +173,7 @@ export const Topbar = () => {
                 </>
               ) : (
                 <DropdownItem key="login">
-                  <Link href="/login">
+                  <Link href={dashboardUrl}>
                     <p className="font-semibold">Sign in</p>
                   </Link>
                 </DropdownItem>
