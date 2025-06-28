@@ -22,28 +22,6 @@ import Link from "next/link";
 export const Topbar = () => {
   const { openDrawer } = useDrawerManager();
   const [user, setUser] = useState<any>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Access cookies from document.cookie on the client side
-    const cookieValue = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("accessToken="))?.split("=")[1];
-
-    setAccessToken(cookieValue ?? null); // If cookieValue is undefined, set it to null
-
-    // Fetch user info if accessToken exists
-    if (cookieValue) {
-      const fetchUser = async () => {
-        const currentUser = await getCurrentUser(); // Your function to fetch the current user
-        setUser(currentUser);
-      };
-      fetchUser();
-    }
-  }, []);
-
-  // Construct the URL with the accessToken as a query parameter
-  const dashboardUrl = accessToken ? `http://localhost:5173?token=${accessToken}` : "/login";
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -53,6 +31,14 @@ export const Topbar = () => {
 
     fetchUser();
   }, []);
+
+  const profileUrl = user?.role === "ADMIN"
+    ? "https://judy-seide-dashboard.vercel.app/admin"
+    : "/profile";
+
+    const orderUrl = user?.role === "ADMIN"
+    ? "https://judy-seide-dashboard.vercel.app/admin"
+    : "/order";
 
   return (
     <HeroUINavbar
@@ -102,12 +88,12 @@ export const Topbar = () => {
               {user ? (
                 <>
                   <DropdownItem key="profile">
-                    <a href={dashboardUrl}>
+                    <a href={profileUrl}>
                       My Profile
                     </a>
                   </DropdownItem>
                   <DropdownItem key="orders">
-                    <a href={dashboardUrl}>
+                    <a href={orderUrl}>
                       My Orders
                     </a>
                   </DropdownItem>
@@ -117,7 +103,7 @@ export const Topbar = () => {
                 </>
               ) : (
                 <DropdownItem key="login">
-                  <Link href={dashboardUrl}>
+                  <Link href={profileUrl}>
                     <p className="font-semibold">Sign in</p>
                   </Link>
                 </DropdownItem>
@@ -150,12 +136,12 @@ export const Topbar = () => {
               {user ? (
                 <>
                   <DropdownItem key="profile">
-                    <a href={dashboardUrl}>
+                    <a href={profileUrl}>
                       My Profile
                     </a>
                   </DropdownItem>
                   <DropdownItem key="orders">
-                    <a href={dashboardUrl}>
+                    <a href={orderUrl}>
                       My Orders
                     </a>
                   </DropdownItem>
@@ -165,7 +151,7 @@ export const Topbar = () => {
                 </>
               ) : (
                 <DropdownItem key="login">
-                  <Link href={dashboardUrl}>
+                  <Link href={profileUrl}>
                     <p className="font-semibold">Sign in</p>
                   </Link>
                 </DropdownItem>
