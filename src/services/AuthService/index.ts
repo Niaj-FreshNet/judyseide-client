@@ -97,27 +97,31 @@ export const logout = async () => {
 
 export const getCurrentUser = async () => {
   const cookieStore = await cookies();
-
-  const userName = cookieStore.get("userName")?.value;
-  const userImg = cookieStore.get("imageUrl")?.value;
-
   const accessToken = cookieStore.get("accessToken")?.value;
 
-  let decodedToken = null;
+  if (!accessToken) return null;
 
-  if (accessToken) {
-    decodedToken = await jwtDecode(accessToken);
+  try {
+    const decodedToken = jwtDecode(accessToken) as {
+      userId: string;
+      email: string;
+      mobileNumber?: string;
+      role: string;
+      status: string;
+      // Add other claims you expect in the token
+    };
 
     return {
-      _id: decodedToken._id,
-      name: userName,
+      _id: decodedToken.userId,
+      name: cookieStore.get("userName")?.value,
       email: decodedToken.email,
       mobileNumber: decodedToken.mobileNumber,
       role: decodedToken.role,
       status: decodedToken.status,
-      profilePhoto: userImg,
+      profilePhoto: cookieStore.get("userImg")?.value,
     };
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null;
   }
-
-  return decodedToken;
 };

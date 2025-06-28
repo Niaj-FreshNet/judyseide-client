@@ -75,3 +75,54 @@ export const updateProfile = async (body: FormData) => {
     throw error; // Throw error to handle in component
   }
 };
+
+
+// Fetch all orders for a specific user
+export const getUserOrders = async (id: string) => {
+  const token = Cookies.get("accessToken");
+
+  try {
+    const res = await fetch(`${envConfig.baseApi}/order/get-user-orders/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": ` ${token}`, // Add token for protected route
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch user orders: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching user orders:", error);
+    return null;
+  }
+};
+
+// Fetch order details for a specific order ID
+export const getUserOrderDetails = async (id: string) => {
+  const token = Cookies.get("accessToken");
+
+  try {
+    const res = await fetch(`${envConfig.baseApi}/order/my-orders/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": ` ${token}`, // Token is necessary
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch order details: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching order details:", error);
+    return null;
+  }
+};
