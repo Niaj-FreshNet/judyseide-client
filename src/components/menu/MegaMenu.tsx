@@ -10,6 +10,12 @@ export const MegaMenu = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    // trendingProducts.map((product, index) => (
+    //                                 <Link href={`/products/${}`} key={index} className="hover:underline cursor-pointer">
+    //                                     {product}
+    //                                 </Link>
+    //                             ))
+
     // Fetch the trending products on component mount
     useEffect(() => {
         const fetchTrendingProducts = async () => {
@@ -28,6 +34,8 @@ export const MegaMenu = () => {
 
     // Loading or error state
     if (error) return <div>{error}</div>;
+
+    console.log("trendingProducts", trendingProducts)
 
     return (
         <div className="absolute top-full -left-96 bg-[#FEF6F1] py-10 px-8 shadow-xl z-[99]">
@@ -72,9 +80,9 @@ export const MegaMenu = () => {
                                 </div>
                             ) : (
                                 // Actual trending products list
-                                trendingProducts.map((product, index) => (
-                                    <li key={index} className="hover:underline cursor-pointer">
-                                        {product}
+                                trendingProducts.map((product: { id: number, name: string }, index) => (
+                                    <li key={product.id} className="hover:underline cursor-pointer">
+                                        <Link href={`/products/${product.id}`}>{product.name}</Link>
                                     </li>
                                 ))
                             )}
