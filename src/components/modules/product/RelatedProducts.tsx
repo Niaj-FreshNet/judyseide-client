@@ -36,7 +36,7 @@ export default function RelatedProducts() {
 
   const relatedProducts = product?.data?.relatedProducts || [];
 
-  console.log("Related Products:", relatedProducts); // Debugging log
+  // console.log("Related Products:", relatedProducts); // Debugging log
 
   return (
     <div className="flex flex-col gap-6 -mt-12">

@@ -84,7 +84,7 @@ const UserProfile: React.FC = () => {
       }
 
       const updatedProfile = await updateProfile(formData);
-      
+
       if (updatedProfile) {
         toast.success("Profile updated successfully!");
         setIsModalVisible(false);
@@ -121,18 +121,18 @@ const UserProfile: React.FC = () => {
     <Container>
       <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto">
         {/* Profile Header Card */}
-        <Card 
-          bordered={false} 
+        <Card
+          bordered={false}
           className="mb-6 sm:mb-8 shadow-none"
         >
-          <Row 
-            align="middle" 
-            gutter={[16, 16]} 
+          <Row
+            align="middle"
+            gutter={[16, 16]}
             className="flex-col sm:flex-row"
           >
             <Col flex="none">
-              <Avatar 
-                src={profileData?.imageUrl || "/default-avatar.png"} 
+              <Avatar
+                src={profileData?.imageUrl || "/default-avatar.png"}
                 size={{ xs: 64, sm: 76 }}
                 className="border border-gray-200"
               />
@@ -197,9 +197,9 @@ const UserProfile: React.FC = () => {
           title={
             <div className="flex justify-between items-center pr-6">
               <span className="text-orange-400 text-lg font-normal">Edit Profile</span>
-              <CloseOutlined 
-                onClick={handleCancel} 
-                className="text-orange-400 text-base cursor-pointer" 
+              <CloseOutlined
+                onClick={handleCancel}
+                className="text-orange-400 text-base cursor-pointer"
               />
             </div>
           }
@@ -228,7 +228,7 @@ const UserProfile: React.FC = () => {
               />
             </Form.Item>
 
-            <Form.Item label={<span className="text-base font-normal text-black">Image</span>}>
+            <Form.Item label={<span className="text-base font-normal text-black">Upload Image</span>}>
               <Upload.Dragger
                 {...uploadProps}
                 className="border-orange-400 rounded bg-gray-50 py-10 px-5"
@@ -273,6 +273,7 @@ const UserProfile: React.FC = () => {
               ]}
             >
               <Input
+                readOnly
                 placeholder="admin@email.com"
                 className="h-11 rounded border-orange-400 text-sm"
               />

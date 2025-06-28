@@ -35,8 +35,6 @@ export const MegaMenu = () => {
     // Loading or error state
     if (error) return <div>{error}</div>;
 
-    console.log("trendingProducts", trendingProducts)
-
     return (
         <div className="absolute top-full -left-96 bg-[#FEF6F1] py-10 px-8 shadow-xl z-[99]">
             <div className="w-full max-w-screen-2xl mx-auto my-auto flex flex-row gap-4 justify-center items-start inset-x-0">

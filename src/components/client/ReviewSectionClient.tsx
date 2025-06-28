@@ -35,8 +35,6 @@ export default function ReviewSectionClient({ reviews }: { reviews: Review[] }) 
     onSelect();
   }, [emblaApi]);
 
-  console.log("reviews:", reviews)
-
   return (
     <Container>
       <div className="flex flex-col gap-6">

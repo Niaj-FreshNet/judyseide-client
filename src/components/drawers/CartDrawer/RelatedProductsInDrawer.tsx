@@ -44,8 +44,6 @@ export function RelatedProductsInDrawer() {
     fetchProducts();
   }, []);
 
-  console.log("Related Products:", products);
-
   return (
     <div className="w-full mx-auto pt-4 flex-grow">
       <div className="flex flex-col gap-6">

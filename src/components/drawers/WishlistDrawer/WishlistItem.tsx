@@ -1,5 +1,8 @@
+'use client';
+
 import Image from "next/image";
-import { useWishlist } from "@/src/context/wishlist.context";
+import { removeFromWishlist } from "@/src/services/Wishlist";
+import { useState } from "react";
 
 interface WishlistItemProps {
   id: string;
@@ -22,10 +25,14 @@ export default function WishlistItem({
   size,
   variantId,
 }: WishlistItemProps) {
-  const { removeFromWishlist } = useWishlist();
+  const [wishlistItems, setWishlistItems] = useState<any[]>([]); // State to store wishlist items
 
-  const handleRemove = () => {
-    removeFromWishlist(id, variantId); // Remove item from wishlist
+  const handleRemove = async () => {
+    const removedItem = await removeFromWishlist(id); // Call the remove API
+    if (removedItem) {
+      // If the item is removed successfully, update the state to remove it from the UI
+      setWishlistItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    }
   };
 
   const handleMoveToBag = () => {

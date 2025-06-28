@@ -4,8 +4,8 @@ import { HeartIcon } from "lucide-react";
 import { useDrawerManager } from "../../drawers/DrawerManager";
 import { useCart } from "@/src/context/cart.context";
 import { Product } from "@/src/types";
-import { useWishlist } from "@/src/context/wishlist.context";
 import { toast } from "sonner";
+import { addToWishlist } from "@/src/services/Wishlist";
 
 export default function ProductActions({
   product,
@@ -24,7 +24,6 @@ export default function ProductActions({
 }) {
   const { openDrawer } = useDrawerManager();
   const { addToCart } = useCart(); // Get the addToCart function from the CartContext
-  const { addToWishlist } = useWishlist(); // Use the addToWishlist from WishlistContext
 
   // Check if the selected variant (size & color) is available
   const selectedVariant = variants.find(
@@ -55,17 +54,28 @@ export default function ProductActions({
     }
   };
 
-  const handleAddToWishlist = () => {
+  const handleAddToWishlist = async () => {
     if (selectedSize && selectedColor) {
-      toast.success("Item added to wishlist!", {
-        position: "top-center",
-        style: {
-          backgroundColor: "#FB923C",
-          color: "#fff",
-        }
-      });
-      addToWishlist(product, variantId); // Add to wishlist without quantity
-      openDrawer("wishlist"); // Optionally open the wishlist drawer
+      try {
+        // Add to wishlist using the API function
+        await addToWishlist(variantId); // Pass the variantId to the API function
+        toast.success("Item added to wishlist!", {
+          position: "top-center",
+          style: {
+            backgroundColor: "#FB923C",
+            color: "#fff",
+          }
+        });
+        openDrawer("wishlist");
+      } catch (error) {
+        toast.error("Failed to add item to wishlist.", {
+          position: "top-right",
+          style: {
+            backgroundColor: "#FB923C",
+            color: "#fff",
+          }
+        });
+      }
     } else {
       toast.error("Please select size and color.", {
         position: "top-right",

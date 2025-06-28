@@ -15,7 +15,7 @@ export default function ProductReviews() {
   const singleProductId = Array.isArray(productId) ? productId[0] : productId;
 
   const { product, loading, error } = useProductById(singleProductId);
-  console.log("Product Data: reviews", product); // Debugging log
+  // console.log("Product Data: reviews", product); // Debugging log
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -37,7 +37,7 @@ export default function ProductReviews() {
   }, [emblaApi]);
 
   const goodReviews = product?.data?.goodReviews || [];
-  console.log("Good Reviews:", goodReviews); // Debugging log
+  // console.log("Good Reviews:", goodReviews); // Debugging log
 
   return (
     <div className="flex flex-col gap-6">
