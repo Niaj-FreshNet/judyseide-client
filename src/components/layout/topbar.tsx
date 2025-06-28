@@ -43,7 +43,7 @@ export const Topbar = () => {
   }, []);
 
   // Construct the URL with the accessToken as a query parameter
-  const dashboardUrl = accessToken ? `https://judy-seide-dashboard.vercel.app?token=${accessToken}` : "/login";
+  const dashboardUrl = accessToken ? `http://localhost:5173?token=${accessToken}` : "/login";
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -150,20 +150,12 @@ export const Topbar = () => {
               {user ? (
                 <>
                   <DropdownItem key="profile">
-<<<<<<< HEAD
-                    <a href="http://localhost:5173/dashboard">
-=======
                     <a href={dashboardUrl}>
->>>>>>> 8588c506162005d758a1177405797671b4ada8ae
                       My Profile
                     </a>
                   </DropdownItem>
                   <DropdownItem key="orders">
-<<<<<<< HEAD
-                    <a href="http://localhost:5173/dashboard/order-list">
-=======
                     <a href={dashboardUrl}>
->>>>>>> 8588c506162005d758a1177405797671b4ada8ae
                       My Orders
                     </a>
                   </DropdownItem>
