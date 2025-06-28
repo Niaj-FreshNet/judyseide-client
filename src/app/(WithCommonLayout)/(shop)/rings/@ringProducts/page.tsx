@@ -62,16 +62,16 @@ export default function Page({ allProducts }: AllProductsClientProps) {
   return (
     <>
       <div className="w-full flex">
-        <div className="w-1/6">
+        <div className="w-1/6 hidden lg:flex mb-8">
           <button
-            className={`mr-0 border px-4 py-2 rounded-none text-lg transition
+            className={`mr-0 border px-4 py-2 rounded-none text-md transition
     ${showAllFilters
                 ? "border-orange-400 bg-orange-500 text-white"
                 : "border-orange-200 text-default-900 hover:bg-gray-100"
               }`}
             onClick={toggleAllFilters} // Toggle the visibility of the filter options
           >
-            <div className="flex items-center">
+            <div className="flex items-center text-md">
               <span className="mr-2">All Filter</span>
               <span className="ml-1 text-gray-200 font-medium">
                 <SlidersHorizontal size={20} />
@@ -80,7 +80,7 @@ export default function Page({ allProducts }: AllProductsClientProps) {
           </button>
         </div>
         {/* Filter Bar remains static, unaffected by loading state */}
-        <div className="w-full -ml-8">
+        <div className="w-full">
           <FilterBar
             selectedCategory={filters.categoryName || ""}
             selectedSort={filters.sortBy}

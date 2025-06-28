@@ -14,7 +14,6 @@ import NextLink from "next/link";
 import { siteConfig } from "@/src/config/site";
 import { SearchIcon } from "@/src/components/icons";
 import { NavItemWithDropdown } from "../menu/NavItemWithDropdown";
-import { ThemeSwitch } from "../UI/theme-switch";
 import { getProducts } from "@/src/services/Products";
 import { useEffect, useRef, useState } from "react";
 import SearchResults from "../search/SearchResults";
@@ -132,12 +131,10 @@ export const Navbar = () => {
         <NavbarItem>
           <div className="w-44 lg:w-48 xl:w-72">{searchInput}</div>
         </NavbarItem>
-        <ThemeSwitch />
       </NavbarContent>
 
       {/* Mobile & Tablet Toggle */}
       <NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
-        <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
 
@@ -145,7 +142,6 @@ export const Navbar = () => {
       <NavbarMenu className="pt-[84px]">
         <div>
           <NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
-            <ThemeSwitch />
             <NavbarMenuToggle />
           </NavbarContent>
         </div>
