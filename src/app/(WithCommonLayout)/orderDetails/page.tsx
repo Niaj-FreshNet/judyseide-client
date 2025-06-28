@@ -1,11 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Row, Col, Typography, Tag, Image, Button, Spin, Input, Modal, Rate, message } from "antd"
 import { CloseOutlined } from "@ant-design/icons"
 import dayjs from "dayjs"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+import { addReview, getUserOrderDetails } from "@/src/services/UserDashboard"
+
 
 const { Title, Text } = Typography
 const { TextArea } = Input
@@ -44,72 +46,12 @@ interface OrderData {
   }
 }
 
-const useOrderDetails = (id: string) => {
-  const [data, setData] = useState<{success: boolean; data: OrderData} | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  const fetchOrderDetails = async () => {
-    try {
-      setIsLoading(true)
-      const response = await fetch(`/api/orders/${id}`)
-      const result = await response.json()
-      if (response.ok) {
-        setData(result)
-      } else {
-        setError(result.error || "Failed to fetch order details")
-      }
-    } catch (err) {
-      setError("An error occurred while fetching order details")
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  return { data, isLoading, error, fetchOrderDetails }
-}
-
-const useAddReview = () => {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const submitReview = async (reviewData: {
-    title: string
-    comment: string
-    rating: number
-    productId: string
-  }) => {
-    try {
-      setIsLoading(true)
-      const response = await fetch('/api/reviews', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reviewData),
-      })
-      const result = await response.json()
-      if (response.ok) {
-        toast.success(result.message)
-        return { success: true }
-      } else {
-        toast.error(result.error || "Failed to submit review")
-        return { success: false, error: result.error }
-      }
-    } catch (err) {
-      toast.error("An error occurred while submitting the review")
-      return { success: false, error: "An error occurred" }
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  return { submitReview, isLoading }
-}
-
 const UserOrderDetails = ({ params }: { params: { id: string } }) => {
   const { id } = params
   const router = useRouter()
-  const { data, isLoading, error } = useOrderDetails(id)
+  const [orderData, setOrderData] = useState<OrderData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   
   // Review modal states
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false)
@@ -118,26 +60,27 @@ const UserOrderDetails = ({ params }: { params: { id: string } }) => {
   const [reviewTitle, setReviewTitle] = useState("")
   const [reviewComment, setReviewComment] = useState("")
   const [reviewRating, setReviewRating] = useState(0)
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false)
 
-  const { submitReview, isLoading: isSubmittingReview } = useAddReview()
+  useEffect(() => {
+    const fetchOrderDetails = async () => {
+      try {
+        setIsLoading(true)
+        const data = await getUserOrderDetails(id)
+        if (data) {
+          setOrderData(data.data)
+        } else {
+          setError("Failed to fetch order details")
+        }
+      } catch (err) {
+        setError("An error occurred while fetching order details")
+      } finally {
+        setIsLoading(false)
+      }
+    }
 
-  if (isLoading) {
-    return (
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "400px" }}>
-        <Spin size="large" />
-      </div>
-    )
-  }
-
-  if (error || !data?.success) {
-    return (
-      <div style={{ padding: "24px", textAlign: "center" }}>
-        <Text type="danger">{error || "Failed to load order details"}</Text>
-      </div>
-    )
-  }
-
-  const orderData: OrderData = data.data
+    fetchOrderDetails()
+  }, [id])
 
   const getStatusColor = (status: string) => {
     switch (status.toUpperCase()) {
@@ -183,16 +126,44 @@ const UserOrderDetails = ({ params }: { params: { id: string } }) => {
       return
     }
 
-    const result = await submitReview({
-      title: reviewTitle,
-      comment: reviewComment,
-      rating: reviewRating,
-      productId: selectedProductId,
-    })
+    try {
+      setIsSubmittingReview(true)
+      
+      const formData = new FormData()
+      formData.append('title', reviewTitle)
+      formData.append('comment', reviewComment)
+      formData.append('rating', reviewRating.toString())
+      formData.append('productId', selectedProductId)
 
-    if (result.success) {
-      handleReviewCancel()
+      const result = await addReview(formData)
+
+      if (result && result.success) {
+        toast.success(result.message || "Review submitted successfully")
+        handleReviewCancel()
+      } else {
+        toast.error(result?.error || "Failed to submit review")
+      }
+    } catch (err) {
+      toast.error("An error occurred while submitting the review")
+    } finally {
+      setIsSubmittingReview(false)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "400px" }}>
+        <Spin size="large" />
+      </div>
+    )
+  }
+
+  if (error || !orderData) {
+    return (
+      <div style={{ padding: "24px", textAlign: "center" }}>
+        <Text type="danger">{error || "Failed to load order details"}</Text>
+      </div>
+    )
   }
 
   return (

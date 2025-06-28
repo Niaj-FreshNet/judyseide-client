@@ -126,3 +126,35 @@ export const getUserOrderDetails = async (id: string) => {
     return null;
   }
 };
+
+
+// Updated addReview API function (JSON version)
+export const addReview = async (reviewData: {
+  title: string;
+  comment: string;
+  rating: number;
+  productId: string;
+}) => {
+  const token = Cookies.get("accessToken");
+
+  try {
+    const res = await fetch(`${envConfig.baseApi}/review/create-review`, {
+      method: "POST",
+      headers: {
+        'Authorization': `${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(reviewData),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || `Failed to add review: ${res.statusText}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error submitting review:", error);
+    throw error;
+  }
+};

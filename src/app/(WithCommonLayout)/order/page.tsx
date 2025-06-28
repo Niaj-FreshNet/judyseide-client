@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import UserInvoice from "@/src/components/userInvoice/UserInvoice";
 import { getUserOrders } from "@/src/services/UserDashboard";
 import { useUser } from "@/src/context/user.proider";
+import Container from "@/src/components/UI/Container";
 
 interface OrderItem {
   variantId: string;
@@ -199,6 +200,7 @@ const UserOrderList = () => {
   }
 
   return (
+    <Container >
     <div style={{ padding: 20 }}>
       <Table
         columns={columns}
@@ -218,6 +220,7 @@ const UserOrderList = () => {
         }}
       />
     </div>
+    </Container>
   );
 };
 
