@@ -44,7 +44,7 @@ export default function HeroSlider() {
   return (
     <div className="max-w-full mx-auto relative overflow-hidden">
       <div ref={emblaRef} className="overflow-hidden">
-        <div className="flex">
+        <div className="hidden lg:flex">
           {slides.map((slide, index) => (
             <div key={index} className="min-w-full relative h-screen">
               <Image
@@ -59,6 +59,28 @@ export default function HeroSlider() {
                   <button className="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded font-sans font-medium transition">
                     {slide.button}
                   </button></Link>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex lg:hidden">
+          {slides.map((slide, index) => (
+            <div key={index} className="min-w-full relative">
+              <Image
+                width={1200}
+                height={600}
+                alt={slide.title}
+                className="object-cover w-full h-2/3"
+                src={slide.image} />
+              <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4">
+                <div className="absolute bottom-16">
+                  <h2 className="text-2xl md:text-5xl font-serif font-bold mb-8">{slide.title}</h2>
+                  <Link href="/new-in">
+                    <button className="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded font-sans font-medium transition">
+                      {slide.button}
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}

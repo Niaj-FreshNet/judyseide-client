@@ -26,7 +26,7 @@ export default function CatalogSection() {
         {catalogs.slice(0, 2).map((catalog, index) => (
           <div
             key={index}
-            className="relative h-[512px] lg:h-[720px] group overflow-hidden rounded-none shadow-md"
+            className="relative h-[448px] md:h-[512px] lg:h-[720px] group overflow-hidden rounded-none shadow-md"
           >
             <Image
               src={catalog.image}

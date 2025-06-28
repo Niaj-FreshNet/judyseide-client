@@ -62,7 +62,7 @@ export default function AllProductsClient({ allProducts }: AllProductsClientProp
   return (
     <>
       <div className="w-full flex">
-        <div className="w-1/6 hidden lg:flex mb-6">
+        <div className="w-1/6 hidden lg:flex mb-8">
           <button
             className={`mr-0 border px-4 py-2 rounded-none text-md transition
     ${showAllFilters

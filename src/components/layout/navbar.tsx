@@ -142,7 +142,7 @@ export const Navbar = () => {
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu className="pt-[72px]">
+      <NavbarMenu className="pt-[84px]">
         <div>
           <NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
             <ThemeSwitch />
@@ -165,7 +165,7 @@ export const Navbar = () => {
       {showResults && searchTerm.length > 0 && !isLoading && (
         <div
           ref={searchResultsRef} // Attach ref to the results container
-          className="absolute top-20 right-0 bg-[#FEF6F1] shadow-lg rounded-md max-h-96 max-w-96 overflow-y-auto "
+          className="absolute top-20 right-6 lg:right-8 bg-[#FEF6F1] shadow-lg rounded-md max-h-96 max-w-sm md:max-w-md lg:max-w-lg overflow-y-auto "
         >
           <SearchResults
             results={isLoading ? [] : searchResults} // Pass empty array if loading

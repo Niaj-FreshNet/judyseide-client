@@ -84,6 +84,18 @@ export default function ProductInfo({
   };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Check if size and color are selected
+    if (!selectedSize || !selectedColor) {
+      toast.error("Please select size and color first.", {
+        position: "top-right",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        },
+      });
+      return; // Prevent quantity change if size/color are not selected
+    }
+
     let newQuantity = parseInt(e.target.value, 10);
     if (isNaN(newQuantity)) newQuantity = 1;
 
