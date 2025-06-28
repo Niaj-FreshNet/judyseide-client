@@ -39,27 +39,6 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
         {/* {product.badge} */}
       {/* </span> */}
 
-<<<<<<< HEAD
-        {/* Image Wrapper with hover button */}
-        <div className="relative overflow-hidden bg-gray-100">
-          <Image
-            alt={product.name}
-            src={imageUrl}
-            unoptimized // 👈 skip loader for testing
-            className="w-full h-64 lg:h-80 object-cover transition-transform duration-300 group-hover:scale-105"
-            width={1200}
-            height={600}
-          />
-
-          {showAddToBag && (
-            <button
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-[#FB923C] text-white px-4 py-2 text-sm rounded-none shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              onClick={(e) => e.preventDefault()} // prevent link navigation on button click
-            >
-              View Product
-            </button>
-          )}
-=======
       {/* Image Wrapper with hover button */}
       <div className="relative overflow-hidden bg-gray-100">
         <Image
@@ -87,7 +66,6 @@ export default function ProductCard({ product, showAddToBag }: ProductCardProps)
         <div className="px-4 py-1">
           <h3 className="text-xl font-semibold">{product.name}</h3>
           <p className="text-lg font-semibold">${price}</p>
->>>>>>> 3c0c8e00d014459573e13f8e453d47e08037b280
         </div>
         <div className="border-b border-orange-100 " />
         <div className="flex items-center px-4 py-2 gap-2 text-xs">

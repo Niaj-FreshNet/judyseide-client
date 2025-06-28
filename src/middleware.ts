@@ -56,12 +56,12 @@ export async function middleware(request: NextRequest) {
     if (routes.some((route) => pathname.match(route))) {
       return NextResponse.next();
     }
-  }
+  }.3
 
   return NextResponse.redirect(new URL("/", request.url));
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/admin", "/login", "/register"],
+  matcher: ["/profile", "/profile/:page*", "/admin", "/login", "/register"],
 };

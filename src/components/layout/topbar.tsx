@@ -129,12 +129,12 @@ export const Topbar = () => {
               {user ? (
                 <>
                   <DropdownItem key="profile">
-                    <a href="https://judy-seide-dashboard.vercel.app/dashboard">
+                    <a href="http://localhost:5173/dashboard">
                       My Profile
                     </a>
                   </DropdownItem>
                   <DropdownItem key="orders">
-                    <a href="https://judy-seide-dashboard.vercel.app/dashboard/order-list">
+                    <a href="http://localhost:5173/dashboard/order-list">
                       My Orders
                     </a>
                   </DropdownItem>
