@@ -32,9 +32,13 @@ export const Topbar = () => {
     fetchUser();
   }, []);
 
-  const dashboardUrl = user?.role === "ADMIN"
+  const profileUrl = user?.role === "ADMIN"
     ? "https://judy-seide-dashboard.vercel.app/admin"
     : "/profile";
+
+    const orderUrl = user?.role === "ADMIN"
+    ? "https://judy-seide-dashboard.vercel.app/admin"
+    : "/order";
 
   return (
     <HeroUINavbar
@@ -84,12 +88,12 @@ export const Topbar = () => {
               {user ? (
                 <>
                   <DropdownItem key="profile">
-                    <a href={dashboardUrl}>
+                    <a href={profileUrl}>
                       My Profile
                     </a>
                   </DropdownItem>
                   <DropdownItem key="orders">
-                    <a href={dashboardUrl}>
+                    <a href={orderUrl}>
                       My Orders
                     </a>
                   </DropdownItem>
@@ -99,7 +103,7 @@ export const Topbar = () => {
                 </>
               ) : (
                 <DropdownItem key="login">
-                  <Link href={dashboardUrl}>
+                  <Link href={profileUrl}>
                     <p className="font-semibold">Sign in</p>
                   </Link>
                 </DropdownItem>
@@ -132,12 +136,12 @@ export const Topbar = () => {
               {user ? (
                 <>
                   <DropdownItem key="profile">
-                    <a href={dashboardUrl}>
+                    <a href={profileUrl}>
                       My Profile
                     </a>
                   </DropdownItem>
                   <DropdownItem key="orders">
-                    <a href={dashboardUrl}>
+                    <a href={orderUrl}>
                       My Orders
                     </a>
                   </DropdownItem>
@@ -147,7 +151,7 @@ export const Topbar = () => {
                 </>
               ) : (
                 <DropdownItem key="login">
-                  <Link href={dashboardUrl}>
+                  <Link href={profileUrl}>
                     <p className="font-semibold">Sign in</p>
                   </Link>
                 </DropdownItem>

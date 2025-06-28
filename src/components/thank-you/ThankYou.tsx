@@ -1,25 +1,8 @@
-<<<<<<< HEAD
-'use client';
-
-import ProductReviews from "@/src/components/modules/product/ProductReviews";
-import RelatedProducts from "@/src/components/modules/product/RelatedProducts";
-import ThankYou from "@/src/components/thank-you/ThankYou";
-
-export default function ThankYouPage() {
-
-  return (
-    <div className=" space-y-16">
-        <ThankYou />
-      
-    </div>
-  );
-}
-=======
 import Image from "next/image"
 import Link from "next/link"
-import image1 from "@/public/gallery/success.jpg";
+import image1 from "@/public/gallery/Illustration.png";
 
-export default function success() {
+export default function ThankYou() {
   return (
     <div className=" flex flex-col">
       {/* Header with Begin link */}
@@ -75,4 +58,3 @@ export default function success() {
     </div>
   )
 }
->>>>>>> 3c0c8e00d014459573e13f8e453d47e08037b280

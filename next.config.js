@@ -10,7 +10,7 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'nyc3.digitaloceanspaces.com',
-        pathname: '**',
+        pathname: '',
       },
       {
         protocol: 'https',

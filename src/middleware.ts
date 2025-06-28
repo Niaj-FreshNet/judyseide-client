@@ -56,7 +56,7 @@ export async function middleware(request: NextRequest) {
     if (routes.some((route) => pathname.match(route))) {
       return NextResponse.next();
     }
-  }
+  }.3
 
   return NextResponse.redirect(new URL("/", request.url));
 }
