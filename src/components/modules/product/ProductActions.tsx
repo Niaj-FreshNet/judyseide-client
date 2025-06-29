@@ -6,6 +6,7 @@ import { useCart } from "@/src/context/cart.context";
 import { Product } from "@/src/types";
 import { toast } from "sonner";
 import { addToWishlist } from "@/src/services/Wishlist";
+import { useRouter } from "next/navigation";
 
 export default function ProductActions({
   product,
@@ -24,13 +25,14 @@ export default function ProductActions({
 }) {
   const { openDrawer } = useDrawerManager();
   const { addToCart } = useCart(); // Get the addToCart function from the CartContext
+  const router = useRouter();
 
   // Check if the selected variant (size & color) is available
   const selectedVariant = variants.find(
     (variant) => variant.size === selectedSize && variant.color === selectedColor
   );
 
-  // console.log(variants)
+  // console.log(product)
 
   const handleAddToCart = () => {
     if (selectedSize && selectedColor) {
@@ -58,23 +60,29 @@ export default function ProductActions({
     if (selectedSize && selectedColor) {
       try {
         // Add to wishlist using the API function
-        await addToWishlist(variantId); // Pass the variantId to the API function
-        toast.success("Item added to wishlist!", {
-          position: "top-center",
-          style: {
-            backgroundColor: "#FB923C",
-            color: "#fff",
-          }
-        });
-        openDrawer("wishlist");
+        const response = await addToWishlist(variantId); // Wait for the response from API function
+
+        if (response) { // If the response is successful (not null)
+          toast.success("Item added to wishlist!", {
+            position: "top-center",
+            style: {
+              backgroundColor: "#FB923C",
+              color: "#fff",
+            }
+          });
+          openDrawer("wishlist"); // Open the drawer after a successful addition
+        } else {
+          throw new Error("Failed to add item to wishlist.");
+        }
       } catch (error) {
-        toast.error("Failed to add item to wishlist.", {
+        toast.error("You must be log in to add wishlist", {
           position: "top-right",
           style: {
             backgroundColor: "#FB923C",
             color: "#fff",
           }
         });
+        router.push("/login");
       }
     } else {
       toast.error("Please select size and color.", {

@@ -5,7 +5,7 @@ import envConfig from "@/src/config/envConfig";
 const getAuthHeaders = () => {
   const accessToken = Cookies.get("accessToken"); // Get the token from cookies using js-cookie
 
-  console.log("accessToken", accessToken);
+//   console.log("accessToken", accessToken);
 
   if (accessToken) {
     return new Headers({
@@ -22,13 +22,14 @@ export const getWishlist = async () => {
     const res = await fetch(`${envConfig.baseApi}/wishlist/get-wishlist`, {
       headers: getAuthHeaders(), // Add authorization header
     });
+    // console.log(res)
     
     if (!res.ok) {
         throw new Error(`Failed to fetch wishlists: ${res.statusText}`);
     }
     
     const data = await res.json();
-    console.log(data)
+    // console.log(data)
     return data;
   } catch (error) {
     console.error("Error fetching wishlists:", error);
@@ -37,7 +38,7 @@ export const getWishlist = async () => {
 };
 
 // Add to wishlist function
-export const addToWishlist = async (itemId: string) => {
+export const addToWishlist = async (variantId: string) => {
   try {
     const res = await fetch(`${envConfig.baseApi}/wishlist/add-to-wishlist`, {
       method: "POST",
@@ -45,14 +46,16 @@ export const addToWishlist = async (itemId: string) => {
         "Content-Type": "application/json",
         ...Object.fromEntries(getAuthHeaders().entries()), // Merge headers from getAuthHeaders
       },
-      body: JSON.stringify({ itemId }),
+      body: JSON.stringify({ variantId }),
     });
-
+    // console.log(res)
+    
     if (!res.ok) {
-      throw new Error(`Failed to add item to wishlist: ${res.statusText}`);
+        throw new Error(`Failed to add item to wishlist: ${res.statusText}`);
     }
-
+    
     const data = await res.json();
+    // console.log(data)
     return data;
   } catch (error) {
     console.error("Error adding to wishlist:", error);

@@ -10,6 +10,7 @@ import { FaShoppingCart } from "react-icons/fa";
 export function CartDrawer() {
   const { cart } = useCart();
   const { closeDrawer } = useDrawerManager();  // To close the drawer on checkout
+  // console.log(cart)
 
   // Calculate Subtotal
   const subtotal = cart.reduce((total, item) => total + item.variants[0]?.price * item.quantity, 0);

@@ -13,6 +13,11 @@ module.exports = {
         pathname: '**', // ✅ Correct wildcard pattern
       },
       {
+        protocol: 'http',
+        hostname: 'nyc3.digitaloceanspaces.com',
+        pathname: '**', // ✅ Correct wildcard pattern
+      },
+      {
         protocol: 'https',
         hostname: 'api.judy-seide.code-commando.com',
         pathname: '**',

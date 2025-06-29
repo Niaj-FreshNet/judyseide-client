@@ -12,7 +12,7 @@ import RelatedProductsLoading from "../../loading/RelatedProductsLoading";
 
 export default function RelatedProducts() {
   const { productId } = useParams();
-  console.log("Product ID:", productId); // Debugging log
+  // console.log("Product ID:", productId); // Debugging log
   const singleProductId = Array.isArray(productId) ? productId[0] : productId;
 
   const { product, loading, error } = useProductById(singleProductId);

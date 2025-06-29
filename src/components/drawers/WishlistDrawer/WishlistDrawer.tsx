@@ -7,45 +7,71 @@ import { useEffect, useState } from "react";
 import { getWishlist } from "@/src/services/Wishlist";
 
 export function WishlistDrawer() {
-  const [wishlist, setWishlist] = useState<any[]>([]);
+  const [wishlist, setWishlist] = useState<any[]>([]); // Initialize wishlist as an array
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const data = await getWishlist(); // Fetch wishlist from the API
+        const response = await getWishlist(); // Fetch wishlist from the API
+        // console.log("API Response:", response); // Log full response to inspect its structure
 
-        // Ensure the data is always an array
-        if (Array.isArray(data)) {
-          setWishlist(data); // Update context state with fetched wishlist
+        // Check if response contains the 'data' property
+        if (response && response.data) {
+          // console.log("Response Data Structure:", response.data); // Log the structure of response.data
+
+          // If 'data' is an object and has an array of wishlist items
+          if (Array.isArray(response.data.data)) {
+            // console.log("Wishlist Items:", response.data.data); // Log actual wishlist items
+            setWishlist(response.data.data); // Set wishlist with the nested data array
+          } else {
+            // console.log("No valid wishlist data found.");
+            setWishlist([]); // If data is not valid, set as empty array
+          }
         } else {
-          setWishlist([]); // If not an array, set as empty array
+          // console.log("No data found in the response");
+          setWishlist([]); // If no valid data found, set as empty array
         }
       } catch (error) {
         setError("Failed to load wishlist"); // Handle error case
+        console.error("Error fetching wishlist:", error); // Log error
       } finally {
         setIsLoading(false); // Stop loading
       }
     };
 
     fetchWishlist();
-  }, [setWishlist]) // Ensure fetching only once when component mounts
+  }, []); // Ensure fetching only once when component mounts
 
   // Displaying loading or error message
   if (isLoading) {
     return (
-      <div className="pt">
-        <div className="flex flex-col items-center justify-center py-8">
-          <FaHeart className="text-6xl text-gray-400 mb-4" /> {/* Heart icon */}
-          <p className="text-lg text-gray-600 mb-2">Your wishlist is empty</p>
-          <p className="text-sm text-gray-500 mb-4">Start adding items to your wishlist.</p>
-          <button
-            onClick={() => { } /* Add your action here, like browsing products */}
-            className="px-6 py-2 text-white bg-pink-500 rounded-full hover:bg-pink-600 focus:outline-none"
-          >
-            Browse Products
-          </button>
+      <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-2 space-y-8">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 border-b border-orange-200 py-6 my-4 animate-pulse">
+          <div className="w-full sm:w-72 h-auto sm:h-64 bg-gray-200"></div> {/* Placeholder for image */}
+          <div className="flex flex-col flex-1 justify-between space-y-2">
+            <div className="flex flex-col sm:flex-row sm:justify-between">
+              <div className="h-6 w-1/2 bg-gray-300 rounded"></div> {/* Placeholder for name */}
+              <div className="h-6 w-1/4 bg-gray-300 rounded"></div> {/* Placeholder for price */}
+            </div>
+
+            <div className="flex items-center gap-2 text-sm mt-1">
+              <div className="h-4 w-1/3 bg-gray-300 rounded"></div> {/* Placeholder for material */}
+            </div>
+
+            <div className="text-xs text-gray-600 mt-1">
+              <div className="h-4 w-1/2 bg-gray-300 rounded"></div> {/* Placeholder for size */}
+              <div className="h-4 w-1/2 bg-gray-300 rounded"></div> {/* Placeholder for color */}
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">
+              <div className="h-6 w-1/3 bg-gray-300 rounded"></div> {/* Placeholder for button */}
+            </div>
+          </div>
+        </div>
+        <div className="pt-2 pb-4">
+          <RelatedProductsInDrawer />
         </div>
       </div>
     );
@@ -53,13 +79,13 @@ export function WishlistDrawer() {
 
   if (error) {
     return (
-      <div className="pt">
+      <div className="pt-2">
         <div className="flex flex-col items-center justify-center py-8">
           <FaHeart className="text-6xl text-gray-400 mb-4" /> {/* Heart icon */}
           <p className="text-lg text-gray-600 mb-2">Your wishlist is empty</p>
           <p className="text-sm text-gray-500 mb-4">Start adding items to your wishlist.</p>
           <button
-            onClick={() => { } /* Add your action here, like browsing products */}
+            onClick={() => { }} /* Add your action here, like browsing products */
             className="px-6 py-2 text-white bg-pink-500 rounded-full hover:bg-pink-600 focus:outline-none"
           >
             Browse Products
@@ -78,7 +104,7 @@ export function WishlistDrawer() {
             <p className="text-lg text-gray-600 mb-2">Your wishlist is empty</p>
             <p className="text-sm text-gray-500 mb-4">Start adding items to your wishlist.</p>
             <button
-              onClick={() => { } /* Add your action here, like browsing products */}
+              onClick={() => { }} /* Add your action here, like browsing products */
               className="px-6 py-2 text-white bg-pink-500 rounded-full hover:bg-pink-600 focus:outline-none"
             >
               Browse Products
@@ -88,13 +114,10 @@ export function WishlistDrawer() {
           wishlist.map((item) => (
             <WishlistItem
               key={item.variantId}
-              id={item.id}
-              name={item.name}
-              imageUrl={item.imageUrl}
-              price={item.variants[0]?.price}
-              material={item.material.materialName}
-              color={item.variants[0]?.color}
-              size={item.variants[0]?.size}
+              variant={item.variant}
+              product={{
+                ...item.variant?.product,
+              }}
               variantId={item.variantId}
             />
           ))
