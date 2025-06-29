@@ -78,17 +78,20 @@ export const updateProfile = async (body: FormData) => {
 
 
 // Fetch all orders for a specific user
-export const getUserOrders = async (id: string) => {
+export const getUserOrders = async (id: string, page: number = 1, limit: number = 10) => {
   const token = Cookies.get("accessToken");
 
   try {
-    const res = await fetch(`${envConfig.baseApi}/order/get-user-orders/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": ` ${token}`, // Add token for protected route
-      },
-    });
+    const res = await fetch(
+      `${envConfig.baseApi}/order/get-user-orders/${id}?page=${page}&limit=${limit}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": ` ${token}`, // Add token for protected route
+        },
+      }
+    );
 
     if (!res.ok) {
       throw new Error(`Failed to fetch user orders: ${res.statusText}`);
