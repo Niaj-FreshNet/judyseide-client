@@ -5,11 +5,14 @@ import { RelatedProductsInDrawer } from "../CartDrawer/RelatedProductsInDrawer";
 import { FaHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { getWishlist } from "@/src/services/Wishlist";
+import Link from "next/link";
+import { useDrawerManager } from "../DrawerManager";
 
 export function WishlistDrawer() {
   const [wishlist, setWishlist] = useState<any[]>([]); // Initialize wishlist as an array
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+    const { closeDrawer } = useDrawerManager();
 
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -84,12 +87,14 @@ export function WishlistDrawer() {
           <FaHeart className="text-6xl text-gray-400 mb-4" /> {/* Heart icon */}
           <p className="text-lg text-gray-600 mb-2">Your wishlist is empty</p>
           <p className="text-sm text-gray-500 mb-4">Start adding items to your wishlist.</p>
-          <button
-            onClick={() => { }} /* Add your action here, like browsing products */
-            className="px-6 py-2 text-white bg-pink-500 rounded-full hover:bg-pink-600 focus:outline-none"
-          >
-            Browse Products
-          </button>
+          <Link href="/new-in" >
+            <button
+              onClick={() => closeDrawer()} // Close drawer on button click
+              className="px-6 py-2 text-white bg-orange-500 rounded-full hover:bg-orange-600 focus:outline-none"
+            >
+              Browse Products
+            </button>
+          </Link>
         </div>
       </div>
     );
@@ -103,12 +108,14 @@ export function WishlistDrawer() {
             <FaHeart className="text-6xl text-gray-400 mb-4" /> {/* Heart icon */}
             <p className="text-lg text-gray-600 mb-2">Your wishlist is empty</p>
             <p className="text-sm text-gray-500 mb-4">Start adding items to your wishlist.</p>
+            <Link href="/new-in" >
             <button
-              onClick={() => { }} /* Add your action here, like browsing products */
-              className="px-6 py-2 text-white bg-pink-500 rounded-full hover:bg-pink-600 focus:outline-none"
+              onClick={() => closeDrawer()} // Close drawer on button click
+              className="px-6 py-2 text-white bg-orange-500 rounded-full hover:bg-orange-600 focus:outline-none"
             >
               Browse Products
             </button>
+          </Link>
           </div>
         ) : (
           wishlist.map((item) => (

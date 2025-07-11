@@ -9,6 +9,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useUser } from "@/src/context/user.proider";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function CartDrawer() {
   const { cart } = useCart();
@@ -28,14 +29,14 @@ export function CartDrawer() {
   const total = subtotal + taxes + shippingCost;
 
   const handleCheckout = () => {
-    
+
     if (!user && !isUserLoading) {
       toast.error("You need to login first to proceed to checkout");
       router.push("/login");
       closeDrawer();  // Close the drawer when user clicks checkout
       return;
     }
-    
+
     router.push("/checkout");  // Redirect to checkout page
 
     closeDrawer();  // Close the drawer when user clicks checkout
@@ -50,12 +51,14 @@ export function CartDrawer() {
               <FaShoppingCart className="text-6xl text-gray-400 mb-4" /> {/* Empty Cart Icon */}
               <p className="text-lg text-gray-600 mb-2">Your cart is empty</p>
               <p className="text-sm text-gray-500 mb-4">Start shopping now and add some items to your cart.</p>
-              <button
-                onClick={() => closeDrawer()} // Close drawer on button click
-                className="px-6 py-2 text-white bg-orange-500 rounded-full hover:bg-orange-600 focus:outline-none"
-              >
-                Browse Products
-              </button>
+              <Link href="/new-in" >
+                <button
+                  onClick={() => closeDrawer()} // Close drawer on button click
+                  className="px-6 py-2 text-white bg-orange-500 rounded-full hover:bg-orange-600 focus:outline-none"
+                >
+                  Browse Products
+                </button>
+              </Link>
             </div>
           ) : (
             cart.map((item) => (
