@@ -1,4 +1,7 @@
+import { useUser } from "@/src/context/user.proider";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function CartDrawerFooter({
   subtotal,
@@ -13,6 +16,20 @@ export function CartDrawerFooter({
   total: number;
   onCheckout: () => void;
 }) {
+  // const { user, isLoading: isUserLoading } = useUser();
+  // const router = useRouter();
+
+  // onCheckout = () => {
+  //   if (!user && !isUserLoading) {
+  //     toast.error("You need to login first to proceed to checkout");
+  //     router.push("/login");
+  //     return;
+  //   }
+  //   else {
+  //     onCheckout(); // Call the passed in onCheckout function
+  //   }
+  // }
+
   return (
     <footer className="px-8 py-4 bottom-0 bg-white">
       <div className="space-y-4 text-sm">
@@ -35,7 +52,7 @@ export function CartDrawerFooter({
           <span>${total.toFixed(2)}</span>
         </div>
       </div>
-      <Link href={"/checkout"}>
+      {/* <Link href={"/checkout"}> */}
 
         <button
           className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded"
@@ -43,7 +60,7 @@ export function CartDrawerFooter({
         >
           Checkout
         </button>
-      </Link>
+      {/* </Link> */}
     </footer>
   );
 }

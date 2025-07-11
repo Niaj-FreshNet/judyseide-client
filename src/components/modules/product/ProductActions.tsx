@@ -10,14 +10,14 @@ import { useRouter } from "next/navigation";
 
 export default function ProductActions({
   product,
-  variantId,
+  // variantId,
   selectedSize,
   selectedColor,
   quantity,
   variants = [],
 }: {
   product: Product;
-  variantId: string;
+  // variantId: string;
   selectedSize: string | null;
   selectedColor: string | null;
   quantity: number;
@@ -32,7 +32,10 @@ export default function ProductActions({
     (variant) => variant.size === selectedSize && variant.color === selectedColor
   );
 
-  console.log("")
+  const variantId = product.variants?.find(
+    (variant) => variant.size === selectedSize && variant.color === selectedColor
+  )?.id || "";
+
 
   // console.log(product)
 

@@ -6,9 +6,14 @@ import { CartDrawerFooter } from "./CartDrawerFooter";
 import CartItem from "./CartItem";
 import { RelatedProductsInDrawer } from "./RelatedProductsInDrawer";
 import { FaShoppingCart } from "react-icons/fa";
+import { useUser } from "@/src/context/user.proider";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export function CartDrawer() {
   const { cart } = useCart();
+  const { user, isLoading: isUserLoading } = useUser();
+  const router = useRouter();
   const { closeDrawer } = useDrawerManager();  // To close the drawer on checkout
   // console.log(cart)
 
@@ -23,6 +28,16 @@ export function CartDrawer() {
   const total = subtotal + taxes + shippingCost;
 
   const handleCheckout = () => {
+    
+    if (!user && !isUserLoading) {
+      toast.error("You need to login first to proceed to checkout");
+      router.push("/login");
+      closeDrawer();  // Close the drawer when user clicks checkout
+      return;
+    }
+    
+    router.push("/checkout");  // Redirect to checkout page
+
     closeDrawer();  // Close the drawer when user clicks checkout
   };
 
@@ -49,11 +64,8 @@ export function CartDrawer() {
                 id={item.id}
                 name={item.name}
                 imageUrl={item.imageUrl}
-                price={item.variants[0]?.price}
                 quantity={item.quantity}
-                material={item.material.materialName}
-                color={item.variants[0]?.color}
-                size={item.variants[0]?.size}
+                material={item.material?.materialName || "N/A"}
                 variantId={item.variantId}
               />
             ))

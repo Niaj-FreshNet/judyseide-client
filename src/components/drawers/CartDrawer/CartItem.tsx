@@ -3,16 +3,14 @@
 import Image from "next/image";
 import { useCart } from "@/src/context/cart.context";
 import { useProductById } from "@/src/hooks/product.hook";
+import { toast } from "sonner";
 
 interface CartItemProps {
   id: string;
   name: string;
   imageUrl: string[];
-  price: number;
   quantity: number;
   material: string;
-  color: string;
-  size: string;
   variantId: string; // Added variantId prop
 }
 
@@ -20,25 +18,30 @@ export default function CartItem({
   id,
   name,
   imageUrl,
-  price,
   quantity,
   material,
-  color,
-  size,
   variantId,
 }: CartItemProps) {
   const { updateQuantity, removeFromCart } = useCart();
   const { product, loading, error } = useProductById(id);
-  
-  console.log("CartItem matched product from the database:", product?.data);
-  console.log("CartItem from context:", variantId);
 
   const variant = product?.data?.variants?.find((v) => v.id === variantId);
-  console.log("Variant from product data:", variant);
+  const color = variant?.color || "N/A";
+  const size = variant?.size || "N/A";
+  const quantityAvailable = variant?.quantity || 0;
 
   const handleQuantityChange = (newQuantity: number) => {
-    if (newQuantity > 0) {
+    if (newQuantity <= quantityAvailable) {
       updateQuantity(id, variantId, newQuantity);
+    }
+    else if (newQuantity > quantityAvailable) {
+      toast.error(`This product is only ${quantityAvailable} pcs available.`, {
+        position: "top-right",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        },
+      });
     }
   };
 
@@ -63,16 +66,30 @@ export default function CartItem({
       <div className="flex flex-col flex-1 justify-between space-y-2">
         <div className="flex flex-col sm:flex-row sm:justify-between">
           <h3 className="text-base sm:text-lg font-semibold">{name}</h3>
-          <p className="text-base sm:text-lg font-bold text-black">${variant?.price}</p>
+
+          {loading ? (
+            <div className="w-16 h-6 bg-gray-300 animate-pulse rounded" />
+          ) : (
+            <p className="text-base sm:text-lg font-bold text-black">${variant?.price}</p>
+          )}
         </div>
 
         <div className="flex items-center gap-2 text-sm mt-1">
           <span className="text-default-600">{material}</span>
         </div>
 
-        <div className="text-xs text-gray-600 mt-1">
-          <p className="mb-2">Size: {size} </p>
-          <p>Color: {color}</p>
+        <div className="text-xs text-gray-600 mt-2">
+          {loading ? (
+            <>
+              <div className="w-24 h-4 bg-gray-300 animate-pulse rounded mb-2" />
+              <div className="w-20 h-4 bg-gray-300 animate-pulse rounded" />
+            </>
+          ) : (
+            <>
+              <p className="mb-2">Size: {size} </p>
+              <p>Color: {color}</p>
+            </>
+          )}
         </div>
 
         <div className="flex items-end justify-start gap-2">

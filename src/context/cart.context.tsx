@@ -34,15 +34,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, [cart]);
 
   const addToCart = (product: Product, variantId: string, quantity: number) => {
+    console.log("Adding to cart:", product.id, variantId, quantity);
     setCart((prevCart) => {
       const existingProduct = prevCart.find(
-        (item) => item.id === product.id && item.variantId === variantId
+        // (item) => item.id === product.id && item.variantId === variantId
+        (item) => item.variantId === variantId
       );
 
       if (existingProduct) {
         // If product with this variant already exists in the cart, increase the quantity
         return prevCart.map((item) =>
-          item.id === product.id && item.variantId === variantId
+          // item.id === product.id && item.variantId === variantId
+          item.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );

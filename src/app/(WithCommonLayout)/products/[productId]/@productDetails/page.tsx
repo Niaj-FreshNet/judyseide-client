@@ -58,7 +58,7 @@ export default function ProductDetails() {
         />
         <ProductActions
           product={singleProduct}
-          variantId={singleProduct.variants?.[0]?.id || ""}
+          // variantId={singleProduct.variants?.[0]?.id || ""}
           selectedSize={selectedSize}
           selectedColor={selectedColor}
           quantity={quantity}
