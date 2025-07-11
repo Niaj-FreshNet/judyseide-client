@@ -22,17 +22,8 @@ export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1); // Default quantity to 1
 
-  // Handle loading, error, or missing product
-  if (loading) {
-    return <ProductDetailsLoading />;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   if (!product || !product.data) {
-    return <div>Product not found</div>;
+    return <ProductDetailsLoading />;
   }
 
   // Access the product data inside the 'data' key

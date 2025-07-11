@@ -22,7 +22,7 @@ export default function ProductDetailsLoading() {
       </div>
 
       {/* Right: Info Section */}
-      <div className="space-y-6 flex flex-col justify-between">
+      <div className="space-y-4 flex flex-col justify-between">
         {/* Title & Price */}
         <div className="space-y-2">
           <div className="h-6 w-2/3 bg-gray-300 animate-pulse rounded" />
@@ -36,7 +36,7 @@ export default function ProductDetailsLoading() {
 
         {/* Select Color */}
         <div className="space-y-2">
-          <div className="h-5 w-32 bg-gray-300 animate-pulse rounded" />
+          {/* <div className="h-5 w-32 bg-gray-300 animate-pulse rounded" /> */}
           <div className="flex gap-4">
             <div className="w-10 h-10 rounded-full bg-gray-300 animate-pulse" />
             <div className="w-10 h-10 rounded-full bg-gray-300 animate-pulse" />
@@ -47,7 +47,7 @@ export default function ProductDetailsLoading() {
 
         {/* Select Size */}
         <div className="space-y-2">
-          <div className="h-5 w-32 bg-gray-300 animate-pulse rounded" />
+          {/* <div className="h-5 w-32 bg-gray-300 animate-pulse rounded" /> */}
           <div className="flex gap-4">
             <div className="w-16 h-10 rounded-md bg-gray-300 animate-pulse" />
             <div className="w-16 h-10 rounded-md bg-gray-300 animate-pulse" />
@@ -58,7 +58,7 @@ export default function ProductDetailsLoading() {
 
         {/* Select Quantity */}
         <div className="space-y-2">
-          <div className="h-5 w-32 bg-gray-300 animate-pulse rounded" />
+          {/* <div className="h-5 w-32 bg-gray-300 animate-pulse rounded" /> */}
           <div className="flex gap-2 items-center w-fit border border-orange-200 px-3 py-2">
             <div className="w-4 h-4 bg-gray-300 animate-pulse" />
             <div className="w-6 h-4 bg-gray-300 animate-pulse" />

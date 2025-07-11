@@ -10,7 +10,7 @@ type ProductsProps = {
 export default async function AllProductPage() {
   try {
     const { products }: ProductsProps = await getProducts(); // You can pass filters here if needed
-    console.log("Fetched products:", products);
+    // console.log("Fetched products:", products);
 
     return <AllProductsClient allProducts={products} />;
   } catch (error) {

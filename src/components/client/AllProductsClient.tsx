@@ -10,7 +10,7 @@ import ProductGridLoading from "../loading/ProductGridLoading"; // Import produc
 import { SlidersHorizontal } from "lucide-react";
 import { Filters, Product } from "@/src/types";
 
-const PRODUCTS_PER_PAGE = 100;
+const PRODUCTS_PER_PAGE = 1000;
 
 interface AllProductsClientProps {
   allProducts: Product[];
@@ -18,7 +18,7 @@ interface AllProductsClientProps {
 
 export default function AllProductsClient({ allProducts }: AllProductsClientProps) {
   const [showAllFilters, setShowAllFilters] = useState(false); // Initially, filter options are hidden
-  const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
+  const [visibleCount, setVisibleCount] = useState(12);
   const [filters, setFilters] = useState<Filters>({
     availability: { inStock: false, outOfStock: false },
     price: {
@@ -53,6 +53,8 @@ export default function AllProductsClient({ allProducts }: AllProductsClientProp
 
     fetchProducts();
   }, [filters]); // Re-run the effect whenever the filters change
+
+  console.log("AllProductsClient Props:", { allProducts, filters, products, loading, error });
 
   // Toggle function for All Filter button
   const toggleAllFilters = () => {
@@ -118,13 +120,11 @@ export default function AllProductsClient({ allProducts }: AllProductsClientProp
             <ProductGridLoading /> // Show loading skeleton only for the product grid
           ) : (
             <>
-              <ProductGrid cols={showAllFilters ? 3 : 4} products={products} />
+              <ProductGrid cols={showAllFilters ? 3 : 4} products={products.slice(0, visibleCount)} />
               <LoadMoreFooter
                 total={products.length}
                 viewed={visibleCount}
-                onLoadMore={() =>
-                  setVisibleCount((prev) => Math.min(prev + PRODUCTS_PER_PAGE, products.length))
-                }
+                onLoadMore={() => setVisibleCount((prev) => Math.min(prev + PRODUCTS_PER_PAGE, products.length))}
               />
             </>
           )}

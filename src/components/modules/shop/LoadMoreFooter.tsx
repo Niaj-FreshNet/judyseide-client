@@ -9,6 +9,8 @@ interface LoadMoreFooterProps {
 
 export default function LoadMoreFooter({ viewed, total, onLoadMore, isLoading = false }: LoadMoreFooterProps) {
 
+  console.log("LoadMoreFooter Props:", { viewed, total, isLoading });
+
     if (isLoading) {
     return (
       <div className="w-full mt-8 flex justify-center">
@@ -24,7 +26,7 @@ export default function LoadMoreFooter({ viewed, total, onLoadMore, isLoading = 
   return (
     <div className="text-center mt-24 mb-8">
       <p className="text-sm text-default-900 mb-4">
-        You’ve viewed {String(total).padStart(2, "0")} of {String(total).padStart(2, "0")}{" "}
+        You’ve viewed {String(viewed).padStart(2, "0")} of {String(total).padStart(2, "0")}{" "}
         products.
       </p>
       <button

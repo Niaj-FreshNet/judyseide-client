@@ -1,8 +1,7 @@
 // In ProductGrid component
 "use client";
 
-import { Category, Material } from "@/src/types"; // Assuming the correct imports
-import { Variant } from "framer-motion";
+import { Category, Material, Variant } from "@/src/types"; // Use Variant from your types
 import ProductCardForAllProductsPage from "../../UI/ProductCardForAllProductsPage";
 
 // Update the Product type to match the one in src/types/index.ts

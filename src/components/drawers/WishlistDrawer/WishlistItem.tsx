@@ -64,12 +64,12 @@ export default function WishlistItem({
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">
-          <button
+          {/* <button
             className="text-sm font-medium underline underline-offset-2 hover:text-orange-600 transition"
             onClick={handleMoveToBag}
           >
             Move to Bag
-          </button>
+          </button> */}
           <button
             className="text-sm font-medium underline underline-offset-2 hover:text-orange-600 transition"
             onClick={handleRemove}

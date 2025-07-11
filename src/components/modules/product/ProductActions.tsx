@@ -36,13 +36,14 @@ export default function ProductActions({
     (variant) => variant.size === selectedSize && variant.color === selectedColor
   )?.id || "";
 
+  const availableQuantity = product.variants?.find(variantId => variantId === variantId)?.quantity || 0;
 
   // console.log(product)
 
   const handleAddToCart = async () => {
     if (!selectedVariant) {
       toast.error(`This product with ${selectedSize} size and ${selectedColor} color is not available.`, {
-        position: "top-right",
+        // position: "top-right",
         style: {
           backgroundColor: "#FB923C",
           color: "#fff",
@@ -50,9 +51,19 @@ export default function ProductActions({
       });
       return;
     };
+    if (availableQuantity === 0) {
+      toast.success("This product is out of stock!", {
+        // position: "top-center",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        }
+      });
+      return
+    }
     if (selectedSize && selectedColor) {
       toast.success("Item added to cart!", {
-        position: "top-center",
+        // position: "top-center",
         style: {
           backgroundColor: "#FB923C",
           color: "#fff",
@@ -62,7 +73,7 @@ export default function ProductActions({
       openDrawer("cart");
     } else {
       toast.error("Please select size and color.", {
-        position: "top-right",
+        // position: "top-right",
         style: {
           backgroundColor: "#FB923C",
           color: "#fff",
@@ -74,7 +85,7 @@ export default function ProductActions({
   const handleAddToWishlist = async () => {
     if (!selectedVariant) {
       toast.error(`This product with ${selectedSize} size and ${selectedColor} color is not available.`, {
-        position: "top-right",
+        // position: "top-right",
         style: {
           backgroundColor: "#FB923C",
           color: "#fff",
@@ -89,7 +100,7 @@ export default function ProductActions({
 
         if (response) { // If the response is successful (not null)
           toast.success("Item added to wishlist!", {
-            position: "top-center",
+            // position: "top-center",
             style: {
               backgroundColor: "#FB923C",
               color: "#fff",
@@ -101,7 +112,7 @@ export default function ProductActions({
         }
       } catch (error) {
         toast.error("You must be log in to add wishlist", {
-          position: "top-right",
+          // position: "top-right",
           style: {
             backgroundColor: "#FB923C",
             color: "#fff",
@@ -111,7 +122,7 @@ export default function ProductActions({
       }
     } else {
       toast.error("Please select size and color.", {
-        position: "top-right",
+        // position: "top-right",
         style: {
           backgroundColor: "#FB923C",
           color: "#fff",
