@@ -47,7 +47,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             : item
         );
       } else {
-        // Add the new product to the cart
+        // Add the new product with its variant as a separate entry
         return [
           ...prevCart,
           { ...product, variantId, quantity }

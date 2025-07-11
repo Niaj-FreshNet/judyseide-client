@@ -10,7 +10,7 @@ import ProductGridLoading from "../loading/ProductGridLoading"; // Import produc
 import { SlidersHorizontal } from "lucide-react";
 import { Filters, Product } from "@/src/types";
 
-const PRODUCTS_PER_PAGE = 9;
+const PRODUCTS_PER_PAGE = 100;
 
 interface AllProductsClientProps {
   allProducts: Product[];

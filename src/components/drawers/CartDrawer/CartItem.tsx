@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCart } from "@/src/context/cart.context";
+import { useProductById } from "@/src/hooks/product.hook";
 
 interface CartItemProps {
   id: string;
@@ -27,6 +28,13 @@ export default function CartItem({
   variantId,
 }: CartItemProps) {
   const { updateQuantity, removeFromCart } = useCart();
+  const { product, loading, error } = useProductById(id);
+  
+  console.log("CartItem matched product from the database:", product?.data);
+  console.log("CartItem from context:", variantId);
+
+  const variant = product?.data?.variants?.find((v) => v.id === variantId);
+  console.log("Variant from product data:", variant);
 
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity > 0) {
@@ -55,7 +63,7 @@ export default function CartItem({
       <div className="flex flex-col flex-1 justify-between space-y-2">
         <div className="flex flex-col sm:flex-row sm:justify-between">
           <h3 className="text-base sm:text-lg font-semibold">{name}</h3>
-          <p className="text-base sm:text-lg font-bold text-black">${price}</p>
+          <p className="text-base sm:text-lg font-bold text-black">${variant?.price}</p>
         </div>
 
         <div className="flex items-center gap-2 text-sm mt-1">

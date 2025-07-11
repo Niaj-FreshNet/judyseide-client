@@ -15,17 +15,17 @@ export default function Footer() {
           {/* Social Icons */}
           <div className="flex space-x-6 pt-2 text-orange-400">
             {/* TikTok Icon from react-icons */}
-            <a href="https://www.tiktok.com" rel="noopener noreferrer" target="_blank">
+            <a href="https://www.tiktok.com/@user2032355437845" rel="noopener noreferrer" target="_blank">
               <FaTiktok className="w-8 h-8 text-black hover:text-gray-700 transition-colors" />
             </a>
 
             {/* Instagram Icon from react-icons */}
-            <a href="https://instagram.com" rel="noopener noreferrer" target="_blank">
+            <a href="https://www.instagram.com/jewelrybellador?igsh=dTZxbHg3dzB6eWVu" rel="noopener noreferrer" target="_blank">
               <FaInstagram className="w-8 h-8 text-[#E1306C] hover:text-[#C13584] transition-colors" />
             </a>
 
             {/* Facebook Icon from react-icons */}
-            <a href="https://facebook.com" rel="noopener noreferrer" target="_blank">
+            <a href="https://www.facebook.com/profile.php?id=61577797949792" rel="noopener noreferrer" target="_blank">
               <FaFacebook className="w-8 h-8 text-[#1877F2] hover:text-[#0A64BC] transition-colors" />
             </a>
           </div>

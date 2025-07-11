@@ -24,7 +24,7 @@ export default function LoadMoreFooter({ viewed, total, onLoadMore, isLoading = 
   return (
     <div className="text-center mt-24 mb-8">
       <p className="text-sm text-default-900 mb-4">
-        You’ve viewed {String(viewed).padStart(2, "0")} of {String(total).padStart(2, "0")}{" "}
+        You’ve viewed {String(total).padStart(2, "0")} of {String(total).padStart(2, "0")}{" "}
         products.
       </p>
       <button

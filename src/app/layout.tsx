@@ -9,10 +9,7 @@ import { siteConfig } from "@/src/config/site";
 import { fontSans, fontSerif } from "@/src/config/fonts";
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
+  title: "Bella D'or",
   description: siteConfig.description,
   icons: {
     icon: "/favicon.ico",
@@ -40,7 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>{children}</Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

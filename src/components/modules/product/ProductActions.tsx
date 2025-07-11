@@ -32,9 +32,21 @@ export default function ProductActions({
     (variant) => variant.size === selectedSize && variant.color === selectedColor
   );
 
+  console.log("")
+
   // console.log(product)
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    if (!selectedVariant) {
+      toast.error(`This product with ${selectedSize} size and ${selectedColor} color is not available.`, {
+        position: "top-right",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        }
+      });
+      return;
+    };
     if (selectedSize && selectedColor) {
       toast.success("Item added to cart!", {
         position: "top-center",
@@ -57,6 +69,16 @@ export default function ProductActions({
   };
 
   const handleAddToWishlist = async () => {
+    if (!selectedVariant) {
+      toast.error(`This product with ${selectedSize} size and ${selectedColor} color is not available.`, {
+        position: "top-right",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        }
+      });
+      return;
+    };
     if (selectedSize && selectedColor) {
       try {
         // Add to wishlist using the API function
@@ -105,7 +127,6 @@ export default function ProductActions({
       </button>
 
       <button
-        disabled={!selectedVariant}
         className="w-1/3 border border-orange-200 text-white px-6 py-4 flex justify-center items-center"
         onClick={handleAddToWishlist}
       >
