@@ -7,13 +7,15 @@ import { useCart } from "@/src/context/cart.context";
 import { Product } from "@/src/types";
 
 export default function WishlistItem({
+  wishlistId,
   product,
   variantId,
   variant,
 }: {
+  wishlistId: string; // ✅ added this
   product: Product;
   variantId: string;
-  variant: { size: string; color: string; price: number; quantity: number }; // Adding variants to check availability
+  variant: { size: string; color: string; price: number; quantity: number };
 }) {
   const { addToCart } = useCart();
   const [wishlistItems, setWishlistItems] = useState<Product[]>([]); // State to store wishlist items
@@ -22,10 +24,8 @@ export default function WishlistItem({
   // console.log(variant)
 
   const handleRemove = async () => {
-    const removedItem = await removeFromWishlist(product.id); // Call the remove API
+    const removedItem = await removeFromWishlist(wishlistId); // ✅ use wishlistId here
     if (removedItem) {
-      // console.log("hello")
-      // If the item is removed successfully, update the state to remove it from the UI
       setWishlistItems((prevItems) => prevItems.filter((item) => item.id !== product.id));
     }
   };
