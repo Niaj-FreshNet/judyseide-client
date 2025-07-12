@@ -26,7 +26,7 @@ export default async function ContactPage() {
                             <div>
                                 <a href="mailto:info@judyseide.com">
                                     <h3 className="font-medium text-gray-900">Send E-Mail</h3>
-                                    <p className="text-sm text-gray-600">info@judyseide.com</p>
+                                    <p className="text-sm text-gray-600">seide.judy@gmail.com </p>
                                 </a>
                             </div>
                         </div>

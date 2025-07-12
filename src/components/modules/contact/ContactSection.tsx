@@ -9,19 +9,19 @@ export default function ContactSection() {
     {
       icon: <MapPin color="#FB923C" className="w-14 h-14" />,
       title: "Location",
-      description: "Location,3456, Lore ipsum",
+      description: "NORTH MIAMI, FL",
       details: "USA",
     },
     {
       icon: <Phone color="#FB923C" className="w-14 h-14" />,
       title: "Call us",
-      description: "0123-456789 Share some cool solutions for a mix of online and local businesses.",
+      description: " 1(305)-360-3048 Share some cool solutions for a mix of online and local businesses.",
       details: "",
     },
     {
       icon: <Mail color="#FB923C" className="w-14 h-14" />,
       title: "Email",
-      description: "info@youremail.com Let's collaborate to connect smoothly and empower one another!",
+      description: "seide.judy@gmail.com Let's collaborate to connect smoothly and empower one another!",
       details: "",
     },
   ]

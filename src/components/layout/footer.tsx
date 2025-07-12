@@ -67,16 +67,17 @@ export default function Footer() {
             <p>
               Email:{" "}
               <a className="hover:text-black transition-colors" href="mailto:Jewelry@info.com">
-                Jewelry@info.com
+                seide.judy@gmail.com
               </a>
             </p>
             <p>
               Phone:{" "}
               <a className="hover:text-black transition-colors" href="tel:01234567890">
-                01234567890
+                1(305)-360-3048
+
               </a>
             </p>
-            <p>Location: Arizona, USA</p>
+            <p>Location: North Miami,Florida, USA</p>
           </div>
         </div>
       </div>
