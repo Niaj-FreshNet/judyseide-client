@@ -5,17 +5,20 @@ import { removeFromWishlist } from "@/src/services/Wishlist";
 import { useState } from "react";
 import { useCart } from "@/src/context/cart.context";
 import { Product } from "@/src/types";
+import { toast } from "sonner";
 
 export default function WishlistItem({
   wishlistId,
   product,
   variantId,
   variant,
+  onRemove, // ✅ new prop
 }: {
-  wishlistId: string; // ✅ added this
+  wishlistId: string;
   product: Product;
   variantId: string;
   variant: { size: string; color: string; price: number; quantity: number };
+  onRemove: (wishlistId: string) => void; // ✅ new prop type
 }) {
   const { addToCart } = useCart();
   const [wishlistItems, setWishlistItems] = useState<Product[]>([]); // State to store wishlist items
@@ -24,9 +27,16 @@ export default function WishlistItem({
   // console.log(variant)
 
   const handleRemove = async () => {
-    const removedItem = await removeFromWishlist(wishlistId); // ✅ use wishlistId here
+    const removedItem = await removeFromWishlist(wishlistId);
     if (removedItem) {
-      setWishlistItems((prevItems) => prevItems.filter((item) => item.id !== product.id));
+      toast.success(`Item removed from wishlist`, {
+        // position: "top-right",
+        style: {
+          backgroundColor: "#FB923C",
+          color: "#fff",
+        },
+      });
+      onRemove(wishlistId);
     }
   };
 

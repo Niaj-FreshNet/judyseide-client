@@ -47,7 +47,10 @@ export function WishlistDrawer() {
     fetchWishlist();
   }, []); // Ensure fetching only once when component mounts
 
-
+  // ✅ Define this function BEFORE `return`
+  const handleRemoveFromUI = (wishlistId: string) => {
+    setWishlist((prev) => prev.filter((item) => item.id !== wishlistId));
+  };
 
   // Displaying loading or error message
   if (isLoading) {
@@ -121,15 +124,18 @@ export function WishlistDrawer() {
           </div>
         ) : (
           wishlist.map((item) => (
-            <WishlistItem
-              key={item.variantId}
-              wishlistId={item.id}
-              variant={item.variant}
-              product={{
-                ...item.variant?.product,
-              }}
-              variantId={item.variantId}
-            />
+            wishlist.map((item) => (
+              <WishlistItem
+                key={item.id}
+                wishlistId={item.id}
+                variant={item.variant}
+                product={{
+                  ...item.variant?.product,
+                }}
+                variantId={item.variantId}
+                onRemove={handleRemoveFromUI} // ✅ pass the handler
+              />
+            ))
           ))
         )}
       </div>

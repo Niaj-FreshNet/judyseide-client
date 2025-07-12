@@ -36,7 +36,7 @@ export default function CartItem({
     }
     else if (newQuantity > quantityAvailable) {
       toast.error(`This product is only ${quantityAvailable} pcs available.`, {
-        position: "top-right",
+        // position: "top-right",
         style: {
           backgroundColor: "#FB923C",
           color: "#fff",
