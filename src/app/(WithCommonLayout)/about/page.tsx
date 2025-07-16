@@ -15,44 +15,20 @@ interface AboutSection {
 const sections: AboutSection[] = [
   {
     id: 1,
-    title: "Subtitle Topic 1",
-    content: `Lorem ipsum dolor sit amet consectetur. At ullamcorper magna mollis iaculis arcu 
-ultricies eget urna purus. Eget faucibus suscipit viverra ultrices. Ipsum eu pulvinar euismod 
-mauris. Vulputate eros morbi adipiscing venenatis quis pretium sed mollis. Amet nec egestas 
-nunc elit. Aliquet orci viverra leo rhoncus nunc. Tincidunt pharetra vestibulum in ullamcorper 
-faucibus ac. Purus tempor netus gravida imperdiet etiam diam aliquet mauris. Eu nisi malesuada 
-augue imperdiet pellentesque adipiscing ut. Venenatis ut cursus eu eget ipsum eget nibh varius.
-Enim lacus eget eget velit eleifend bibendum et. Porta at praesent id in sed pharetra sagittis.
-Quam non dignissim pretium odio. 
-Lorem ipsum dolor sit amet consectetur. At ullamcorper magna mollis iaculis arcu 
-ultricies eget urna purus. Eget faucibus suscipit viverra ultrices. Ipsum eu pulvinar euismod 
-mauris. Vulputate eros morbi adipiscing venenatis quis pretium sed mollis. Amet nec egestas 
-nunc elit. Aliquet orci viverra leo rhoncus nunc. Tincidunt pharetra vestibulum in ullamcorper 
-faucibus ac. Purus tempor netus gravida imperdiet etiam diam aliquet mauris. Eu nisi malesuada 
-augue imperdiet pellentesque adipiscing ut. Venenatis ut cursus eu eget ipsum eget nibh varius.
-Enim lacus eget eget velit eleifend bibendum et. Porta at praesent id in sed pharetra sagittis.
-Quam non dignissim pretium odio.`,
+    title: "Bella D'or Jewelry",
+    content: `Bella D'or Jewelry was founded in November 2024 by Judy Seide, a proud Haitian-American woman with a deep passion for style, empowerment, and cultural heritage. Inspired by the belief that beauty and elegance should be accessible to all, Judy set out to create a jewelry brand that speaks to women from every background, celebrating their strength, resilience, and uniqueness.
+
+From the very beginning, Bella D'or has been about more than just fashion — it’s a movement to uplift and inspire. Judy’s vision was to craft fine fashion necklaces, pendants, bracelets, and rings that don’t just complement a woman’s outfit, but enhance her confidence, radiance, and individuality. Each piece is designed with intention, blending sophistication with affordability, so every woman can experience the joy of owning jewelry that feels luxurious and personal.
+
+Whether you're expressing love, marking a milestone, or simply treating yourself, Bella D'or Jewelry is here to make every moment shine.`,
     imageUrl: "/about.jpg",
   },
   {
     id: 2,
-    title: "Subtitle Topic 1",
-    content: `Lorem ipsum dolor sit amet consectetur. At ullamcorper magna mollis iaculis arcu 
-ultricies eget urna purus. Eget faucibus suscipit viverra ultrices. Ipsum eu pulvinar euismod 
-mauris. Vulputate eros morbi adipiscing venenatis quis pretium sed mollis. Amet nec egestas 
-nunc elit. Aliquet orci viverra leo rhoncus nunc. Tincidunt pharetra vestibulum in ullamcorper 
-faucibus ac. Purus tempor netus gravida imperdiet etiam diam aliquet mauris. Eu nisi malesuada 
-augue imperdiet pellentesque adipiscing ut. Venenatis ut cursus eu eget ipsum eget nibh varius.
-Enim lacus eget eget velit eleifend bibendum et. Porta at praesent id in sed pharetra sagittis.
-Quam non dignissim pretium odio. 
-Lorem ipsum dolor sit amet consectetur. At ullamcorper magna mollis iaculis arcu 
-ultricies eget urna purus. Eget faucibus suscipit viverra ultrices. Ipsum eu pulvinar euismod 
-mauris. Vulputate eros morbi adipiscing venenatis quis pretium sed mollis. Amet nec egestas 
-nunc elit. Aliquet orci viverra leo rhoncus nunc. Tincidunt pharetra vestibulum in ullamcorper 
-faucibus ac. Purus tempor netus gravida imperdiet etiam diam aliquet mauris. Eu nisi malesuada 
-augue imperdiet pellentesque adipiscing ut. Venenatis ut cursus eu eget ipsum eget nibh varius.
-Enim lacus eget eget velit eleifend bibendum et. Porta at praesent id in sed pharetra sagittis.
-Quam non dignissim pretium odio.`,
+    title: "Empowering Women Through Elegance",
+    content: `At Bella D'or Jewelry, we believe jewelry is more than just an accessory — it's a statement of confidence, grace, and individuality. Each piece in our collection is carefully designed to reflect the inner strength and beauty of women from all walks of life. Whether you're dressing for a special occasion or adding sparkle to your everyday look, our affordable fine fashion pieces are made to make you feel radiant and empowered.
+
+We are committed to ensuring that every woman can experience the joy of high-quality, fashionable jewelry without compromise. Our designs blend timeless elegance with modern style, helping you create unforgettable moments, one accessory at a time.`,
     imageUrl: "/about.jpg",
     reverse: true,
   },
@@ -66,9 +42,8 @@ export default function AboutPage() {
       {sections.map((section) => (
         <div
           key={section.id}
-          className={`flex flex-col md:flex-row ${
-            section.reverse ? "md:flex-row-reverse" : ""
-          } items-start gap-16`}
+          className={`flex flex-col md:flex-row ${section.reverse ? "md:flex-row-reverse" : ""
+            } items-start gap-16`}
         >
           {/* Text Block */}
           <div className="flex-1 text-default-900">
