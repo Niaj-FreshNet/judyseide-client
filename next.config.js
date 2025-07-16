@@ -19,12 +19,14 @@ module.exports = {
       },
       {
         protocol: 'https',
-        hostname: 'api.judy-seide.code-commando.com',
+        // hostname: 'api.judy-seide.code-commando.com',
+        hostname: 'www.api.belladorjewelry.com',
         pathname: '**',
       },
       {
         protocol: 'http',
-        hostname: 'api.judy-seide.code-commando.com',
+        // hostname: 'api.judy-seide.code-commando.com',
+        hostname: 'www.api.belladorjewelry.com',
         pathname: '**',
       },
       {

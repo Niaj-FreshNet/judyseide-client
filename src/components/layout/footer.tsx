@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Social Icons */}
           <div className="flex space-x-6 pt-2 text-orange-400">
             {/* TikTok Icon from react-icons */}
-            <a href="https://www.tiktok.com/@user2032355437845" rel="noopener noreferrer" target="_blank">
+            <a href="https://www.tiktok.com/@belladorjewelry" rel="noopener noreferrer" target="_blank">
               <FaTiktok className="w-8 h-8 text-black hover:text-gray-700 transition-colors" />
             </a>
 
