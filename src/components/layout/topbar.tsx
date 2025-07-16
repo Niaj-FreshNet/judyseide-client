@@ -33,11 +33,11 @@ export const Topbar = () => {
   }, []);
 
   const profileUrl = user?.role === "ADMIN"
-    ? "https://judy-seide-dashboard.vercel.app/admin"
+    ? "https://admin.belladorjewelry.com/"
     : "/profile";
 
     const orderUrl = user?.role === "ADMIN"
-    ? "https://judy-seide-dashboard.vercel.app/admin"
+    ? "https://admin.belladorjewelry.com/"
     : "/order";
 
   return (
