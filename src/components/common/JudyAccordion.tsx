@@ -22,7 +22,7 @@ export default function JudyAccordion({ items }: AccordionSectionProps) {
           className="bg-default-100 shadow-none border border-orange-100 rounded-none"
           title={<p className="text-xl text-default-900 px-4 py-2">{item.title}</p>}
         >
-          <p className="text-default-600 px-2 pb-2">{item.content}</p>
+          <p className="text-default-600 text-lg px-2 pb-2">{item.content}</p>
         </AccordionItem>
       ))}
     </Accordion>
