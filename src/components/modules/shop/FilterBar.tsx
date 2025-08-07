@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SlidersHorizontal } from "lucide-react";
 import { getCategories } from "@/src/services/Categories";
 
 interface FilterBarProps {
@@ -54,8 +53,8 @@ export default function FilterBar({
   };
 
   return (
-    <div className="w-full flex justify-between items-center mb-8 ml-0 lg:ml-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-4">
+    <div className="w-full flex justify-between items-start mb-8 ml-0 lg:ml-4">
+      <div className="w-full grid grid-cols-4 md:grid-cols-8 gap-2 md:gap-2">
         {categories.map((label) => (
           <button
             key={label}
